@@ -19,60 +19,64 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='register/register.css') }}">
     <!-- END: Page Level CSS-->
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='register/custom.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='register/custom.css') }}">
     <!-- END: Custom CSS-->
-  </head>
-  <!-- END: Head-->
-  <body class="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu 1-column register-bg blank-page keyboard-focused" data-open="click" data-menu="vertical-modern-menu" data-col="1-column" data-gr-c-s-loaded="true">
-    <div class="row">
-      <div class="col s12">
-        <div class="container"><div id="register-page" class="row">
-  <div class="col s12 m6 l4 z-depth-4 card-panel border-radius-6 register-card bg-opacity-8">
-    <form class="login-form">
-      <div class="row">
-        <div class="input-field col s12">
-          <h5 class="ml-4">Register</h5>
-{#          <p class="ml-4">Join to our community now !</p>#}
-        </div>
-      </div>
-      <div class="row margin">
-        <div class="input-field col s12">
-          <i class="material-icons prefix pt-2">person_outline</i>
-          <input id="username" type="text">
-          <label for="username" class="center-align">Username</label>
-        </div>
-      </div>
-      <div class="row margin">
-        <div class="input-field col s12">
-          <i class="material-icons prefix pt-2">mail_outline</i>
-          <input id="email" type="email">
-          <label for="email">Email</label>
-        </div>
-      </div>
-      <div class="row margin">
-        <div class="input-field col s12">
-          <i class="material-icons prefix pt-2">lock_outline</i>
-          <input id="password" type="password">
-          <label for="password">Password</label>
-        </div>
-      </div>
-      <div class="row margin">
-        <div class="input-field col s12">
-          <i class="material-icons prefix pt-2">lock_outline</i>
-          <input id="password-again" type="password">
-          <label for="password-again">Password again</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <a href="{{url_for('index')}}" class="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12">Register</a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <p class="margin medium-small">
-              <a href="{{url_for('login') }}">Already have an account? Login</a></p>
-        </div>
+</head>
+<!-- END: Head-->
+<body class="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu 1-column register-bg blank-page keyboard-focused"
+      data-open="click" data-menu="vertical-modern-menu" data-col="1-column" data-gr-c-s-loaded="true">
+<div class="row">
+    <div class="col s12">
+        <div class="container">
+            <div id="register-page" class="row">
+                <div class="col s12 m6 l4 z-depth-4 card-panel border-radius-6 register-card bg-opacity-8">
+                    <form class="login-form" method="POST" action="{{ url_for('register_func') }}">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <h5 class="ml-4">Register</h5>
+                                {#          <p class="ml-4">Join to our community now !</p>#}
+                            </div>
+                        </div>
+                        <div class="row margin">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix pt-2">person_outline</i>
+                                <input id="username" type="text" name="username">
+                                <label for="username" class="center-align">Username</label>
+                            </div>
+                        </div>
+                        <div class="row margin">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix pt-2">mail_outline</i>
+                                <input id="email" type="email" name="email">
+                                <label for="email">Email</label>
+                            </div>
+                        </div>
+                        <div class="row margin">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix pt-2">lock_outline</i>
+                                <input id="password" type="password" name="password">
+                                <label for="password">Password</label>
+                            </div>
+                        </div>
+                        {#      <div class="row margin">#}
+                        {#        <div class="input-field col s12">#}
+                        {#          <i class="material-icons prefix pt-2">lock_outline</i>#}
+                        {#          <input id="password-again" type="password">#}
+                        {#          <label for="password-again">Password again</label>#}
+                        {#        </div>#}
+                        {#      </div>#}
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <button class="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12">
+                                    Register
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <p class="margin medium-small">
+                                    <a href="{{ url_for('login') }}">Already have an account? Login</a></p>
+                            </div>
       </div>
     </form>
   </div>

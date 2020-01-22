@@ -1,17 +1,17 @@
-import sqlite3
-from flask import Flask, render_template, url_for, request,jsonify,redirect,g,send_file,Response,flash
-from flask_sqlalchemy import SQLAlchemy
 import base64
 import datetime
+import sqlite3
 from datetime import datetime
 
+from flask import Flask, render_template, url_for, request, redirect, g, flash
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///Database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
-autoflush=True
-db  = SQLAlchemy(app)
+autoflush = True
+db = SQLAlchemy(app)
 '''
     Create Company profile table
 '''
@@ -34,8 +34,7 @@ class Company(db.Model):
         self.email=email
         self.telephone=telephone
         self.image=image
-db.create_all()
-db.session.commit()
+
 '''
     Create a working days table
 '''
@@ -45,8 +44,6 @@ class Working_Days(db.Model):
     working_day=db.Column(db.String(300))
     def __init__(self,working_day):
         self.working_day=working_day
-db.create_all()
-db.session.commit()
 '''
     Create employee data table
 '''
@@ -121,49 +118,117 @@ class Employee_Data(db.Model):
         self.Supervisor=Supervisor
         self.Department=Department
         self.Picture=Picture
-db.create_all()
-db.session.commit()
+
+
 '''
     Create Department table
 '''
-class Departments(db.Model):
-    __tablename__='Departments'
-    id=db.Column(db.Integer,primary_key=True)
-    Department = db.Column(db.String(300))
-    def __init__(self,Department):
-        self.Department=Department
-db.create_all()
-db.session.commit()
 
-#creating a db to the database
-DATABASE  = 'Database.db'
+
+class Departments(db.Model):
+    __tablename__ = 'Departments'
+    id = db.Column(db.Integer, primary_key=True)
+    Department = db.Column(db.String(300))
+
+    def __init__(self, Department):
+        self.Department = Department
+
+
+'''
+    Creating Register table
+'''
+
+
+class Register(db.Model):
+    __tablename__ = 'Register'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80))
+    email = db.Column(db.String(120))
+    password = db.Column(db.String(80))
+
+    def __init__(self, username, email, password):
+        self.username = username
+        self.email = email
+        self.password = password
+
+
+# creating a db to the database
+DATABASE = 'Database.db'
 
 
 def getConnection():
-    con = getattr(g,'_database',None)
+    con = getattr(g, '_database', None)
     if con is None:
         con = g._database = sqlite3.connect(DATABASE)
     return con
+
+
+'''
+ Login Function
+'''
+
+
+@app.route("/login_func", methods=["GET", "POST"])
+def login_func():
+    if request.method == "POST":
+        uname = request.form["username"]
+        passw = request.form["password"]
+        login = Register.query.filter_by(username=uname, password=passw).first()
+        if login is not None:
+            return redirect(url_for("index"))
+    return render_template("login.html")
+
+
+'''
+ User Login
+'''
+
+
+@app.route("/", methods=["GET", "POST"])
+def login():
+    return render_template("login.html")
+
+
+'''
+ Register user 
+'''
+
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    return render_template("register.html")
+
+
+@app.route("/register_func", methods=["GET", "POST"])
+def register_func():
+    if request.method == "POST":
+        uname = request.form['username']
+        mail = request.form['email']
+        passw = request.form['password']
+        try:
+            register = Register(username=uname, email=mail, password=passw)
+            db.session.add(register)
+            db.session.commit()
+            return redirect(url_for('login'))
+        except Exception as e:
+            raise e
+    return render_template("register.html")
+
 
 '''
     Company image to all template html pages
 '''
 
+
 def image():
     try:
-        file =Company.query.filter_by(id=1).first()
+        file = Company.query.filter_by(id=1).first()
         imgs = base64.b64encode(file.image).decode('ascii')
     except:
         imgs = "User"
     return imgs
 
-@app.route('/')
-def login():
-    return render_template('login.html')
 
-@app.route('/register')
-def register():
-    return render_template('register.html')
 @app.route('/forgot')
 def forgot():
     return render_template('forgot.html')
@@ -457,8 +522,10 @@ def Sick_Leave():
         except Exception as e:
             raise e
     return render_template('leave.html',img=imgs)
+
+
 '''
-    Apply for a vaction
+    Apply for a vacation
 '''
 @app.route('/Vacation',methods=['POST','GET'])
 def Vacation():
@@ -471,15 +538,118 @@ def Vacation():
         db = getConnection()
         c = db.cursor()
         try:
-            c.execute('''CREATE TABLE IF NOT EXISTS Vacation(Employee_Name VARCHAR(4000),Replacement VARCHAR(100),Start_Date DATE ,End_Date DATE)''')
-            c.execute("Insert INTO Vacation(Employee_Name,Replacement,Start_Date,End_Date) VALUES('{name}','{rep}','{start_date}','{end_date}')".format(name=name,rep=replacement,start_date=start_date, end_date=end_date))
+            c.execute(
+                '''CREATE TABLE IF NOT EXISTS Vacation(Employee_Name VARCHAR(4000),Replacement VARCHAR(100),Start_Date DATE ,End_Date DATE)''')
+            c.execute(
+                "Insert INTO Vacation(Employee_Name,Replacement,Start_Date,End_Date) VALUES('{name}','{rep}','{start_date}','{end_date}')".format(
+                    name=name, rep=replacement, start_date=start_date, end_date=end_date))
             db.commit()
             db.close()
-            return  redirect(url_for('Leave'))
+            return redirect(url_for('Leave'))
         except Exception as e:
             raise e
-    return render_template('leave.html',img=imgs)
+    return render_template('leave.html', img=imgs)
+
+
+'''
+    User settings
+'''
+
+
+@app.route('/settings', methods=['POST', 'GET'])
+def settings():
+    imgs = image()
+    db = getConnection()
+    c = db.cursor()
+    d = db.cursor()
+    users = Employee_Data.query.all()
+    try:
+        query = c.execute('SELECT * FROM Roles')
+        rows = query.fetchall()
+        depart = d.execute('SELECT Department FROM Departments')
+        depart_row = depart.fetchall()
+    except:
+        c.execute(
+            '''CREATE TABLE IF NOT EXISTS Roles(Employee_name VARCHAR(100),Role VARCHAR(100),Password VARCHAR(100),Department VARCHAR(100))''')
+        db.commit()
+        return redirect('settings')
+    db.close()
+    return render_template('settings.html', rows=rows, sql_rows=users, depart_row=depart_row, img=imgs)
+
+
+'''
+    Assign Role
+'''
+
+
+@app.route('/Role', methods=['POST', 'GET'])
+def Role():
+    imgs = image()
+    if request.method == 'POST':
+        name = request.form['name']
+        role = request.form['role']
+        password = request.form['password']
+        department = request.form['department']
+        try:
+            db = getConnection()
+            c = db.cursor()
+            c.execute(
+                """INSERT INTO Roles(Employee_name,Role,Password,Department) VALUES('{name}','{role}','{password}','{department}')""".
+                format(name=name, role=role, password=password, department=department))
+            db.commit()
+            db.close()
+            return redirect(url_for('settings'))
+        except Exception as e:
+            raise e
+    return render_template('settings.html', img=imgs)
+
+
+'''
+    Change password
+'''
+
+
+@app.route('/Change_Password', methods=['POST', 'GET'])
+def Change_Password():
+    imgs = image()
+    if request.method == 'POST':
+        name = request.form['name']
+        npassword = request.form['npassword']
+        db = getConnection()
+        c = db.cursor()
+        try:
+            c.execute(
+                '''UPDATE Roles SET Password =('{ps}') WHERE Employee_name=('{nm}')'''.format(ps=npassword, nm=name))
+            db.commit()
+            db.close()
+            return redirect(url_for('settings'))
+        except Exception as e:
+            raise e
+    return render_template('settings.html', img=imgs)
+
+
+'''
+    Delete user role
+'''
+
+
+@app.route('/Delete_User', methods=['POST', 'GET'])
+def Delete_User():
+    if request.method == 'POST':
+        name = request.form['name']
+        db = getConnection()
+        c = db.cursor()
+        try:
+            c.execute('''DELETE FROM Roles WHERE Employee_name=('{nm}') '''.format(nm=name))
+            db.commit()
+            db.close()
+            return redirect(url_for('settings'))
+        except Exception as e:
+            raise e
+    return render_template('settings.html')
+
 
 if __name__ == '__main__':
+    db.create_all()
+    db.session.commit()
     app.run(debug=True)
-

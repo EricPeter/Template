@@ -298,23 +298,23 @@
             <i class="material-icons">playlist_add_check</i>
             <span class="menu-title" data-i18n="Chat">Attendance</span></a>
         </li>
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{url_for('Leave')}}">
-            <i class="material-icons">beach_access</i>
-            <span class="menu-title" data-i18n="File Manager">Holiday/Leave</span></a>
-        </li>
-        <li class="bold">
-            <a class="waves-effect waves-cyan " href="">
-                <i class="material-icons"> business_center</i>
-                <span class="menu-title" data-i18n="Contacts">Finance Management</span></a>
-        </li>
-        <li class="bold">
-            <a class="waves-effect waves-cyan " href="">
-            <i class="material-icons">settings</i>
-            <span class="menu-title" data-i18n="settings">
+          <li class="bold"><a class="waves-effect waves-cyan " href="{{ url_for('Leave') }}">
+              <i class="material-icons">beach_access</i>
+              <span class="menu-title" data-i18n="File Manager">Holiday/Leave</span></a>
+          </li>
+          <li class="bold">
+              <a class="waves-effect waves-cyan " href="">
+                  <i class="material-icons"> business_center</i>
+                  <span class="menu-title" data-i18n="Contacts">Finance Management</span></a>
+          </li>
+          <li class="bold">
+              <a class="waves-effect waves-cyan " href="{{ url_for('settings') }}">
+                  <i class="material-icons">settings</i>
+                  <span class="menu-title" data-i18n="settings">
                 User Settings
             </span>
-        </a>
-        </li>
+              </a>
+          </li>
       </ul>
     </aside>
     <!-- END: SideNav-->
