@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% block title %}Admin {% endblock title%}
+{% block content %}
+<div id="main">
+      <div class="row">
+        <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+        <div class="col s12">
+          <div class="container">
+            <div class="section">
+                <div class="row">
+                    <div class="col s12 m12 l6">
+                        <div id="html-validations" class="card-panel">
+                            <div class="card-content">
+                                <div class="card-title">
+                                    <div class="row">
+                                        <div class="col s12 m6 l10">
+                                            <h4 class="card-title">Add Allowance</h4>
+                                        </div>
+                                        <div class="col s12 m6 l2">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="html-view-validations">
+                                    <form class="formValidate0" id="formValidate0" method="POST" action="{{url_for('add_allowance')}}" enctype="multipart/form-data">
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                            	<label for="first_input2" class="">Allowance Name</label>
+                                                <input id="first_input2" type="text" class="validate"  required="" name="a_type">
+                                                
+                                            </div>
+                                            
+                                            <div class="input-field col s12">
+                                            	<label for="c_event" >Description</label>
+                                                <input class="validate" required="" id="c_event" type="text" name="descr">
+                                                
+                                            </div>
+                                         
+                                            <div class="input-field col s12">
+                                                <button class="btn cyan waves-effect waves-light left" type="submit" name="action">Submit
+                                                    <i class="material-icons right">send</i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- START RIGHT SIDEBAR NAV -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m12 l6">
+                        <div id="html-validations" class="card-panel">
+                            <div class="card-content">
+                                <div class="card-title">
+                                    <div class="row">
+                                        <div class="col s12 m6 l10">
+                                            <h4 class="card-title">Compute Allowance(s)</h4>
+                                        </div>
+                                        <div class="col s12 m6 l2">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="html-view-validations">
+                                        <div class="row">
+                                            <form class="formValidate0" id="formValidate0" method="POST" action="{{url_for('issue_allowance')}}" enctype="multipart/form-data">
+                                            <div class="input-field col s12">
+                                            	<label for="first_input2" class="">Employee Name </label><br>
+                                               <select name="a_empname">
+			                                    {% for evalu in serows %}
+			                                      <option value="{{evalu[1]}}">{{evalu[9]}} {{evalu[10]}} {{evalu[11]}}</option>
+			                                      {% endfor %}
+			                                  </select>
+                                                
+                                            </div>
+                                            <div class="input-field col s12">
+                                                
+                                                <label for="rep" >Allowance Name</label><br>
+                                                <select name="a_type">
+			                                    {% for a in arows %}
+			                                      <option value="{{a[0]}}">{{a[0]}}</option>
+			                                      {% endfor %}
+			                                  </select>
+                                            </div>
+                                            <div class="input-field col s6">
+                                            	<label for="start_date" class=""  >Date</label><br>
+                                                <input class="validate" required="" id="start_date" type="date" name="a_date">
+                                                
+                                            </div>
+                                            <div class="input-field col s6">
+                                            	<label for="end_date" class="">Amount</label><br>
+                                                <input class="validate" required="" id="end_date" type="text"  name="a_ammount">
+                                                
+                                            </div>
+                                            <div class="input-field col s12">
+                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
+                                                    <i class="material-icons right">send</i>
+                                                </button>
+                                            </div>
+                                            </form>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m12 l12">
+                        <div id="html-validations" class="card-panel">
+                            <div class="card-content">
+                                <div class="card-title">
+                                    <div class="row">
+                                        <div class="col s12 m6 l10">
+                                            <h4 class="card-title">Allowances</h4>
+                                        </div>
+                                        <div class="col s12 m6 l2">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="html-view-validations">
+                                        <div class="row">
+                                           <table id="example" class="table table-striped table-bordered" style="width:100%">
+						                      <thead>
+						                      <th>Employee ID</th>
+						                      <th>Allowance Type</th>
+						                      <th>Date</th>
+						                      <th>Amount</th>
+						                      </thead>
+						                      <tbody>
+						                      {% for row in data1 %}
+						                      <tr><td>{{row[0]}}</td><td>{{row[1]}}</td><td>{{row[2]}}</td><td>{{row[3]}}</td></tr>
+						                      {% endfor %}
+						                      
+						                      </tbody>
+						                  </table>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

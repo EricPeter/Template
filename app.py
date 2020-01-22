@@ -1,3 +1,23 @@
+<<<<<<< HEAD
+import sqlite3
+from flask import Flask, render_template, url_for, request,jsonify,redirect,g,send_file,Response,flash
+from flask_sqlalchemy import SQLAlchemy
+import base64
+import datetime
+from datetime import datetime
+import xlsxwriter
+import io
+from io import BytesIO
+from fpdf import FPDF, HTMLMixin
+
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///Database.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+autoflush=True
+db  = SQLAlchemy(app)
+=======
 import base64
 import datetime
 import sqlite3
@@ -12,6 +32,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 autoflush = True
 db = SQLAlchemy(app)
+>>>>>>> ced2d4453154c04aedcbaf6ed05c2a83cfb77938
 '''
     Create Company profile table
 '''
@@ -34,7 +55,12 @@ class Company(db.Model):
         self.email=email
         self.telephone=telephone
         self.image=image
+<<<<<<< HEAD
+db.create_all()
+db.session.commit()
+=======
 
+>>>>>>> ced2d4453154c04aedcbaf6ed05c2a83cfb77938
 '''
     Create a working days table
 '''
@@ -44,6 +70,11 @@ class Working_Days(db.Model):
     working_day=db.Column(db.String(300))
     def __init__(self,working_day):
         self.working_day=working_day
+<<<<<<< HEAD
+db.create_all()
+db.session.commit()
+=======
+>>>>>>> ced2d4453154c04aedcbaf6ed05c2a83cfb77938
 '''
     Create employee data table
 '''
@@ -118,6 +149,28 @@ class Employee_Data(db.Model):
         self.Supervisor=Supervisor
         self.Department=Department
         self.Picture=Picture
+<<<<<<< HEAD
+db.create_all()
+db.session.commit()
+'''
+    Create Department table
+'''
+class Departments(db.Model):
+    __tablename__='Departments'
+    id=db.Column(db.Integer,primary_key=True)
+    Department = db.Column(db.String(300))
+    def __init__(self,Department):
+        self.Department=Department
+db.create_all()
+db.session.commit()
+
+#creating a db to the database
+DATABASE  = 'Database.db'
+
+
+def getConnection():
+    con = getattr(g,'_database',None)
+=======
 
 
 '''
@@ -158,10 +211,13 @@ DATABASE = 'Database.db'
 
 def getConnection():
     con = getattr(g, '_database', None)
+>>>>>>> ced2d4453154c04aedcbaf6ed05c2a83cfb77938
     if con is None:
         con = g._database = sqlite3.connect(DATABASE)
     return con
 
+<<<<<<< HEAD
+=======
 
 '''
  Login Function
@@ -215,20 +271,114 @@ def register_func():
     return render_template("register.html")
 
 
+>>>>>>> ced2d4453154c04aedcbaf6ed05c2a83cfb77938
 '''
     Company image to all template html pages
 '''
 
+<<<<<<< HEAD
+def image():
+    try:
+        file =Company.query.filter_by(id=1).first()
+=======
 
 def image():
     try:
         file = Company.query.filter_by(id=1).first()
+>>>>>>> ced2d4453154c04aedcbaf6ed05c2a83cfb77938
         imgs = base64.b64encode(file.image).decode('ascii')
     except:
         imgs = "User"
     return imgs
+<<<<<<< HEAD
+#create data
+def add_data(emp_id,name,gross_pay,residence):
+    #a list for adding data into the finance module
+    detail=[]
+    db = getConnection()
+    c = db.cursor()
+    detail.append(emp_id)
+    detail.append(name)
+    detail.append(float(gross_pay))
+    #calculate NSSf contribution
+    #5% calculation
+    employee_contrnssf=0.05*float(gross_pay)
+    detail.append(float(employee_contrnssf))
+    #employer NSSf contribution
+#    app.run( )
+
+    employeer_contrnssf=0.1*float(gross_pay)
+    detail.append(float(employeer_contrnssf))
+    nssf_contribution = employee_contrnssf+employeer_contrnssf
+    detail.append(nssf_contribution)
+
+    #calculate payee
+        
+    if residence=='Yes':
+        #Paye for residents
+        if float(gross_pay)<235000:
+            paye=0
+                    
+        elif float(gross_pay) in range(235000,335000):
+            paye=0.1*float(gross_pay)
+                    
+        elif float(gross_pay) in range(335000,410000):
+            paye=10000 + 0.2*float(gross_pay)
+                    
+        elif float(gross_pay)>410000:
+            paye=25000+0.3*float(gross_pay)
+                    
+        elif float(gross_pay)>10000000:
+            paye=25000+0.3*float(gross_pay)+0.1*float(gross_pay)
+                    
+        else:
+            print("Enter valid money for the employeee")
+
+    elif residence== 'No':
+        #paye for non residents
+        if float(gross_pay)<335000:
+            paye=0.1*float(gross_pay)
+                    
+        elif float(gross_pay) in range(335000,410000):
+            paye=33500 + 0.2*float(gross_pay)
+                    
+        elif float(gross_pay)>410000:
+            paye=48500+0.3*float(gross_pay)
+                    
+        elif float(gross_pay)>10000000:
+            paye=48500+0.3*float(gross_pay)+0.1*float(gross_pay)
+                    
+        else:
+            print("Enter valid money for the employeee")
 
 
+    else:
+        print("warning this field is required !!!")
+    detail.append(paye)
+    tt_deductions=paye+nssf_contribution
+    detail.append(tt_deductions)
+    Net_salary=float(gross_pay)-tt_deductions
+    detail.append(Net_salary)
+            
+    arr=[str(i) for i in detail]
+    detail_data = tuple(arr)
+    c.execute('''Insert INTO Finances(Emp_ID,Employee_Name,Gross_pay,employee_contrb,employer_contrb,nssf_contrib,Paye,Total_Dect,Net_pay) VALUES {table_value}'''.format(table_value=detail_data))
+            
+    db.commit()
+    db.close()
+
+
+@app.route('/')
+def login():
+    return render_template('login.html')
+
+@app.route('/register')
+def register():
+    return render_template('register.html')
+=======
+
+
+>>>>>>> ced2d4453154c04aedcbaf6ed05c2a83cfb77938
 @app.route('/forgot')
 def forgot():
     return render_template('forgot.html')
@@ -400,6 +550,17 @@ def Delete_Department():
 @app.route('/Employee')
 def Employee():
     imgs=image()
+<<<<<<< HEAD
+    #connecting and selecting departments
+    db=getConnection()
+    c=db.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS Finances(Emp_ID VARCHAR(15),Employee_Name VARCHAR(100),Gross_pay VARCHAR(100),employee_contrb VARCHAR(100),employer_contrb VARCHAR(100),nssf_contrib VARCHAR(50),Paye VARCHAR(100),Total_Dect VARCHAR(100),Net_pay VARCHAR(100))''')
+    query = c.execute('SELECT * FROM  Departments')
+    rows = query.fetchall()
+    db.commit()
+    db.close()
+=======
+>>>>>>> ced2d4453154c04aedcbaf6ed05c2a83cfb77938
     return render_template('employee.html',img=imgs)
 '''
     Adding an employee to the database
@@ -424,6 +585,10 @@ def add_employee():
         surname=request.form['surname']
         given_name=request.form['given_name']
         other_names=request.form['other_names']
+<<<<<<< HEAD
+        name=surname+" "+given_name
+=======
+>>>>>>> ced2d4453154c04aedcbaf6ed05c2a83cfb77938
         marital_status=request.form['marital_status']
         nationality=request.form['nationality']
         date_of_birth=request.form['date_of_birth']
@@ -449,6 +614,10 @@ def add_employee():
                                  Bank_Name=bank_name,Bank_Branch=bank_branch,Level_of_Education=level,Award=award,Institution=instition,Cv=cv_file,
                                  Current_Address=current_address,Mobile=mobile,Home_Phone=phone,Email=email)
             db.session.add(data)
+<<<<<<< HEAD
+            add_data(emp_id,name,gross_pay,status)
+=======
+>>>>>>> ced2d4453154c04aedcbaf6ed05c2a83cfb77938
             db.session.commit()
             return redirect(url_for('Employee'))
         except Exception as e:
@@ -522,10 +691,15 @@ def Sick_Leave():
         except Exception as e:
             raise e
     return render_template('leave.html',img=imgs)
+<<<<<<< HEAD
+'''
+    Apply for a vaction
+=======
 
 
 '''
     Apply for a vacation
+>>>>>>> ced2d4453154c04aedcbaf6ed05c2a83cfb77938
 '''
 @app.route('/Vacation',methods=['POST','GET'])
 def Vacation():
@@ -538,6 +712,440 @@ def Vacation():
         db = getConnection()
         c = db.cursor()
         try:
+<<<<<<< HEAD
+            c.execute('''CREATE TABLE IF NOT EXISTS Vacation(Employee_Name VARCHAR(4000),Replacement VARCHAR(100),Start_Date DATE ,End_Date DATE)''')
+            c.execute("Insert INTO Vacation(Employee_Name,Replacement,Start_Date,End_Date) VALUES('{name}','{rep}','{start_date}','{end_date}')".format(name=name,rep=replacement,start_date=start_date, end_date=end_date))
+            db.commit()
+            db.close()
+            return  redirect(url_for('Leave'))
+        except Exception as e:
+            raise e
+    return render_template('leave.html',img=imgs)
+
+@app.route('/salary')
+def salary():
+    db = getConnection()
+    c = db.cursor()
+    # file = Data.query.filter_by(id=1).first()
+    # img = base64.b64encode(file.image).decode('ascii')
+    try:
+        query = c.execute('SELECT * FROM Finances')
+        sql_rows = query.fetchall()
+
+    except Exception as e:
+        raise e
+    return render_template('salary.html',sql_rows=sql_rows)
+@app.route('/Salaries')
+def Salaries():
+    return render_template('Salaries.html')
+@app.route('/allowances')
+def allowances():
+    imgs=image()
+    db = getConnection()
+    c = db.cursor()
+    # file = Data.query.filter_by(id=1).first()
+    # img = base64.b64encode(file.image).decode('ascii')
+    try:
+        #select employe name from employee table
+        erows=c.execute('SELECT * FROM Employee_Data')
+        serows = erows.fetchall()
+        #select allowance type from allowance type table
+        atype = c.execute('SELECT * FROM Allowance_types')
+        arows = atype.fetchall()
+        #select allownaces
+        query = c.execute('SELECT * FROM Allowances')
+        allowance_rows = query.fetchall()
+    except Exception as e:
+        c = db.cursor()
+        #creat allowances table is not existing
+        c.execute('''CREATE TABLE IF NOT EXISTS Allowances(Emp_ID VARCHAR(100),Allowance_type VARCHAR(100),Issue_Date DATE,Amount VARCHAR(100))''')
+        #create employee table is not exist
+        #create allowance type  table is not exist
+        c.execute('''CREATE TABLE IF NOT EXISTS Allowance_types(Allowance_type VARCHAR(100),description VARCHAR(100))''')
+        db.commit()
+        return redirect(url_for('allowances'))
+    return render_template('allowances.html',data1=allowance_rows,arows=arows,serows=serows,img=imgs)
+@app.route('/add_allowance',methods=('POST','GET'))
+def add_allowance():
+    dallowance=[]
+    if request.method=='POST':
+        atype=request.form['a_type']
+        dallowance.append(atype)
+        cdescr=request.form['descr']
+        dallowance.append(cdescr)
+        arr4=[str(i) for i in dallowance]
+        dallowance_data = tuple(arr4)
+        db = getConnection()
+        c = db.cursor()
+        try:
+            c.execute('''INSERT INTO Allowance_types(Allowance_type,description)  VALUES {table_value}'''.format(table_value=dallowance_data))
+            db.commit()
+            db.close()
+        except Exception as e:
+            raise e
+    
+    return  redirect(url_for('allowances'))
+
+@app.route('/issue_allowance',methods=('POST','GET'))
+def issue_allowance():
+    allowance = []
+    if request.method == 'POST':
+        emp_name=request.form['a_empname']
+        allowance.append(emp_name)
+        allowance_type=request.form['a_type']
+        allowance.append(allowance_type)
+        Issue_date=request.form['a_date']
+        allowance.append(Issue_date)
+        amt=request.form['a_ammount']
+        allowance.append(amt)
+        arr2=[str(i) for i in allowance]
+        allowance_data = tuple(arr2)
+        db = getConnection()
+        c = db.cursor()
+        try:
+            c.execute('''INSERT INTO Allowances(Emp_ID,Allowance_type,Issue_Date,Amount)  VALUES {table_values}'''.format(table_values=allowance_data))
+            db.commit()
+            db.close()
+            return redirect(url_for('allowances'))
+        except Exception as e:
+            raise e
+
+    return render_template('allowances.html')
+@app.route('/deductions')
+def deductions():
+    imgs=image()
+    db = getConnection()
+    c = db.cursor()
+    try:
+        #select employe name from employee table
+        erows=c.execute('SELECT * FROM Employee_Data')
+        serows = erows.fetchall()
+        #select allowance type from allowance type table
+        dtype = c.execute('SELECT * FROM Deduction_types')
+        drows = dtype.fetchall()
+        #select allownaces
+        query = c.execute('SELECT * FROM  Deduction')
+        adeduction_rows = query.fetchall()
+       
+    except:
+        c = db.cursor()
+        #creat allowances table is not existing
+        c.execute('''CREATE TABLE IF NOT EXISTS Deduction(Emp_id VARCHAR(15),deduction_type VARCHAR(100),Issue_Date DATE,Amount VARCHAR(100))''')
+        #create employee table is not exist
+        #create allowance type  table is not exist
+        c.execute('''CREATE TABLE IF NOT EXISTS Deduction_types(Deduction_type VARCHAR(100),Description VARCHAR(100))''')
+        db.commit()
+        return redirect(url_for('deductions'))
+
+
+    db.close()
+    return render_template('deductions.html',adeduction_rows=adeduction_rows,drows=drows,serows=serows,img=imgs)
+@app.route('/add_deduction',methods=['POST','GET'])
+def add_deduction():
+    dd=[]
+    if request.method=='POST':
+        
+        dtype=request.form['d_type']
+        dd.append(dtype)
+        descrip=request.form['descip']
+        dd.append(descrip)
+        
+        arr4=[str(i) for i in dd]
+        dd_data = tuple(arr4)
+        db = getConnection()
+        c = db.cursor()
+        try:
+            c.execute('''INSERT INTO Deduction_types(Deduction_type,Description)  VALUES {table_value}'''.format(table_value=dd_data))
+            db.commit()
+            db.close()
+        except Exception as e:
+            raise e
+    
+    return  redirect(url_for('deductions'))
+@app.route('/compute_deduction',methods=['POST','GET'])
+def compute_deduction():
+    edd = []
+    if request.method == 'POST':
+        emp_name=request.form['a_empname']
+        edd.append(emp_name)
+        allowance_type=request.form['d_type']
+        edd.append(allowance_type)
+        Issue_date=request.form['a_date']
+        edd.append(Issue_date)
+        amt=request.form['a_ammount']
+        edd.append(amt)
+        arr2=[str(i) for i in edd]
+        edd_data = tuple(arr2)
+        db = getConnection()
+        c = db.cursor()
+        try:
+            c.execute('''INSERT INTO Deduction(Emp_id,deduction_type,Issue_Date,Amount)  VALUES {table_values}'''.format(table_values=edd_data))
+            db.commit()
+            return redirect(url_for('deductions'))
+        except Exception as e:
+            raise e
+    return render_template('deductions.html',img=imgs)   
+@app.route('/pay')
+def pay():
+    imgs=image()
+    # file = Data.query.filter_by(id=1).first()
+    # img = base64.b64encode(file.image).decode('ascii')
+    try:
+        db = getConnection()
+        c = db.cursor()
+        # #name,department,date,amount,period
+        # # query = c.execute('SELECT * FROM Employee_Data')
+        # # emp_rows = query.fetchall()
+        depart = c.execute('SELECT * FROM Finances')
+        depart_row = depart.fetchall()
+        pay_list = c.execute('SELECT * FROM Payment')
+        dpay_list = pay_list.fetchall()
+        
+    except Exception as e:
+        c = db.cursor()
+        c.execute('''CREATE TABLE IF NOT EXISTS Payment(Emp_ID VARCHAR(100),Salary VARCHAR(15),Paid_month VARCHAR(15),pYear VARCHAR(10),Issue_Date DATE)''')
+        db.commit()
+        return redirect(url_for('pay'))
+        
+    
+    return render_template('pay.html',pay_list=dpay_list,Finance=depart_row,img=imgs)
+@app.route('/add_tpaylist',methods=['POST','GET'])
+def add_tpaylist():
+    list_data = []
+    db = getConnection()
+    c = db.cursor()
+    if request.method=='POST':
+        name=request.form['emp_id']
+        list_data.append(name)
+        salary=request.form['bsalary']
+        list_data.append(salary)
+        vmonth=request.form['vMonth']
+        list_data.append(vmonth)
+        vyear=request.form['vyear']
+        list_data.append(vyear) 
+        vdate=request.form['vdate']
+        list_data.append(vdate)
+        arr3=[str(i) for i in list_data]
+        main_add = tuple(arr3)
+        try:
+            c.execute('''INSERT INTO Payment(Emp_ID,Salary,Paid_month,pYear,Issue_Date)  VALUES {table_value}'''.format(table_value=main_add))
+            db.commit()
+            db.close()
+            return redirect(url_for('pay'))
+        except Exception as e:
+            raise e
+
+    return render_template('pay.html',img=imgs)
+@app.route('/gen_slip',methods=['POST','GET'])
+def gen_slip():
+    if request.method=='POST':
+        db = getConnection()
+        c = db.cursor()
+        new_data=request.form['myFile']
+        other=c.execute('''SELECT * FROM Deduction WHERE Emp_ID=('{nd}')'''.format(nd=new_data))
+        rother =  other.fetchall()
+        emdata = c.execute('''SELECT * FROM Employee_Data WHERE Emp_ID=('{nd}')'''.format(nd=new_data))
+        rdata =  emdata.fetchall()
+        crows=Company.query.all()
+        for i in crows:
+            cname = i.cname
+            caddress=i.address
+        gallowances = c.execute('''SELECT SUM(Amount) FROM Allowances WHERE Emp_ID=('{nd}')'''.format(nd=new_data))
+        rallowances =  gallowances.fetchall()
+        ralll=float(rallowances[0][0])
+        gpayment = c.execute('''SELECT * FROM Payment WHERE Emp_ID=('{name}')'''.format(name=new_data))
+        rpay_list = gpayment.fetchall()
+        gf = c.execute('''SELECT * FROM Finances WHERE Emp_ID=('{name}')'''.format(name=new_data))
+        rf_list = gf.fetchall()
+         #total deductions 
+        dsum=c.execute('''SELECT SUM(Amount) FROM Deduction WHERE Emp_id=('{name}')'''.format(name=new_data))
+        drow = dsum.fetchall()
+        valuer=float(drow[0][0])
+        # total payment
+        netcal=c.execute('''SELECT Net_pay FROM Finances WHERE Emp_ID=('{name}')'''.format(name=new_data))
+        nets=netcal.fetchall()
+        # comp = nets - drow[0][0]
+        netpay=float(nets[0][0])-valuer
+
+        pdf = FPDF('P','mm','A4')
+        pdf.add_page()
+        col_width =100
+        th =10
+        pdf.set_font("Arial", size=10)
+        pdf.multi_cell(200, 5,cname)
+        pdf.ln()
+        pdf.multi_cell(200, 5,caddress)
+        pdf.ln()
+        pdf.set_text_color(0,0,255)
+        pdf.multi_cell(200, 5, 'Monthly Payslip')
+        pdf.ln()
+        pdf.multi_cell(0, 5, ('Employee Name: %s' % rf_list[0][1]))
+        pdf.ln()
+        pdf.multi_cell(0, 5, ('Designation: %s' % rdata[0][4]))
+        pdf.ln()
+        pdf.multi_cell(0, 5, ('Designation: %s' % rpay_list[0][4]))
+        pdf.ln()
+        pdf.multi_cell(0, 5, ('NSSF No: %s' % rdata[0][3]))
+        pdf.ln()
+        pdf.multi_cell(0, 5, ('Bank Account: %s' % rdata[0][21]))
+        pdf.ln()
+        pdf.multi_cell(0, 5, ('Bank Info: %s' % rdata[0][22] ))
+        pdf.ln()
+        pdf.set_text_color(0,0,255) 
+        pdf.multi_cell(200, 5, 'Gross Pay')
+        pdf.ln()
+        pdf.multi_cell(0, 5, ('Basic Pay: %s' % rf_list[0][2]))
+        pdf.ln()
+        pdf.multi_cell(0, 5, ('Other Earnings: %s' % ralll ))
+        pdf.ln()
+        pdf.multi_cell(200, 5, 'Taxation',border=0)
+        pdf.ln()
+        pdf.multi_cell(0, 5, ('NSSF No: %s' % rdata[0][30]))
+        pdf.ln()
+        pdf.set_text_color(0,0,255) 
+        pdf.multi_cell(200, 5, 'Deduction')
+        pdf.ln()
+        pdf.multi_cell(0, 5, ('P.A.Y.E: %s' % rf_list[0][6]))
+        pdf.ln()
+        pdf.multi_cell(0, 5, ('NSSF: %s' % rf_list[0][5] ))
+        pdf.ln()
+        pdf.multi_cell(0, 5, ('Other Deductions: %s' % valuer ))
+        pdf.ln()
+        pdf.set_text_color(0,0,255) 
+        pdf.multi_cell(200, 5, 'SUMMARY NETPAY')
+        pdf.ln()
+        pdf.multi_cell(0, 5, ('NSSF: %s' % netpay ))
+        # pdf.output("home.pdf")
+    # return Response(pdf.output(dest='S'), mimetype='application/pdf', headers={'Content-Disposition':'attachment;filename=pay_slip.pdf'})
+    return Response(pdf.output(dest='S').encode('latin-1'), mimetype='application/pdf', headers={'Content-Disposition':'attachment;filename=pay_slip.pdf'})
+#NSSF submission
+@app.route('/nssf')
+def nssf():
+    imgs=image()
+    return render_template('nssf_subf.html',img=imgs)
+@app.route('/nssf_sub',methods=['POST','GET'])
+def nssf_sub():
+    if request.method=='POST':
+        syear=request.form['year']
+        submonth=request.form['sMonth']
+        
+        db = getConnection()
+        c = db.cursor()
+        # company_details=c.execute('SELECT * FROM  Artistry')
+        crows =Company.query.all()
+        for i in crows:
+            cname=i.cname
+            nssf_number=i.nssf_number
+        ford=c.execute("""SELECT  Employee_Data.Emp_ID,
+        Employee_Data.Emp_ID,Employee_Data.Nssf_Number,
+        Employee_Data.Residence_type,Finances.Employee_Name,
+        Finances.Gross_pay,Finances.employee_contrb,Finances.employer_contrb,
+        Finances.nssf_contrib,Employee_Data.Mobile FROM Payment JOIN Finances ON(Payment.Emp_ID=Finances.Emp_ID) JOIN Employee_Data ON(Payment.Emp_ID= Employee_Data.Emp_ID) WHERE Payment.Paid_month=('{nmonth}') AND  Payment.pYear=('{yr}')"""
+                       .format(nmonth=submonth,yr=syear))
+        drows = ford.fetchall()
+        print(drows)
+        #sum
+        tsum=c.execute("select SUM(Finances.Total_Dect)from Payment JOIN Finances ON(Payment.Emp_ID=Finances.Emp_ID) JOIN Employee_Data ON(Payment.Emp_ID= Employee_Data.Emp_ID) WHERE Payment.Paid_month=('{nmonth}')".format(nmonth=submonth))
+        tsumval = tsum.fetchall()
+        
+        output=BytesIO()
+        
+        workbook = xlsxwriter.Workbook(output)
+       #writing excel headers
+        workbook.formats[0].set_bold()
+        workbook.formats[0].set_font_size(10)
+        workbook.formats[0].set_font_name('Arial')
+        
+
+        worksheet = workbook.add_worksheet()
+        worksheet.set_column('A:J',20)
+        cell_format = workbook.add_format({'color':'blue'})
+        #cell background colors
+        bcel_format=workbook.add_format({'bg_color':'#C6EFCE','font_size':'10'})
+        wcel_format=workbook.add_format({'bg_color':'#C5EADA','font_size':'10'})
+        
+        ncel_format=workbook.add_format({'bg_color':'#ff4f33','font_size':'10'})
+     #create a format to use in the merged range
+        cell_format.set_font_color('Sliver')
+        coname=cname
+        nssf=nssf_number
+        ttr=1233333
+        # print(tsumval[0][0])
+    
+        nmembers=len(drows)
+        year=syear
+        nMonth=submonth
+        merge_format=workbook.add_format({'bold':1,'border':1,'align':'center','valign':'vcenter','color':'blue'})
+        # merge_format2=workbook.add_format({'fg_color':'sliver'})
+        #merge 7 cells
+        worksheet.merge_range('A1:H1','NATIONAL SOCIAL SECURITY FUND',merge_format)
+        worksheet.merge_range('A2:H2','MONTHLY SCHEDULE',merge_format)
+        worksheet.merge_range('A3:H3','C-SPEED MOBILE',merge_format)
+        worksheet.write('C6','Company Name')
+        worksheet.write('C7','Company NSSF Number')
+        worksheet.write('C8','Total Amount')
+        worksheet.write('C9','No.of members')
+        worksheet.write('D6',coname,bcel_format)
+        worksheet.write('D7',nssf,bcel_format)
+        worksheet.write('D8',ttr,wcel_format)
+        worksheet.write('D9',nmembers,wcel_format)
+        worksheet.write('E6','Year')
+        worksheet.write('E7','Month')
+        worksheet.write('F6',year,bcel_format)
+        worksheet.write('F7',nMonth,bcel_format)
+        #legend
+        worksheet.write('G4','Legend')
+        worksheet.merge_range('G5:H5','Calculated Protected',wcel_format)
+        worksheet.merge_range('G6:H6','Required',bcel_format)
+        worksheet.merge_range('G7:H7','Optional',ncel_format)
+        #contribution
+        worksheet.write('I3','NORMAL',wcel_format)
+        worksheet.write('I4','BONUS',wcel_format)
+        worksheet.write('I5','ARREAR',wcel_format)
+        worksheet.write('I6','MULTIPLE',wcel_format)
+        worksheet.write('I7','10%CONTRIBUTION',wcel_format)
+        worksheet.write('I8','5%CONTRIBUTION',wcel_format)
+        worksheet.write('I9','SPECIAL CONTRIBUTION',wcel_format)
+        worksheet.write('I10','INTEREST',wcel_format)
+        #Description
+        worksheet.write('J2','DESCRIPTION',wcel_format)
+        worksheet.write('J3','15% normal contribution',wcel_format)
+        worksheet.write('J4','15% bonus contribution',wcel_format)
+        worksheet.write('J5','15% arrear contribution',wcel_format)
+        worksheet.write('J6','15% contributions paid more than once',wcel_format)
+        worksheet.write('J7','10% contribution',wcel_format)
+        worksheet.write('J8','5% contribution',wcel_format)
+        worksheet.write('J9','Special contribution',wcel_format)
+        worksheet.write('J10','Interest contribution',wcel_format)
+        #column headers
+        worksheet.write('A12','NO')
+        worksheet.write('B12','NationalID/StaffNo',ncel_format)
+        worksheet.write('C12','Employee NSSF Number',bcel_format)
+        worksheet.write('D12','Contribution Type',bcel_format)
+        worksheet.write('E12','Employee Names',bcel_format)
+        worksheet.write('F12','Employee Gross Pay',bcel_format)
+        worksheet.write('G12','Employee Contribution',wcel_format)
+        worksheet.write('H12','Employer Contribution',wcel_format)
+        worksheet.write('I12','Total Contribution',wcel_format)
+        worksheet.write('J12','Telephone Number',ncel_format)
+        #add values to the file
+        
+        for i, row in enumerate(drows):
+            for j, value in enumerate(row):
+                worksheet.write(i+12, j, row[j])
+        workbook.close() 
+        #go back to the beginning of the stream
+        output.seek(0)
+        
+  
+    
+    # return redirect(url_for('nssf'))
+    return send_file(output, attachment_filename="nssf.xlsx", as_attachment=True)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+=======
             c.execute(
                 '''CREATE TABLE IF NOT EXISTS Vacation(Employee_Name VARCHAR(4000),Replacement VARCHAR(100),Start_Date DATE ,End_Date DATE)''')
             c.execute(
@@ -653,3 +1261,4 @@ if __name__ == '__main__':
     db.create_all()
     db.session.commit()
     app.run(debug=True)
+>>>>>>> ced2d4453154c04aedcbaf6ed05c2a83cfb77938
