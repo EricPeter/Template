@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% block title %}Admin {% endblock title%}
+{% block content %}
+<div id="main">
+      <div class="row">
+        <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+        <div class="col s12">
+          <div class="container">
+            <div class="section">
+                <div class="row">
+                    <div class="col s12 m12 l6">
+                        <div id="html-validations" class="card-panel">
+                            <div class="card-content">
+                                <div class="card-title">
+                                    <div class="row">
+                                        <div class="col s12 m6 l10">
+                                            <h4 class="card-title">Holidays</h4>
+                                        </div>
+                                        <div class="col s12 m6 l2">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="html-view-validations">
+                                    <form class="formValidate0" id="formValidate0" method="POST" action="{{url_for('Holidays')}}" enctype="multipart/form-data">
+                                        <div class="row">
+                                            <div class="input-field col s6">
+                                                <input id="first_input2" type="text" class="validate"  required="" name="public_holiday">
+                                                <label for="first_input2" class="">Public Holiday</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input class="validate" required="" id="c_date" type="date" name="date1">
+                                                <label for="c_date" class=""  >Date</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input class="validate" required="" id="c_event" type="text" name="personal_event">
+                                                <label for="c_event" >Personal Event</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input class="validate" required="" id="c_date0" type="date"  name="date2">
+                                                <label for="c_date0" class="">Date</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input class="validate" required="" id="cevent" type="text" name="company_events">
+                                                <label for="cevent" >Company Events</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input type="date" class="validate invalid" required="" id="c_date1"  name="date3" >
+                                                <label for="c_date1"  >Date</label>
+                                            </div>
+                                            <div class="input-field col s12">
+                                                <button class="btn cyan waves-effect waves-light left" type="submit" name="action">Submit
+                                                    <i class="material-icons right">send</i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- START RIGHT SIDEBAR NAV -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m12 l6">
+                        <div id="html-validations" class="card-panel">
+                            <div class="card-content">
+                                <div class="card-title">
+                                    <div class="row">
+                                        <div class="col s12 m6 l10">
+                                            <h4 class="card-title">Sick Leave</h4>
+                                        </div>
+                                        <div class="col s12 m6 l2">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="html-view-validations">
+                                        <div class="row">
+                                            <form class="formValidate0" id="formValidate0" method="POST" action="{{url_for('Sick_Leave')}}" enctype="multipart/form-data">
+                                            <div class="input-field col s12">
+                                                <select name="name">
+                                                    {% for i in sql_rows %}
+                                                        <option>{{i.Given_name}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <label for="first_input2" class="">Employee Name </label>
+                                            </div>
+                                            <div class="input-field col s12">
+                                                <input class="validate" required="" id="rep" type="text" name="rep">
+                                                <label for="rep" >Replacement</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input class="validate" required="" id="start_date" type="date" name="start_date">
+                                                <label for="start_date" class=""  >Start Date</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input class="validate" required="" id="end_date" type="date"  name="end_date">
+                                                <label for="end_date" class="">End Date</label>
+                                            </div>
+                                            <div class="input-field col s12">
+                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
+                                                    <i class="material-icons right">send</i>
+                                                </button>
+                                            </div>
+                                            </form>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m12 l12">
+                        <div id="html-validations" class="card-panel">
+                            <div class="card-content">
+                                <div class="card-title">
+                                    <div class="row">
+                                        <div class="col s12 m6 l10">
+                                            <h4 class="card-title">Vacation</h4>
+                                        </div>
+                                        <div class="col s12 m6 l2">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="html-view-validations">
+                                        <div class="row">
+                                            <form class="formValidate0" id="formValidate0" method="POST" action="{{url_for('Vacation')}}" enctype="multipart/form-data">
+                                            <div class="input-field col s12">
+                                                <select name="name">
+                                                    {% for i in sql_rows %}
+                                                        <option>{{i.Given_name}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <label for="first_input2" class="">Employee Name </label>
+                                            </div>
+                                            <div class="input-field col s12">
+                                                <input class="validate" required="" id="replacement" type="text" name="replacement">
+                                                <label for="replacement" >Replacement</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input class="validate" required="" id="start_date1" type="date" name="start_date1">
+                                                <label for="start_date1" class=""  >Start Date</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input class="validate" required="" id="end_date1" type="date"  name="end_date1">
+                                                <label for="end_date1" class="">End Date</label>
+                                            </div>
+                                            <div class="input-field col s12">
+                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
+                                                    <i class="material-icons right">send</i>
+                                                </button>
+                                            </div>
+                                            </form>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+{% block title %}Admin {% endblock title%}
+{% block content %}
+    <!-- BEGIN: Page Main-->
+    <div id="main">
+        <div class="row">
+            <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+            <div class="col s12">
+                <div class="container">
+                    <!-- Add new contact popup -->
+                    <div class="contact-overlay"></div>
+                    <div style="bottom: 54px; right: 19px;" class="fixed-action-btn direction-top active">
+                        <a class="btn-floating btn-large primary-text gradient-shadow contact-sidebar-trigger" href="#modal1">
+                            <i class="material-icons">person_add</i>
+                        </a>
+                    </div>
+                    <!-- Add new contact popup Ends-->
+                    <!-- Sidebar Area Starts -->
+                    <div class="sidebar-left sidebar-fixed">
+                        <div class="sidebar">
+                            <div class="sidebar-content">
+                                <div class="sidebar-header">
+                                    <div class="sidebar-details">
+                                        <h5 class="m-0 sidebar-title"><i class="material-icons app-header-icon text-top">perm_identity</i> Employees Attendance
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div id="sidebar-list" class="sidebar-menu list-group position-relative animate fadeLeft delay-1 ps ps--active-y">
+                                    <div class="sidebar-list-padding app-sidebar" id="contact-sidenav">
+                                        <ul class="contact-list display-grid">
+                                            <li class="sidebar-title">Filters</li>
+                                            <li class="active"><a href="javascript:void(0)" class="text-sub"><i class="material-icons mr-2">
+                                                perm_identity </i> All Employees</a></li>
+                                            <li><a href="javascript:void(0)" class="text-sub"><i class="material-icons mr-2"> history </i> Frequent</a>
+                                            </li>
+                                            <li class="sidebar-title">Options</li>
+                                            <li><a href="javascript:void(0)" class="text-sub"><i class="material-icons mr-2"> keyboard_arrow_down </i>
+                                                Import</a></li>
+                                            <li><a href="javascript:void(0)" class="text-sub"><i class="material-icons mr-2"> keyboard_arrow_up </i>
+                                                Export</a></li>
+                                            <li><a href="javascript:void(0)" class="text-sub"><i class="material-icons mr-2"> print </i> Print</a></li>
+                                            <li class="sidebar-title">Department</li>
+                                            <li><a href="javascript:void(0)" class="text-sub"><i class="purple-text material-icons small-icons mr-2">
+                                                fiber_manual_record </i> Engineering</a></li>
+                                            <li><a href="javascript:void(0)" class="text-sub"><i class="amber-text material-icons small-icons mr-2">
+                                                fiber_manual_record </i> Sales</a></li>
+                                            <li><a href="javascript:void(0)" class="text-sub"><i class="light-green-text material-icons small-icons mr-2">
+                                                fiber_manual_record </i> Support</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 620px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 561px;"></div></div></div>
+                                <a href="#" data-target="contact-sidenav" class="sidenav-trigger hide-on-large-only"><i class="material-icons">menu</i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Sidebar Area Ends -->
+                    <!-- Content Area Starts -->
+                    <div class="content-area content-right">
+                        <div class="app-wrapper">
+                            <div class="datatable-search">
+                                <i class="material-icons mr-2 search-icon">search</i>
+                                <input type="text" placeholder="Search employee" class="app-filter" id="global_filter">
+                            </div>
+                            <div id="button-trigger" class="card card card-default scrollspy border-radius-6 fixed-width">
+                                <div class="card-content p-0">
+                                    <div id="data-table-contact_wrapper" class="dataTables_wrapper no-footer">
+                                        <div class="dataTables_length" id="data-table-contact_length"><label>Show
+                                            <select name="data-table-contact_length" aria-controls="data-table-contact" class="">
+                                                <option value="15" selected="selected">15</option>
+                                            </select> entries
+                                        </label>
+                                        </div>
+                                        <div id="data-table-contact_filter" class="dataTables_filter"><label>Search:
+                                            <input type="search" class="" placeholder="" aria-controls="data-table-contact">
+                                        </label>
+                                        </div>
+                                        <div class="dataTables_scroll">
+                                        <div class="dataTables_scrollHead" style="overflow: hidden; position: relative; border: 0px none; width: 100%;">
+                                            <div class="dataTables_scrollHeadInner" style="box-sizing: content-box; width: 712.05px; padding-right: 12px;">
+                                            </div>
+                                        </div>
+                                        <div class="dataTables_scrollBody ps ps--active-x ps--active-y" style="position: relative; overflow: auto; max-height: 553px; width: 100%;">
+                                            <table id="data-table-contact" class="display dataTable no-footer dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="data-table-contact_info">
+                                            <thead>
+                                            <tr >
+                                                <th>Profile Photo</th>
+                                                <th >Lastname</th>
+                                                <th >Department</th>
+                                                <th>Present</th>
+                                                <th>Absent</th>
+                                                <th>Leave</th>
+                                                <th>Take Attendance</th>
+                                            </tr>
+                                            </thead>
+                                                <tbody>
+                                                {% for i,x in user_zipped%}
+                                                    <tr>
+                                                        <td>
+                                                            <span class="avatar-contact avatar-online">
+                                                                <img class="" src="data:;base64,{{x}}" alt="Logo">
+                                                            </span>
+                                                        </td>
+                                                        <td>{{i.Given_name}}</td>
+                                                        <td>{{i.Department}}</td>
+                                                            <form method="POST" action="{{url_for('Take_Attendance')}}" >
+                                                                <input type="hidden" value="{{i.Given_name}}" name="name">
+                                                                <td>
+                                                                <label>
+                                                                    <input class="with-gap" name="group1" type="radio" value="Present"  />
+                                                                    <span>P</span>
+                                                                </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label>
+                                                                    <input class="with-gap" name="group1" type="radio" value="Absent"  />
+                                                                    <span>A</span>
+                                                                </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label>
+                                                                    <input class="with-gap" name="group1" type="radio" value="Leave"  />
+                                                                    <span>L</span>
+                                                                </label>
+                                                                </td>
+                                                                <td>
+                                                                    <button type="submit" class="btn-floating btn waves-effect waves-light green">
+                                                                        <i class="material-icons blue-grey-text">check</i>
+                                                                    </button>
+                                                                </td>
+                                                            </form>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                            <div class="ps__rail-x" style="width: 695px; left: 0px; bottom: 0px;">
+                                                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 678px;">
+
+                                                </div>
+                                            </div>
+                                            <div class="ps__rail-y" style="top: 0px; height: 552px; right: 0px;">
+                                                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 358px;">
+
+                                                </div>
+                                            </div>
+                                            <div class="ps__rail-x" style="width: 695px; left: 0px; bottom: 0px;">
+                                                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 678px;">
+
+                                                </div>
+                                            </div>
+                                            <div class="ps__rail-y" style="top: 0px; height: 552px; right: 0px;">
+                                                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 358px;">
+
+                                                </div>
+                                            </div>
+                                            <div class="ps__rail-x" style="width: 695px; left: 0px; bottom: 0px;">
+                                                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 678px;">
+
+                                                </div>
+                                            </div>
+                                            <div class="ps__rail-y" style="top: 0px; height: 552px; right: 0px;">
+                                                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 358px;">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+{#                                        <div class="dataTables_info" id="data-table-contact_info" role="status" aria-live="polite">Showing 16 to 29 of 29 entries</div>#}
+{#                                        <div class="dataTables_paginate paging_simple_numbers" id="data-table-contact_paginate">#}
+{#                                            <a class="paginate_button previous" aria-controls="data-table-contact" data-dt-idx="0" tabindex="0" id="data-table-contact_previous">Previous</a>#}
+{#                                            <span><a class="paginate_button " aria-controls="data-table-contact" data-dt-idx="1" tabindex="0">1</a>#}
+{#                                                <a class="paginate_button current" aria-controls="data-table-contact" data-dt-idx="2" tabindex="0">2</a>#}
+{#                                            </span>#}
+{#                                            <a class="paginate_button next disabled" aria-controls="data-table-contact" data-dt-idx="3" tabindex="-1" id="data-table-contact_next">Next</a></div>#}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!-- Content Area Ends -->
+          <div class="content-overlay"></div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- END: Page Main-->
+{% endblock %}
