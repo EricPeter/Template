@@ -1,0 +1,349 @@
+{% extends "base.html" %}
+{% block title %}Admin {% endblock title%}
+{% block content %}
+<div id="main">
+      <div class="row">
+        <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+        <div class="col s12">
+          <div class="container">
+            <div class="section">
+                <div class="row">
+                    <div class="col s12">
+                        <div id="html-validations" class="card card-tabs">
+                            <div class="card-content">
+                                <div class="card-title">
+                                    <div class="row">
+                                        <div class="col s12 m6 l10">
+                                            <h4 class="card-title">Add Employee</h4>
+                                        </div>
+                                        <div class="col s12 m6 l2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="html-view-validations">
+                                    <div class="container">
+                                        <div class="stepwizard col-md-offset-3">
+                                            <div class="stepwizard-row setup-panel">
+                                                <div class="stepwizard-step">
+                                                    <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                                                    <p>Step 1</p>
+                                                </div>
+                                                <div class="stepwizard-step">
+                                                    <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                                                    <p>Step 2</p>
+                                                </div>
+                                                <div class="stepwizard-step">
+                                                    <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                                                    <p>Step 3</p>
+                                                </div>
+                                                <div class="stepwizard-step">
+                                                    <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+                                                    <p>Step 4</p>
+                                                </div>
+                                                <div class="stepwizard-step">
+                                                    <a href="#step-5" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
+                                                    <p>Step 5</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <form role="form" action="{{url_for('add_employee')}}" method="POST" class="formValidate0" id="formValidate0" enctype="multipart/form-data" >
+                                            <div class="row setup-content" id="step-1">
+                                                <div class="col s12 m12 l6">
+                                                    <div id="html-validations" class="card-panel">
+                                                        <div class="card-content">
+                                                            <div class="card-title">
+                                                                <div class="row">
+                                                                    <div class="col s12 m6 l10">
+                                                                        <h6>Employement Details</h6>
+                                                                    </div>
+                                                                    <div class="col s12 m6 l2">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="html-view-validations">
+                                                                     <div class="col-xs-6 col-md-offset-3">
+                                                                         <div class="col-md-12">
+                                                                             <div class="input-field col s12">
+                                                                                 <i class="material-icons prefix">accessibility</i>
+                                                                                 <input class="validate invalid" required="" id="emp_id" name="emp_id" type="text">
+                                                                                 <label for="emp_id" class="">Emp ID*</label>
+                                                                             </div>
+                                                                             <div class="input-field col s12">
+                                                                                 <i class="material-icons prefix">card_travel</i>
+                                                                                 <input class="validate invalid" required="" id="designation" type="text" name="designation">
+                                                                                 <label for="designation" class="">Designation *</label>
+                                                                             </div>
+                                                                             <div class="input-field col s12">
+                                                                                 <i class="material-icons prefix">date_range</i>
+                                                                                 <input   id="date1" type="date" name="join_date">
+                                                                                 <label for="date1" >Joining Date *</label>
+                                                                             </div>
+                                                                             <div class="input-field col s12">
+                                                                                 <i class="material-icons prefix">date_range</i>
+                                                                                 <input id="date2" type="date" name="end_date">
+                                                                                 <label for="date2" >End of Contract *</label>
+                                                                             </div>
+                                                                             <div class="input-field col s12">
+                                                                                 <i class="material-icons prefix">assignment_ind</i>
+                                                                                 <select name="emp_status">
+                                                                                     <option value="Permanent" selected>Permanent</option>
+                                                                                     <option value="Permanent">Probation</option>
+                                                                                 </select>
+                                                                                 <label>Employee Status</label>
+                                                                             </div>
+                                                                             <div class="input-field col s12">
+                                                                                 <i class="material-icons prefix">airline_seat_individual_suite</i>
+                                                                                 <select name="status">
+                                                                                     <option value="Yes" selected>Yes</option>
+                                                                                     <option value="No">No</option>
+                                                                                 </select>
+                                                                                 <label>Residence</label>
+                                                                             </div>
+                                                                              <div class="input-field col s12">
+                                                                                  <i class="material-icons prefix">assessment</i>
+                                                                                 <input class="validate invalid" required="" id="tin" type="text" name="tin" maxlength="10" size="10">
+                                                                                  <label for="tin" class="">Tin Number *</label>
+                                                                             </div>
+                                                                             <button class="btn btn-light-blue nextBtn pull-right" type="button">Next
+                                                                                 <i class="material-icons right">send</i>
+                                                                             </button>
+                                                                         </div>
+                                                                     </div>
+                                                                 </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <div class="col s12 m12 l6">
+                                                    <div id="html-validations" class="card-panel">
+                                                        <div class="card-content">
+                                                            <div class="card-title">
+                                                                <div class="row">
+                                                                    <div class="col s12 m6 l10">
+
+                                                                    </div>
+                                                                    <div class="col s12 m6 l2">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="html-view-validations">
+                                                                     <div class="col-xs-6 col-md-offset-3">
+                                                                         <div class="col-md-12">
+                                                                             <div class="input-field col s12">
+                                                                                  <i class="material-icons prefix">attach_money</i>
+                                                                                 <input class="validate invalid" required="" id="gross" name="gross_pay" type="text">
+                                                                                 <label for="gross" class="">Gross Pay*</label>
+                                                                             </div>
+                                                                             <div class="input-field col s12">
+                                                                                 <i class="material-icons prefix">work</i>
+                                                                                 <input class="validate invalid" required="" id="nssf" type="text" name="nssf" maxlength="13" size="13">
+                                                                                 <label for="nssf" class="">Nssf Number *</label>
+                                                                             </div>
+                                                                             <div class="input-field col s12">
+                                                                                 <i class="material-icons prefix">group</i>
+                                                                                 <input class="validate invalid" required="" id="next_of_kin" type="text" name="next_of_kin">
+                                                                                 <label for="next_of_kin" class="">Next of Kin *</label>
+                                                                             </div>
+                                                                             <div class="input-field col s12">
+                                                                                 <i class="material-icons prefix">device_hub</i>
+                                                                                 <input class="validate invalid" required="" id="department" type="text" name="department">
+                                                                                 <label for="department" class="">Department *</label>
+                                                                             </div>
+                                                                             <div class="input-field col s12">
+                                                                                  <i class="material-icons prefix">person_outline</i>
+                                                                                 <input class="validate invalid" required="" id="supervisor" type="text" name="supervisor">
+                                                                                 <label for="supervisor" class="">Supervisor *</label>
+                                                                             </div>
+                                                                             <div class="input-field col s12">
+                                                                                 <div class="file-field input-field">
+                                                                                     <div class="btn btn-light-blue">
+                                                                                         <span>Upload Picture:</span>
+                                                                                         <input type="file" name="pic" id="pic" placeholder="Upload picture *">
+                                                                                     </div>
+                                                                                     <div class="file-path-wrapper">
+                                                                                         <input class="file-path validate" type="text">
+                                                                                     </div>
+                                                                                 </div>
+                                                                             </div>
+                                                                             <button class="btn btn-light-blue nextBtn pull-right" type="button">Next
+                                                                                 <i class="material-icons right">send</i>
+                                                                             </button>
+                                                                         </div>
+                                                                     </div>
+                                                                 </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <div class="row setup-content" id="step-2">
+                                                <div class="col-xs-6 col-md-offset-3">
+                                                    <div class="col-md-12">
+                                                        <h6>Personal Information</h6>
+                                                        <div class="input-field col s6">
+                                                            <i class="material-icons prefix">person_add</i>
+                                                            <input class="validate invalid" required="" id="first_name" name="surname" type="text">
+                                                            <label for="first_name" class="">Surname *</label>
+                                                        </div>
+                                                        <div class="input-field col s6">
+                                                            <i class="material-icons prefix">person_add</i>
+                                                            <input class="validate invalid" required="" id="last_name" type="text" name="given_name">
+                                                            <label for="last_name" class="">Given Name *</label>
+                                                        </div>
+                                                        <div class="input-field col s12">
+                                                            <i class="material-icons prefix">person_add</i>
+                                                            <input class="validate invalid" required="" id="other" type="text" name="other_names">
+                                                            <label for="other" class="">Other Names *</label>
+                                                        </div>
+                                                        <div class="input-field col s12">
+                                                            <i class="material-icons prefix">plus_one</i>
+                                                            <select name="marital_status">
+                                                                <option value="Single" selected>Single</option>
+                                                                <option value="Married">Married</option>
+                                                                <option value=" divorced">divorced</option>
+                                                                <option value="widowed">widowed</option>
+                                                            </select>
+                                                            <label>Marital Status *</label>
+                                                        </div>
+                                                        <div class="input-field col s12">
+                                                            <i class="material-icons prefix">person_pin_circle</i>
+                                                            <input class="validate invalid" required="" id="nationality" type="text" name="nationality">
+                                                            <label for="nationality" class="">Nationality *</label>
+                                                        </div>
+                                                        <div class="input-field col s12">
+                                                            <i class="material-icons prefix">date_range</i>
+                                                            <input  required="" id="date_of_birth" type="date" name="date_of_birth">
+                                                            <label for="date_of_birth" class="">Date of Birth *</label>
+                                                        </div>
+                                                         <div class="input-field col s12">
+                                                             <i class="material-icons prefix">pregnant_woman</i>
+                                                            <select name="gender">
+                                                                <option value="Male" selected>Male</option>
+                                                                <option value="Female">Female</option>
+                                                            </select>
+                                                            <label>Gender</label>
+                                                        </div>
+                                                        <button class="btn btn-light-deep-purple prevBtn  pull-left" type="button">
+                                                            Previous
+                                                        </button>
+                                                        <button class="btn waves-effect waves-light right nextBtn pull-right" type="button">Next
+                                                            <i class="material-icons right">send</i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row setup-content" id="step-3">
+                                                <div class="col-xs-6 col-md-offset-3">
+                                                    <div class="col-md-12">
+                                                        <h6>Bank Information</h6>
+                                                        <div class="input-field col s12">
+                                                            <i class="material-icons prefix">business_center</i>
+                                                            <input class="validate invalid" required="" id="account_name" name="account_name" type="text">
+                                                            <label for="account_name" class="">Account Name *</label>
+                                                        </div>
+                                                        <div class="input-field col s12">
+                                                            <i class="material-icons prefix">redeem</i>
+                                                            <input class="validate invalid" required="" id="account_number" type="text" name="account_number">
+                                                            <label for="account_number" class="">Account Number *</label>
+                                                        </div>
+                                                        <div class="input-field col s12">
+                                                            <i class="material-icons prefix">credit_card</i>
+                                                            <input class="validate invalid" required="" id="bank_name" type="text" name="bank_name">
+                                                            <label for="bank_name" class="">Bank Name *</label>
+                                                        </div>
+                                                        <div class="input-field col s12">
+                                                            <i class="material-icons prefix">credit_card</i>
+                                                            <input class="validate invalid" required="" id="bank_branch" type="text" name="bank_branch">
+                                                            <label for="bank_branch" class="">Bank Branch *</label>
+                                                        </div>
+                                                        <button class="btn btn-light-deep-purple prevBtn  pull-left" type="button">
+                                                            Previous
+                                                        </button>
+                                                        <button class="btn waves-effect waves-light right nextBtn pull-right" type="button">Next
+                                                            <i class="material-icons right">send</i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row setup-content" id="step-4">
+                                                <div class="col-xs-6 col-md-offset-3">
+                                                    <div class="col-md-12">
+                                                        <h6>Education Information</h6>
+                                                        <div class="input-field col s12">
+                                                            <i class="material-icons prefix">school</i>
+                                                            <input class="validate invalid" required="" id="level" name="level" type="text">
+                                                            <label for="level" class="">Level of Education  *</label>
+                                                        </div>
+                                                        <div class="input-field col s12">
+                                                            <i class="material-icons prefix">school</i>
+                                                            <input class="validate invalid" required="" id="award" name="award" type="text">
+                                                            <label for="award" class="">Award Received  *</label>
+                                                        </div>
+                                                        <div class="input-field col s12">
+                                                            <i class="material-icons prefix">account_balance</i>
+                                                            <input class="validate invalid" required="" id="instition" type="text" name="instition">
+                                                            <label for="instition" class="">Institution*</label>
+                                                        </div>
+                                                        <div class="input-field col s12">
+                                                            <div class="file-field input-field">
+                                                                <div class="btn btn-light-blue">
+                                                                    <span>Upload CV:</span>
+                                                                    <input type="file" name="cv" id="cv" placeholder="Upload CV*">
+                                                                </div>
+                                                                <div class="file-path-wrapper">
+                                                                    <input class="file-path validate" type="text">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <button class="btn btn-light-deep-purple prevBtn  pull-left" type="button">
+                                                            Previous
+                                                        </button>
+                                                        <button class="btn waves-effect waves-light right nextBtn pull-right" type="button">Next
+                                                            <i class="material-icons right">send</i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row setup-content" id="step-5">
+                                                <div class="col-xs-6 col-md-offset-3">
+                                                    <div class="col-md-12">
+                                                        <h6>Contact Information</h6>
+                                                        <div class="input-field col s12">
+                                                            <i class="material-icons prefix">accessibility</i>
+                                                            <input class="validate invalid" required="" id="current_address" name="current_address" type="text">
+                                                            <label for="current_address" class="">Current Address *</label>
+                                                        </div>
+                                                        <div class="input-field col s12">
+                                                            <i class="material-icons prefix">contact_phone</i>
+                                                            <input class="validate invalid" required="" id="mobile" type="text" name="mobile" maxlength="10" size="10">
+                                                            <label for="mobile" class="">Mobile *</label>
+                                                        </div>
+                                                        <div class="input-field col s12">
+                                                            <i class="material-icons prefix">phone</i>
+                                                            <input class="validate invalid" required="" id="phone" type="text" name="phone" maxlength="10" size="10">
+                                                            <label for="phone" class="">Home Phone *</label>
+                                                        </div>
+                                                        <div class="input-field col s12">
+                                                            <i class="material-icons prefix">contact_mail</i>
+                                                            <input class="validate invalid" required="" id="email" type="email" name="email">
+                                                            <label for="email" class="">Email *</label>
+                                                        </div>
+                                                        <button class="btn btn-light-blue prevBtn btn-light-deep-purple pull-left" type="button">
+                                                            Previous</button>
+                                                        <button class="btn waves-effect waves-light right " type="submit">Submit
+                                                        <i class="material-icons right">send</i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+{% endblock %}
