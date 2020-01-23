@@ -208,8 +208,6 @@ def register_func():
 '''
     Company image to all template html pages
 '''
-
-
 def image():
     try:
         file = Company.query.filter_by(id=1).first()
