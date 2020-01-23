@@ -307,7 +307,7 @@
             <a class=" collapsible-header waves-effect waves-cyan ">
                 <i class="material-icons"> business_center</i>
                 <span class="menu-title" data-i18n="Contacts">Finance Management</span></a>
-                <div class="collapsible-body" style="display: block;">
+                <div class="collapsible-body" style="align-items: center;">
                   <ul>
                    <li><a href="{{url_for('salary')}}">Manage Salary Details</a></li>
                    <li><a href="{{url_for('deductions')}}">Deductions</a></li>
@@ -317,10 +317,9 @@
                </ul>
                   
                 </div>
-                
         </li>
         <li class="bold">
-            <a class="waves-effect waves-cyan " href="">
+            <a class="waves-effect waves-cyan " href="{{url_for('settings')}}">
             <i class="material-icons">settings</i>
             <span class="menu-title" data-i18n="settings">
                 User Settings

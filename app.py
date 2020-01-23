@@ -851,6 +851,7 @@ def add_deduction():
 @app.route('/compute_deduction',methods=['POST','GET'])
 def compute_deduction():
     edd = []
+    imgs=image()
     if request.method == 'POST':
         emp_name=request.form['a_empname']
         edd.append(emp_name)
@@ -897,6 +898,7 @@ def pay():
     return render_template('pay.html',pay_list=dpay_list,Finance=depart_row,img=imgs)
 @app.route('/add_tpaylist',methods=['POST','GET'])
 def add_tpaylist():
+    imgs=image()
     list_data = []
     db = getConnection()
     c = db.cursor()
@@ -920,7 +922,6 @@ def add_tpaylist():
             return redirect(url_for('pay'))
         except Exception as e:
             raise e
-
     return render_template('pay.html',img=imgs)
 @app.route('/gen_slip',methods=['POST','GET'])
 def gen_slip():
