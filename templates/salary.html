@@ -43,36 +43,18 @@
                                             <table id="data-table-contact" class="display dataTable no-footer dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="data-table-contact_info">
                                             <thead>
                                             <tr >
+                                                <th>Employee ID</th>
                                                 <th>Employee Name</th>
-                                                  <th>GrossPay</th>
-                                                  <th>Employee Contribution</th>
-                                                  <th>Employer Contribution</th>
-                                                  <th>NSSF Contribution</th>
-                                                  <th>PAYE</th>
-                                                  <th>TT Deductions</th>
-                                                  <th>NetPay</th>
+                                                  <th>Basic Payment</th>
+                                                  
+                                                  
                                             </tr>
                                             </thead>
                                                 <tbody>
                                                 {% for df in sql_rows %}
                                                     <tr>
-                                                        <tr><td>{{df[1]}}</td><td>{{df[2]}}</td><td>{{df[3]}}</td><td>{{df[4]}}</td><td>{{df[5]}}</td><td>{{df[6]}}</td><td>{{df[7]}}</td><td>{{df[8]}}</td>
-                                                        <td>
-                                                            <form method="POST" action="" >
-                                                                <input type="hidden" value="" name="name">
-                                                                 <button type="submit" class="btn-floating btn waves-effect waves-light green">
-                                                                     <i class="material-icons blue-grey-text">remove_red_eye</i>
-                                                                 </button>
-                                                            </form>
-                                                        </td>
-                                                        <td>
-                                                            <form>
-                                                                <input type="hidden" value="" name="">
-                                                                <button type="submit" class="btn-floating btn waves-effect waves-light red">
-                                                                    <i class="material-icons blue-grey-text">delete</i>
-                                                                </button>
-                                                            </form>
-                                                        </td>
+                                                        <tr><td>{{df[1]}}</td><td>{{df[9]}} {{df[10]}} {{df[11]}}</td><td>{{df[28]}}</td>                                                      
+                                                          <td>
                                                     </tr>
                                                 {% endfor %}
                                                 </tbody>

@@ -51,16 +51,18 @@
                                    <th>Gross Pay</th><th>Taxation</th>
                                    <tr>
                                    <td>
-                                   {% for rp in rf_list %}
-                                   <p>Basic Pay:  UGX {{rp[2]}}</p>
+                                   {% for i in rdata%}
+                                   <p>Basic Pay:  UGX {{i[28]}}</p>
+                                   {% endfor %}
+                                    {% for rp in rf_list %}
+                                   <p>Other Earnings: UGX {{rp[3]}}</p>
                                    
-                                   <p>Other Earnings: UGX {{ralll}}</p>
-                                   <p>Gross Pay: UGX {{rp[2]}}</p>
+                                   <p>Gross Pay: UGX {{rp[4]}}</p>
                                    {% endfor %}
                                    </td>
                                    <td>
                                    {% for rp in rf_list %}
-                                   <p>Taxable Pay:    UGX {{rp[7]}}</p>
+                                   <p>Taxable Pay:    UGX {{rp[4]}}</p>
                                    {% endfor %}
                                    </td>
                                    </tr>
@@ -68,15 +70,18 @@
                                    <tr>
                                    <td>
                                     {% for rp in rf_list %}
-                                   <p>P.A.Y.E:    UGX {{rp[6]}}</p>
+                                   <p>P.A.Y.E:    UGX {{rp[8]}}</p>
                                    
-                                   <p>NSSF: UGX {{rp[5]}}</p>
+                                   <p>NSSF: UGX {{rp[7]}}</p>
                                   
-                                   {% endfor %}
-                                    <p>other Deductions:UGX {{ valuer }}</p>
+                                   
+                                    <p>other Deductions:UGX {{rp[10] }}</p>
+                                    {% endfor %}
                                    </td>
                                    <td>
-                                   <p>Net Pay: UGX {{ netpay }}</p>
+                                   {% for rp in rf_list %}
+                                   <p>Net Pay: UGX {{rp[12]}}</p>
+                                   {% endfor %}
                                    </td>
                                    </tr>
                                    

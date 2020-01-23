@@ -73,7 +73,7 @@
 			                                  </select>
                                                 
                                             </div>
-                                            <div class="input-field col s12">
+                                            <div class="input-field col s6">
                                                 
                                                 <label for="rep" >Allowance Name</label><br>
                                                 <select name="a_type">
@@ -83,13 +83,32 @@
 			                                  </select>
                                             </div>
                                             <div class="input-field col s6">
-                                            	<label for="start_date" class=""  >Date</label><br>
-                                                <input class="validate" required="" id="start_date" type="date" name="a_date">
+                                            	<label for="end_date" class="">Amount</label><br>
+                                                <input class="validate" required="" id="end_date" type="text"  name="a_ammount">
                                                 
                                             </div>
                                             <div class="input-field col s6">
-                                            	<label for="end_date" class="">Amount</label><br>
-                                                <input class="validate" required="" id="end_date" type="text"  name="a_ammount">
+                                            	<label for="start_date" class=""  >Month</label><br>
+                                                 <select name="a_date">
+                                      
+                                                  <option value="January">January</option>
+                                                  <option value="February">February</option>
+                                                  <option value="March">March</option>
+                                                  <option value="April">April</option>
+                                                  <option value="May">May</option>
+                                                  <option value="June">June</option>
+                                                  <option value="July">July</option>
+                                                  <option value="August">August</option>
+                                                  <option value="September">September</option>
+                                                  <option value="October ">October</option>
+                                                  <option value="November">November</option>
+                                                  <option value="December">December</option>
+                                                  
+                                              </select>
+                                            </div>
+                                            <div class="input-field col s6">
+                                            	<label for="end_date" class="">Year</label><br>
+                                                <input class="validate" required="" id="end_date" type="text"  name="year">
                                                 
                                             </div>
                                             <div class="input-field col s12">
@@ -122,12 +141,13 @@
 						                      <thead>
 						                      <th>Employee ID</th>
 						                      <th>Allowance Type</th>
-						                      <th>Date</th>
+						                      <th>Month</th>
+                                              <th>Year</th>
 						                      <th>Amount</th>
 						                      </thead>
 						                      <tbody>
 						                      {% for row in data1 %}
-						                      <tr><td>{{row[0]}}</td><td>{{row[1]}}</td><td>{{row[2]}}</td><td>{{row[3]}}</td></tr>
+						                      <tr><td>{{row[0]}}</td><td>{{row[1]}}</td><td>{{row[2]}}</td><td>{{row[3]}}</td><td>{{row[4]}}</td></tr>
 						                      {% endfor %}
 						                      
 						                      </tbody>
