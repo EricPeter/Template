@@ -7,7 +7,7 @@ from datetime import datetime
 import xlsxwriter
 import io
 from io import BytesIO
-from fpdf import FPDF, HTMLMixin
+
 
 
 app = Flask(__name__)
