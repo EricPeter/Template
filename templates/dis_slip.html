@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}Admin {% endblock title%}
+{% block content %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<div id="main">
+      <div class="row">
+        <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+        <div class="col s12">
+          <div class="container">
+            <div class="section">
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <div id="html-validations" class="card-panel">
+                            <div class="card-content">
+                                <div class="card-title">
+                                    <div class="row">
+                                        <div class="col s12 m6 l10">
+                                            <h4 class="card-title">Employee Pay Slip</h4>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                </div>
+                                <hr />
+                                <div id="tblCustomers" style="width:800px; height:800px; border:black solid 1px;" class="text-center" >
+                                  
+                                   {% for row in crows %}
+                                    <h5 class='h5 text-center'>{{row.cname}}</h5>
+                                    <h5 class='h5 text-center'>{{row.address}}</h5>
+                                   {% endfor %}
+                                   <h5 class='h5 text-center'>Monthly Pay Slip</h5>
+                                   <table style="border:black solid 1px;" class="text-center table table-striped">
+                                   <tr><td>
+                                   {% for i in rdata%}
+                                   <p>Employee ID: {{i[1]}}</p>
+                                   <p>Employee Name: {{i[9]}} {{i[10]}} {{11}}</p>
+                                   
+                                   <p>Department: {{i[31]}}</p>
+                                   <p>Designation: {{i[4]}}</p>
+                                   
+                                   {% endfor %}
+                                   </td>
+                                   <td>
+                                   {% for i in rdata%}
+                                   <p>NSSF No:     {{i[3]}}</p>
+                                   <p>Bank Account: {{i[21]}}</p>
+                                   <p>Bank info: {{i[20]}}</p>
+                                   {% endfor %}
+                                   </td></tr>
+                                   <th>Gross Pay</th><th>Taxation</th>
+                                   <tr>
+                                   <td>
+                                   {% for rp in rf_list %}
+                                   <p>Basic Pay:  UGX {{rp[2]}}</p>
+                                   
+                                   <p>Other Earnings: UGX {{ralll}}</p>
+                                   <p>Gross Pay: UGX {{rp[2]}}</p>
+                                   {% endfor %}
+                                   </td>
+                                   <td>
+                                   {% for rp in rf_list %}
+                                   <p>Taxable Pay:    UGX {{rp[7]}}</p>
+                                   {% endfor %}
+                                   </td>
+                                   </tr>
+                                   <th>Deduction(s)</th><th>SUMMARY</th>
+                                   <tr>
+                                   <td>
+                                    {% for rp in rf_list %}
+                                   <p>P.A.Y.E:    UGX {{rp[6]}}</p>
+                                   
+                                   <p>NSSF: UGX {{rp[5]}}</p>
+                                  
+                                   {% endfor %}
+                                    <p>other Deductions:UGX {{ valuer }}</p>
+                                   </td>
+                                   <td>
+                                   <p>Net Pay: UGX {{ netpay }}</p>
+                                   </td>
+                                   </tr>
+                                   
+                                   </table>
+
+
+                                </div> <hr />
+                                <div>
+                                <input type="button" id="btnExport" value="Print" onclick="Export()"  class="btn btn-success"/>
+                                 <script type="text/javascript">
+                                    function Export() {
+                                        html2canvas(document.getElementById('tblCustomers'), {
+                                            onrendered: function (canvas) {
+                                                var data = canvas.toDataURL();
+                                                var docDefinition = {
+                                                    content: [{
+                                                        image: data,
+                                                        width: 500
+                                                    }]
+                                                };
+                                                pdfMake.createPdf(docDefinition).download("Table.pdf");
+                                            }
+                                        });
+                                    }
+                                </script>
+                                </div>
+                                <!-- START RIGHT SIDEBAR NAV -->
+                            </div>
+                        </div>
+                    </div>
+                 
+                    
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

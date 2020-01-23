@@ -925,6 +925,7 @@ def add_tpaylist():
     return render_template('pay.html',img=imgs)
 @app.route('/gen_slip',methods=['POST','GET'])
 def gen_slip():
+    imgs=image()
     if request.method=='POST':
         db = getConnection()
         c = db.cursor()
@@ -934,12 +935,13 @@ def gen_slip():
         emdata = c.execute('''SELECT * FROM Employee_Data WHERE Emp_ID=('{nd}')'''.format(nd=new_data))
         rdata =  emdata.fetchall()
         crows=Company.query.all()
-        for i in crows:
-            cname = i.cname
-            caddress=i.address
         gallowances = c.execute('''SELECT SUM(Amount) FROM Allowances WHERE Emp_ID=('{nd}')'''.format(nd=new_data))
         rallowances =  gallowances.fetchall()
-        ralll=float(rallowances[0][0])
+        try:
+            ralll=float(rallowances[0][0])
+        except:
+            ralll=0.0
+            
         gpayment = c.execute('''SELECT * FROM Payment WHERE Emp_ID=('{name}')'''.format(name=new_data))
         rpay_list = gpayment.fetchall()
         gf = c.execute('''SELECT * FROM Finances WHERE Emp_ID=('{name}')'''.format(name=new_data))
@@ -947,64 +949,21 @@ def gen_slip():
          #total deductions 
         dsum=c.execute('''SELECT SUM(Amount) FROM Deduction WHERE Emp_id=('{name}')'''.format(name=new_data))
         drow = dsum.fetchall()
-        valuer=float(drow[0][0])
+        #check if value is float or not
+        try:
+            valuer=float(drow[0][0])
+        except:
+            valuer=0.0
+        
+       
+
         # total payment
         netcal=c.execute('''SELECT Net_pay FROM Finances WHERE Emp_ID=('{name}')'''.format(name=new_data))
         nets=netcal.fetchall()
         # comp = nets - drow[0][0]
         netpay=float(nets[0][0])-valuer
 
-        pdf = FPDF('P','mm','A4')
-        pdf.add_page()
-        col_width =100
-        th =10
-        pdf.set_font("Arial", size=10)
-        pdf.multi_cell(200, 5,cname)
-        pdf.ln()
-        pdf.multi_cell(200, 5,caddress)
-        pdf.ln()
-        pdf.set_text_color(0,0,255)
-        pdf.multi_cell(200, 5, 'Monthly Payslip')
-        pdf.ln()
-        pdf.multi_cell(0, 5, ('Employee Name: %s' % rf_list[0][1]))
-        pdf.ln()
-        pdf.multi_cell(0, 5, ('Designation: %s' % rdata[0][4]))
-        pdf.ln()
-        pdf.multi_cell(0, 5, ('Designation: %s' % rpay_list[0][4]))
-        pdf.ln()
-        pdf.multi_cell(0, 5, ('NSSF No: %s' % rdata[0][3]))
-        pdf.ln()
-        pdf.multi_cell(0, 5, ('Bank Account: %s' % rdata[0][21]))
-        pdf.ln()
-        pdf.multi_cell(0, 5, ('Bank Info: %s' % rdata[0][22] ))
-        pdf.ln()
-        pdf.set_text_color(0,0,255) 
-        pdf.multi_cell(200, 5, 'Gross Pay')
-        pdf.ln()
-        pdf.multi_cell(0, 5, ('Basic Pay: %s' % rf_list[0][2]))
-        pdf.ln()
-        pdf.multi_cell(0, 5, ('Other Earnings: %s' % ralll ))
-        pdf.ln()
-        pdf.multi_cell(200, 5, 'Taxation',border=0)
-        pdf.ln()
-        pdf.multi_cell(0, 5, ('NSSF No: %s' % rdata[0][30]))
-        pdf.ln()
-        pdf.set_text_color(0,0,255) 
-        pdf.multi_cell(200, 5, 'Deduction')
-        pdf.ln()
-        pdf.multi_cell(0, 5, ('P.A.Y.E: %s' % rf_list[0][6]))
-        pdf.ln()
-        pdf.multi_cell(0, 5, ('NSSF: %s' % rf_list[0][5] ))
-        pdf.ln()
-        pdf.multi_cell(0, 5, ('Other Deductions: %s' % valuer ))
-        pdf.ln()
-        pdf.set_text_color(0,0,255) 
-        pdf.multi_cell(200, 5, 'SUMMARY NETPAY')
-        pdf.ln()
-        pdf.multi_cell(0, 5, ('NSSF: %s' % netpay ))
-        # pdf.output("home.pdf")
-    # return Response(pdf.output(dest='S'), mimetype='application/pdf', headers={'Content-Disposition':'attachment;filename=pay_slip.pdf'})
-    return Response(pdf.output(dest='S').encode('latin-1'), mimetype='application/pdf', headers={'Content-Disposition':'attachment;filename=pay_slip.pdf'})
+        return render_template('dis_slip.html',crows=crows,rdata=rdata,rf_list=rf_list,ralll=ralll,valuer=valuer,netpay=netpay)
 #NSSF submission
 @app.route('/nssf')
 def nssf():
@@ -1030,10 +989,14 @@ def nssf_sub():
         Finances.nssf_contrib,Employee_Data.Mobile FROM Payment JOIN Finances ON(Payment.Emp_ID=Finances.Emp_ID) JOIN Employee_Data ON(Payment.Emp_ID= Employee_Data.Emp_ID) WHERE Payment.Paid_month=('{nmonth}') AND  Payment.pYear=('{yr}')"""
                        .format(nmonth=submonth,yr=syear))
         drows = ford.fetchall()
-        print(drows)
+        
         #sum
         tsum=c.execute("select SUM(Finances.Total_Dect)from Payment JOIN Finances ON(Payment.Emp_ID=Finances.Emp_ID) JOIN Employee_Data ON(Payment.Emp_ID= Employee_Data.Emp_ID) WHERE Payment.Paid_month=('{nmonth}')".format(nmonth=submonth))
         tsumval = tsum.fetchall()
+        try:
+            ttr=float(tsumval[0][0])
+        except:
+            ttr=0.0
         
         output=BytesIO()
         
@@ -1056,7 +1019,7 @@ def nssf_sub():
         cell_format.set_font_color('Sliver')
         coname=cname
         nssf=nssf_number
-        ttr=1233333
+        
         # print(tsumval[0][0])
     
         nmembers=len(drows)
