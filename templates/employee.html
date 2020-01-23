@@ -47,11 +47,10 @@
                                             </div>
                                         </div>
                                         <form role="form" action="{{url_for('add_employee')}}" method="POST" class="formValidate0" id="formValidate0" enctype="multipart/form-data" >
-                                            <div class="row setup-content" id="step-1">
+                                            <div class="row setup-content" id="step-2">
                                                 <div class="col s12 m12 l6">
                                                     <div id="html-validations" class="card-panel">
-                                                        <div class="card-content">
-                                                            <div class="card-title">
+                                                          <div class="card-title">
                                                                 <div class="row">
                                                                     <div class="col s12 m6 l10">
                                                                         <h6>Employement Details</h6>
@@ -60,6 +59,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                        <div class="card-content">
                                                             <div id="html-view-validations">
                                                                      <div class="col-xs-6 col-md-offset-3">
                                                                          <div class="col-md-12">
@@ -108,8 +108,8 @@
                                                                                  <input class="validate invalid" required="" id="tin" type="text" name="tin" maxlength="10" size="10">
                                                                                   <label for="tin" class="">Tin Number *</label>
                                                                              </div>
-                                                                             <button class="btn btn-light-blue nextBtn pull-right" type="button">Next
-                                                                                 <i class="material-icons right">send</i>
+                                                                             <button class="btn btn-light-deep-purple prevBtn  pull-left" type="button">
+                                                                                 Previous
                                                                              </button>
                                                                          </div>
                                                                      </div>
@@ -135,7 +135,7 @@
                                                                              <div class="input-field col s12">
                                                                                   <i class="material-icons prefix">attach_money</i>
                                                                                  <input class="validate invalid" required="" id="gross" name="gross_pay" type="text">
-                                                                                 <label for="gross" class="">Gross Pay*</label>
+                                                                                 <label for="gross" class="">Basic Pay*</label>
                                                                              </div>
                                                                              <div class="input-field col s12">
                                                                                  <i class="material-icons prefix">work</i>
@@ -148,9 +148,13 @@
                                                                                  <label for="next_of_kin" class="">Next of Kin *</label>
                                                                              </div>
                                                                              <div class="input-field col s12">
-                                                                                 <i class="material-icons prefix">device_hub</i>
-                                                                                 <input class="validate invalid" required="" id="department" type="text" name="department">
-                                                                                 <label for="department" class="">Department *</label>
+                                                                             <i class="material-icons prefix">device_hub</i>
+                                                                                 <label for="first_input2" class="">Department *</label><br>
+                                                                                 <select name="department">
+                                                                                     {% for i in rows %}
+                                                                                         <option>{{i[1]}}</option>
+                                                                                     {% endfor %}
+                                                                                 </select>
                                                                              </div>
                                                                              <div class="input-field col s12">
                                                                                   <i class="material-icons prefix">person_outline</i>
@@ -178,7 +182,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            <div class="row setup-content" id="step-2">
+                                            <div class="row setup-content" id="step-1">
                                                 <div class="col-xs-6 col-md-offset-3">
                                                     <div class="col-md-12">
                                                         <h6>Personal Information</h6>
@@ -230,9 +234,9 @@
                                                             </select>
                                                             <label>Gender</label>
                                                         </div>
-                                                        <button class="btn btn-light-deep-purple prevBtn  pull-left" type="button">
-                                                            Previous
-                                                        </button>
+{#                                                        <button class="btn btn-light-deep-purple prevBtn  pull-left" type="button">#}
+{#                                                            Previous#}
+{#                                                        </button>#}
                                                         <button class="btn waves-effect waves-light right nextBtn pull-right" type="button">Next
                                                             <i class="material-icons right">send</i>
                                                         </button>
@@ -336,7 +340,8 @@
                                                             <label for="email" class="">Email *</label>
                                                         </div>
                                                         <button class="btn btn-light-blue prevBtn btn-light-deep-purple pull-left" type="button">
-                                                            Previous</button>
+                                                            Previous
+                                                        </button>
                                                         <button class="btn waves-effect waves-light right " type="submit">Submit
                                                         <i class="material-icons right">send</i>
                                                         </button>

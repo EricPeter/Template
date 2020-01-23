@@ -478,7 +478,7 @@ def Employee():
     rows = query.fetchall()
     db.commit()
     db.close()
-    return render_template('employee.html',img=imgs)
+    return render_template('employee.html',img=imgs,rows=rows)
 '''
     Adding an employee to the database
 '''
