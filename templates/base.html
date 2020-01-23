@@ -451,7 +451,7 @@ var inputQuantity = [];
             return;
         } 
         if (val.length > Number($field.attr("maxlength"))) {
-          val=val.slice(0, 5);
+          val=val.slice(0, 10);
           $field.val(val);
         }
         inputQuantity[$thisIndex]=val;
