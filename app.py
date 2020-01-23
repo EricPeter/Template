@@ -840,15 +840,12 @@ def deductions():
         c.execute('''CREATE TABLE IF NOT EXISTS Deduction_types(Deduction_type VARCHAR(100),Description VARCHAR(100))''')
         db.commit()
         return redirect(url_for('deductions'))
-
-
     db.close()
     return render_template('deductions.html',adeduction_rows=adeduction_rows,drows=drows,serows=serows,img=imgs)
 @app.route('/add_deduction',methods=['POST','GET'])
 def add_deduction():
     dd=[]
     if request.method=='POST':
-        
         dtype=request.form['d_type']
         dd.append(dtype)
         descrip=request.form['descip']
