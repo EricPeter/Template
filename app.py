@@ -1,3 +1,4 @@
+from flaskwebgui import FlaskUI
 import sqlite3
 from flask import Flask, render_template, url_for, request,jsonify,redirect,g,send_file,Response,flash
 from flask_sqlalchemy import SQLAlchemy
@@ -15,7 +16,9 @@ app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///Database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 autoflush=True
+
 db  = SQLAlchemy(app)
+ui = FlaskUI(app)
 '''
     Create Company profile table
 '''
@@ -840,12 +843,15 @@ def deductions():
         c.execute('''CREATE TABLE IF NOT EXISTS Deduction_types(Deduction_type VARCHAR(100),Description VARCHAR(100))''')
         db.commit()
         return redirect(url_for('deductions'))
+
+
     db.close()
     return render_template('deductions.html',adeduction_rows=adeduction_rows,drows=drows,serows=serows,img=imgs)
 @app.route('/add_deduction',methods=['POST','GET'])
 def add_deduction():
     dd=[]
     if request.method=='POST':
+        
         dtype=request.form['d_type']
         dd.append(dtype)
         descrip=request.form['descip']
@@ -1090,3 +1096,4 @@ if __name__ == '__main__':
     db.create_all()
     db.session.commit()
     app.run(debug=True)
+# ui.run()
