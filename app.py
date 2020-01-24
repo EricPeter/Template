@@ -226,9 +226,17 @@ def add_data(name,salary,vmonth,vyear,vdate):
     detail.append(vyear)
     allowances=c.execute('''SELECT SUM(Amount) FROM Allowances WHERE Emp_ID=('{name}') OR (('{moth}') AND ('{yr}'))'''.format(name=name,moth=vmonth,yr=vyear))
     nets=allowances.fetchall()
-    detail.append(float(nets[0][0]))
+    
     try:
-        mGross_pay=float(salary)+float(nets[0][0])
+        net_allowance=float(nets[0][0])
+        
+    except:
+        net_allowance=0.0
+        
+        
+    detail.append(net_allowance)
+    try:
+        mGross_pay=float(salary)+net_allowance
     except :
         mGross_pay=float(salary)+0.0
     detail.append(mGross_pay)
@@ -291,9 +299,13 @@ def add_data(name,salary,vmonth,vyear,vdate):
     detail.append(mtt_deductions)
     deductions=c.execute('''SELECT SUM(Amount) FROM Deduction WHERE Emp_ID=('{name}') OR (('{moth}') AND ('{yr}'))'''.format(name=name,moth=vmonth,yr=vyear))
     ded=deductions.fetchall()
-    detail.append(float(ded[0][0]))
     try:
-        cded=float(ded[0][0])+mtt_deductions
+        dect=float(ded[0][0])
+    except:
+        dect=0.0
+    detail.append(dect)
+    try:
+        cded=dect+mtt_deductions
         detail.append(cded)
         dnetpay=mGross_pay-cded
     except:
