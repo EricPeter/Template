@@ -191,7 +191,6 @@ def com_name():
     except:
         cnames = "company name"
     return cnames
-#create data
 def add_data(name,salary,vmonth,vyear,vdate):
     #a list for adding data into the finance module
     detail=[]
@@ -295,13 +294,6 @@ def add_data(name,salary,vmonth,vyear,vdate):
 
     db.commit()
     db.close()
-# @app.route('/')
-# def login():
-#     return render_template('login.html')
-
-# @app.route('/register')
-# def register():
-#     return render_template('register.html')
 @app.route('/forgot')
 def forgot():
     return render_template('forgot.html')
@@ -336,8 +328,12 @@ def Profile():
                 db.session.add(df)
                 db.session.commit()
                 return redirect(url_for('index'))
-        except Exception as  e:
-            raise e
+        except:
+            new_file = Company(cname=Company_name, Tin=c_tin, nssf_number=c_nssf_num, address=c_address, email=c_email,
+                               telephone=c_Tel, image=img)
+            db.session.add(new_file)
+            db.session.commit()
+            return redirect(url_for('index'))
     return render_template('index.html')
 '''Edit company profile'''
 @app.route('/Update_Profile',methods=['POST','GET'])
