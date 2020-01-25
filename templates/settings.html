@@ -25,7 +25,7 @@
                                             <form class="formValidate0" id="formValidate0" method="POST"
                                                   action="{{ url_for('Role') }}" enctype="multipart/form-data">
                                                 <div class="row">
-                                                    <div class="input-field col s12">
+                                                    <div class="input-field col s6">
                                                         <select name="name">
                                                             {% for i in sql_rows %}
                                                                 <option>{{ i.Given_name }}</option>
@@ -33,7 +33,7 @@
                                                         </select>
                                                         <label for="first_input2" class="">Employee Name </label>
                                                     </div>
-                                                    <div class="input-field col s12">
+                                                    <div class="input-field col s6">
                                                         <select name="department">
                                                             {% for x in depart_row %}
                                                                 {% for t in x %}
@@ -84,7 +84,7 @@
                                                 <form class="formValidate0" id="formValidate0" method="POST"
                                                       action="{{ url_for('Change_Password') }}"
                                                       enctype="multipart/form-data">
-                                                    <div class="input-field col s12">
+                                                    <div class="input-field col s6">
                                                         <select name="name">
                                                             {% for i in sql_rows %}
                                                                 <option>{{ i.Given_name }}</option>
@@ -92,7 +92,7 @@
                                                         </select>
                                                         <label for="first_input2" class="">Employee Name </label>
                                                     </div>
-                                                    <div class="input-field col s12">
+                                                    <div class="input-field col s6">
                                                         <input class="validate" required="" id="npassword"
                                                                type="password" name="npassword">
                                                         <label for="npassword">New Password</label>
@@ -124,16 +124,19 @@
                                         </div>
                                         <div id="html-view-validations">
                                             <div class="row">
-                                                <table id="example" class="mdl-data-table" style="width:100%">
+                                                <div id="page-length-option_wrapper" class="dataTables_wrapper">
+                                                      <table id="page-length-option" class="display dataTable dtr-inline collapsed" role="grid"
+                                                                   aria-describedby="page-length-option_info" style="width:100%;">
                                                     <thead>
                                                     <tr>
                                                         <th>Name</th>
                                                         <th>Role</th>
                                                         <th>Password</th>
+                                                        <th>Department</th>
                                                         <th>Delete</th>
                                                     </tr>
                                                     </thead>
-                                                    <tbody>
+                                                    <tbody style="overflow:auto;">
                                                     {% for df in rows %}
                                                         <tr>
                                                             {% for i in df %}
@@ -154,6 +157,7 @@
                                                     {% endfor %}
                                                     </tbody>
                                                 </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

@@ -54,12 +54,12 @@
                                 {% endwith %}
                                 <form class="formValidate0" id="formValidate0" method="POST" action="{{url_for('add_department')}}">
                                         <div class="row">
-                                            <div class="input-field col s12">
+                                            <div class="input-field col s6">
                                                 <textarea class="materialize-textarea" placeholder="Separate departments with commas..." id="uname0" name="dname" required=""></textarea>
                                                 <label for="uname0">Department Name *</label>
                                             </div>
-                                            <div class="input-field col s12">
-                                                <button class="btn waves-effect waves-light right" type="submit" name="action">Submit
+                                            <div class="input-field col s6">
+                                                <button class="btn waves-effect waves-light left" type="submit" name="action">Submit
                                                     <i class="material-icons right">send</i>
                                                 </button>
                                             </div>
@@ -92,7 +92,7 @@
                                                             {% for  i in rows %}
                                                                 <tr role="row">
                                                                 {% for x in i %}
-                                                                    <td class="left-align contact-checkbox sorting_1" tabindex="0">{{x}}</td>
+                                                                    <td>{{x}}</td>
                                                                     {% endfor %}
                                                                     <td>
                                                                         <form method="POST" action="{{url_for('Delete_Department')}}">
@@ -102,14 +102,14 @@
                                                                             </button>
                                                                         </form>
                                                                     </td>
-                                                                    <td>
-                                                                        <form method="POST" action="">
-                                                                            <input type="hidden" value="{{i[0]}}" name="depart1">
-                                                                            <button type="submit" class="btn-floating btn waves-effect waves-light white">
-                                                                                <i class="material-icons blue-grey-text">edit</i>
-                                                                            </button>
-                                                                        </form>
-                                                                    </td>
+{#                                                                    <td>#}
+{#                                                                        <form method="POST" action="">#}
+{#                                                                            <input type="hidden" value="{{i[0]}}" name="depart1">#}
+{#                                                                            <button type="submit" class="btn-floating btn waves-effect waves-light white">#}
+{#                                                                                <i class="material-icons blue-grey-text">edit</i>#}
+{#                                                                            </button>#}
+{#                                                                        </form>#}
+{#                                                                    </td>#}
                                                                 </tr>
                                                             {% endfor %}
                                                             </tbody>

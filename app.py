@@ -215,6 +215,14 @@ def image():
     except:
         imgs = "User"
     return imgs
+'''Select company name'''
+def com_name():
+    try:
+        file = Company.query.filter_by(id=1).first()
+        cnames =file.cname
+    except:
+        cnames = "company name"
+    return cnames
 #create data
 def add_data(name,salary,vmonth,vyear,vdate):
     #a list for adding data into the finance module
@@ -334,7 +342,9 @@ def forgot():
 @app.route('/index',methods=['POST','GET'])
 def index():
     imgs=image()
-    return render_template('index.html',img=imgs)
+    cm = com_name()
+    return render_template('index.html',img=imgs,cm=cm)
+'''Check Profile table'''
 '''
     Creating a company profile
 '''
@@ -351,11 +361,19 @@ def Profile():
         c_Tel = request.form['c_tel']
         ###insert data into the table in the sqlite database
         try:
-            new_file=Company(cname=Company_name,Tin=c_tin,nssf_number=c_nssf_num,address=c_address,email=c_email,telephone=c_Tel,image=img)
-            db.session.add(new_file)
-            db.session.commit()
-            return redirect(url_for('index'))
-        except Exception as e:
+            df = db.session.query(Company).filter_by(id=1).one()
+            if df != []:
+                df.cname =Company_name
+                df.image = img
+                df.Tin =c_tin
+                df.nssf_number =c_nssf_num
+                df.address = c_address
+                df.email = c_email
+                df.telephone =c_Tel
+                db.session.add(df)
+                db.session.commit()
+                return redirect(url_for('index'))
+        except Exception as  e:
             raise e
     return render_template('index.html')
 '''
@@ -434,6 +452,7 @@ def add_department():
 @app.route('/department')
 def department():
     imgs = image()
+    cm=com_name()
     db = getConnection()
     c = db.cursor()
     query = c.execute('''SELECT  Department FROM  Departments''')
@@ -441,13 +460,14 @@ def department():
     print(rows)
     db.commit()
     db.close()
-    return render_template('department.html',rows=rows,img=imgs)
+    return render_template('department.html',rows=rows,img=imgs,cm=cm)
 '''
     Route attendance 
 '''
 @app.route('/Attendance',methods=['POST','GET'])
 def Attendance():
     imgs=image()
+    cm=com_name()
     img_df = []
     users = Employee_Data.query.all()
     # # base64.b64encode(file.image).decode('ascii')
@@ -455,7 +475,7 @@ def Attendance():
         images=base64.b64encode(i.Picture).decode('ascii')
         img_df.append(images)
     user_zipped = zip(users,img_df)
-    return  render_template('attendance.html',img=imgs,user_zipped=user_zipped)
+    return  render_template('attendance.html',img=imgs,user_zipped=user_zipped,cm=cm)
 '''
     Take attendance
 '''
@@ -499,6 +519,7 @@ def Delete_Department():
 @app.route('/Employee')
 def Employee():
     imgs=image()
+    cm=com_name()
     #connecting and selecting departments
     db=getConnection()
     c=db.cursor()
@@ -507,7 +528,7 @@ def Employee():
     rows = query.fetchall()
     db.commit()
     db.close()
-    return render_template('employee.html',img=imgs,rows=rows)
+    return render_template('employee.html',img=imgs,rows=rows,cm=cm)
 '''
     Adding an employee to the database
 '''
@@ -569,8 +590,9 @@ def add_employee():
 @app.route('/Employee_list',methods=['POST','GET'])
 def Employee_list():
     imgs=image()
+    cm=com_name()
     users = Employee_Data.query.all()
-    return render_template('employee_list.html',img=imgs,users=users)
+    return render_template('employee_list.html',img=imgs,users=users,cm=cm)
 '''
     Screen lock
 '''
@@ -583,8 +605,9 @@ def screen_lock():
 @app.route('/Leave',methods=['POST','GET'])
 def Leave():
     imgs = image()
+    cm=com_name()
     users = Employee_Data.query.all()
-    return render_template('leave.html',img=imgs,sql_rows=users)
+    return render_template('leave.html',img=imgs,sql_rows=users,cm=cm)
 '''
     Set Holidays
 '''
@@ -614,6 +637,7 @@ def Holidays():
 @app.route('/Sick_Leave',methods=['POST','GET'])
 def Sick_Leave():
     imgs=image()
+    cm=com_name()
     if request.method=='POST':
         name=request.form['name']
         start_date=request.form['start_date']
@@ -629,12 +653,13 @@ def Sick_Leave():
             return  redirect(url_for('Leave'))
         except Exception as e:
             raise e
-    return render_template('leave.html',img=imgs)
+    return render_template('leave.html',img=imgs,cm=cm)
 @app.route('/salary')
 def salary():
     db = getConnection()
     c = db.cursor()
     imgs=image()
+    cm=com_name()
     # file = Data.query.filter_by(id=1).first()
     # img = base64.b64encode(file.image).decode('ascii')
     try:
@@ -643,13 +668,14 @@ def salary():
 
     except Exception as e:
         raise e
-    return render_template('salary.html',sql_rows=sql_rows,img=imgs)
+    return render_template('salary.html',sql_rows=sql_rows,img=imgs,cm=cm)
 '''
     Apply for a vacation
 '''
 @app.route('/Vacation',methods=['POST','GET'])
 def Vacation():
     imgs=image()
+    cm=com_name()
     if request.method=='POST':
         name=request.form['name']
         start_date=request.form['start_date1']
@@ -668,13 +694,14 @@ def Vacation():
             return redirect(url_for('Leave'))
         except Exception as e:
             raise e
-    return render_template('leave.html', img=imgs)
+    return render_template('leave.html', img=imgs,cm=cm)
 '''
     User settings
 '''
 @app.route('/settings', methods=['POST', 'GET'])
 def settings():
     imgs = image()
+    cm=com_name()
     db = getConnection()
     c = db.cursor()
     d = db.cursor()
@@ -690,13 +717,14 @@ def settings():
         db.commit()
         return redirect('settings')
     db.close()
-    return render_template('settings.html', rows=rows, sql_rows=users, depart_row=depart_row, img=imgs)
+    return render_template('settings.html', rows=rows, sql_rows=users, depart_row=depart_row, img=imgs,cm=cm)
 '''
     Assign Role
 '''
 @app.route('/Role', methods=['POST', 'GET'])
 def Role():
     imgs = image()
+    cm=com_name()
     if request.method == 'POST':
         name = request.form['name']
         role = request.form['role']
@@ -713,7 +741,7 @@ def Role():
             return redirect(url_for('settings'))
         except Exception as e:
             raise e
-    return render_template('settings.html', img=imgs)
+    return render_template('settings.html', img=imgs,cm=cm)
 '''
     Change password
 '''
@@ -754,6 +782,7 @@ def Delete_User():
 @app.route('/allowances')
 def allowances():
     imgs=image()
+    cm=com_name()
     db = getConnection()
     c = db.cursor()
     # file = Data.query.filter_by(id=1).first()
@@ -778,7 +807,7 @@ def allowances():
         c.execute('''CREATE TABLE IF NOT EXISTS Allowance_types(Allowance_type VARCHAR(100),description VARCHAR(100))''')
         db.commit()
         return redirect(url_for('allowances'))
-    return render_template('allowances.html',data1=allowance_rows,arows=arows,serows=serows,img=imgs)
+    return render_template('allowances.html',data1=allowance_rows,arows=arows,serows=serows,img=imgs,cm=cm)
 @app.route('/add_allowance',methods=('POST','GET'))
 def add_allowance():
     dallowance=[]
@@ -830,6 +859,7 @@ def issue_allowance():
 @app.route('/deductions')
 def deductions():
     imgs=image()
+    cm=com_name()
     db = getConnection()
     c = db.cursor()
     try:
@@ -853,7 +883,7 @@ def deductions():
         db.commit()
         return redirect(url_for('deductions'))
     db.close()
-    return render_template('deductions.html',adeduction_rows=adeduction_rows,drows=drows,serows=serows,img=imgs)
+    return render_template('deductions.html',adeduction_rows=adeduction_rows,drows=drows,serows=serows,img=imgs,cm=cm)
 @app.route('/add_deduction',methods=['POST','GET'])
 def add_deduction():
     dd=[]
@@ -879,6 +909,7 @@ def add_deduction():
 def compute_deduction():
     edd = []
     imgs=image()
+    cm=com_name()
     if request.method == 'POST':
         emp_name=request.form['a_empname']
         edd.append(emp_name)
@@ -903,10 +934,11 @@ def compute_deduction():
             return redirect(url_for('deductions'))
         except Exception as e:
             raise e
-    return render_template('deductions.html',img=imgs)   
+    return render_template('deductions.html',img=imgs,cm=cm)
 @app.route('/pay')
 def pay():
     imgs=image()
+    cm=com_name()
     # file = Data.query.filter_by(id=1).first()
     # img = base64.b64encode(file.image).decode('ascii')
     try:
@@ -927,11 +959,11 @@ def pay():
         return redirect(url_for('pay'))
         
     
-    return render_template('pay.html',pay_list=dpay_list,Finance=depart_row,img=imgs)
+    return render_template('pay.html',pay_list=dpay_list,Finance=depart_row,img=imgs,cm=cm)
 @app.route('/add_tpaylist',methods=['POST','GET'])
 def add_tpaylist():
     imgs=image()
-    
+    cm=com_name()
     db = getConnection()
     c = db.cursor()
     if request.method=='POST':
@@ -952,10 +984,9 @@ def add_tpaylist():
             return redirect(url_for('pay'))
         except Exception as e:
             raise e
-    return render_template('pay.html',img=imgs)
+    return render_template('pay.html',img=imgs,cm=cm)
 @app.route('/gen_slip',methods=['POST','GET'])
 def gen_slip():
-    imgs=image()
     if request.method=='POST':
         db = getConnection()
         c = db.cursor()
@@ -975,7 +1006,8 @@ def gen_slip():
 @app.route('/nssf')
 def nssf():
     imgs=image()
-    return render_template('nssf_subf.html',img=imgs)
+    cm=com_name()
+    return render_template('nssf_subf.html',img=imgs,cm=cm)
 @app.route('/nssf_sub',methods=['POST','GET'])
 def nssf_sub():
     if request.method=='POST':

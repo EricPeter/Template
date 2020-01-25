@@ -24,7 +24,7 @@
                                 <div id="html-view-validations">
                                     <form class="formValidate0" id="formValidate0" method="POST" action="{{url_for('add_tpaylist')}}" enctype="multipart/form-data">
                                         <div class="row">
-                                            <div class="input-field col s12">
+                                            <div class="input-field col s6">
                                                 <label for="first_input2" class="">Employee Name</label><br>
                                                  <select name="emp_id">
                                                 {% for emp in Finance %}
@@ -33,7 +33,7 @@
                                                  </select>
                                             </div>
                                            
-                                            <div class="input-field col s12">
+                                            <div class="input-field col s6">
                                                 <label for="c_event" >Month Being Paid</label><br>
                                                 <select name="vMonth">
                                       
@@ -53,12 +53,12 @@
                                               </select>
                                             </div>
                                             
-                                           <div class="input-field col s12">
+                                           <div class="input-field col s6">
                                                 <label for="cevent" >Enter Year</label><br/>
                                                 <input class="validate" required="" id="cevent" type="text" name="vyear">
                                                 
                                             </div>
-                                            <div class="input-field col s12">
+                                            <div class="input-field col s6">
                                                 <label for="cevent" >Date of Payment</label><br/>
                                                 <input class="validate" required="" id="cevent" type="date" name="vdate">
                                                 
