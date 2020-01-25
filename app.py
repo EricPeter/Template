@@ -189,24 +189,26 @@ def com_name():
     except:
         cnames = "company name"
     return cnames
-def add_data(name,salary,vmonth,vyear,vdate):
+#create data
+def add_data(name,rname,salary,vmonth,vyear,vdate):
     #a list for adding data into the finance module
     detail=[]
     db = getConnection()
     c = db.cursor()
     detail.append(name)
+    detail.append(rname)
     detail.append(vmonth)
     detail.append(vyear)
     allowances=c.execute('''SELECT SUM(Amount) FROM Allowances WHERE Emp_ID=('{name}') OR (('{moth}') AND ('{yr}'))'''.format(name=name,moth=vmonth,yr=vyear))
     nets=allowances.fetchall()
-
+    
     try:
         net_allowance=float(nets[0][0])
-
+        
     except:
         net_allowance=0.0
-
-
+        
+        
     detail.append(net_allowance)
     try:
         mGross_pay=float(salary)+net_allowance
@@ -225,25 +227,25 @@ def add_data(name,salary,vmonth,vyear,vdate):
 
 #     #calculate payee
     status=c.execute('''SELECT Residence_type FROM Employee_Data WHERE Emp_ID=('{name}')'''.format(name=name))
-    bom=allowances.fetchall()
-    residence=bom[0][0]
+    bom=allowances.fetchall() 
+    residence=bom[0][0]  
     if residence=='Yes':
         #Paye for residents
         if mGross_pay <235000:
             paye=0
-
+                    
         elif mGross_pay in range(235000,335000):
             paye=0.1*mGross_pay
-
+                    
         elif mGross_pay in range(335000,410000):
             paye=10000 + 0.2*mGross_pay
-
+                
         elif mGross_pay >410000:
             paye=25000+0.3*mGross_pay
-
+                    
         elif mGross_pay >10000000:
             paye=25000+0.3*mGross_pay+0.1*mGross_pay
-
+                    
         else:
             print("Enter valid money for the employeee")
 
@@ -251,16 +253,16 @@ def add_data(name,salary,vmonth,vyear,vdate):
         #paye for non residents
         if mGross_pay <335000:
             paye=0.1*mGross_pay
-
+                    
         elif mGross_pay in range(335000,410000):
             paye=33500 + 0.2*mGross_pay
-
+                    
         elif mGross_pay>410000:
             paye=48500+0.3*mGross_pay
-
+                    
         elif mGross_pay>10000000:
             paye=48500+0.3*mGross_pay+0.1*mGross_pay
-
+                    
         else:
             print("Enter valid money for the employeee")
 
@@ -283,13 +285,13 @@ def add_data(name,salary,vmonth,vyear,vdate):
         dnetpay=mGross_pay-cded
     except:
         dnetpay=mGross_pay-mtt_deductions
-    detail.append(dnetpay)
-    detail.append(vdate)
+    detail.append(dnetpay) 
+    detail.append(vdate)      
     arr=[str(i) for i in detail]
     detail_data = tuple(arr)
-
-    c.execute('''Insert INTO Payment(Emp_ID,pmonth,pyear,tt_allowances,gross_pay,emp_contrib,emplry_contrib,nssf_contrib,paye,mdeduction,other_ded,ttded,net_pay,Issue_Date) VALUES {vdata}'''.format(vdata=detail_data))
-
+    
+    c.execute('''Insert INTO Payment(Emp_ID,Emp_name,pmonth,pyear,tt_allowances,gross_pay,emp_contrib,emplry_contrib,nssf_contrib,paye,mdeduction,other_ded,ttded,net_pay,Issue_Date) VALUES {vdata}'''.format(vdata=detail_data))
+            
     db.commit()
     db.close()
 @app.route('/forgot')
@@ -593,7 +595,7 @@ def salary():
     # file = Data.query.filter_by(id=1).first()
     # img = base64.b64encode(file.image).decode('ascii')
     try:
-        query = c.execute('SELECT * FROM Employee_Data')
+        query = c.execute('SELECT * FROM Payment')
         sql_rows = query.fetchall()
 
     except Exception as e:
@@ -697,6 +699,40 @@ def Delete_User():
         except Exception as e:
             raise e
     return render_template('settings.html')
+#delete deduction
+@app.route('/delete_dd',methods=['POST','GET'] )
+def delete_dd():
+    if request.method == 'POST':
+        emp_id = request.form['emp_id']
+        nmonth = request.form['nmonth']
+        nyear = request.form['nyear']
+        db = getConnection()
+        c = db.cursor()
+        try:
+            c.execute('''DELETE FROM Deduction WHERE Emp_id=('{nm}')  OR (('{moth}') AND ('{yr}'))'''.format(nm=emp_id,moth=nmonth,yr=nyear))
+            db.commit()
+            db.close()
+            return redirect(url_for('deductions'))
+        except Exception as e:
+            raise e
+    return render_template('deductions.html')
+#delete allowances 
+@app.route('/delete_allow',methods=['POST','GET'])
+def delete_allow():
+    if request.method == 'POST':
+        emp_id = request.form['emp_id']
+        nmonth = request.form['nmonth']
+        nyear = request.form['nyear']
+        db = getConnection()
+        c = db.cursor()
+        try:
+            c.execute('''DELETE FROM Allowances WHERE Emp_id=('{nm}')  OR (('{moth}') AND ('{yr}'))'''.format(nm=emp_id,moth=nmonth,yr=nyear))
+            db.commit()
+            db.close()
+            return redirect(url_for('allowances'))
+        except Exception as e:
+            raise e
+    return render_template('allowances.html')
 @app.route('/allowances')
 def allowances():
     imgs=image()
@@ -718,8 +754,8 @@ def allowances():
     except Exception as e:
         c = db.cursor()
         #creat allowances table is not existing
-
-        c.execute('''CREATE TABLE IF NOT EXISTS Allowances(Emp_id VARCHAR(15),Allowance_type VARCHAR(100),month VARCHAR(15),year VARCHAR(15),Amount VARCHAR(100))''')
+        
+        c.execute('''CREATE TABLE IF NOT EXISTS Allowances(Emp_id VARCHAR(15),Emp_name VARCHAR(30),Allowance_type VARCHAR(100),month VARCHAR(15),year VARCHAR(15),Amount VARCHAR(100))''')
         #create employee table is not exist
         #create allowance type  table is not exist
         c.execute('''CREATE TABLE IF NOT EXISTS Allowance_types(Allowance_type VARCHAR(100),description VARCHAR(100))''')
@@ -749,10 +785,21 @@ def add_allowance():
 
 @app.route('/issue_allowance',methods=('POST','GET'))
 def issue_allowance():
+    db = getConnection()
+    c = db.cursor()
     allowance = []
     if request.method == 'POST':
         emp_name=request.form['a_empname']
         allowance.append(emp_name)
+        #get employye name
+        depart = c.execute('''SELECT * FROM Employee_Data WHERE Emp_ID=('{nd}')'''.format(nd=emp_name))
+        depart_row = depart.fetchall()
+        for i in depart_row:
+            lname=i[9]
+            mname=i[10]
+            
+        rname=lname +" "+ mname
+        allowance.append(rname)
         allowance_type=request.form['a_type']
         allowance.append(allowance_type)
         Issue_date=request.form['a_date']
@@ -763,10 +810,9 @@ def issue_allowance():
         allowance.append(amt)
         arr2=[str(i) for i in allowance]
         allowance_data = tuple(arr2)
-        db = getConnection()
-        c = db.cursor()
+        
         try:
-            c.execute('''INSERT INTO Allowances(Emp_id,Allowance_type,month,year,Amount)  VALUES {table_values}'''.format(table_values=allowance_data))
+            c.execute('''INSERT INTO Allowances(Emp_id,Emp_name,Allowance_type,month,year,Amount)  VALUES {table_values}'''.format(table_values=allowance_data))
             db.commit()
             db.close()
             return redirect(url_for('allowances'))
@@ -790,11 +836,11 @@ def deductions():
         #select allownaces
         query = c.execute('SELECT * FROM  Deduction')
         adeduction_rows = query.fetchall()
-
+       
     except:
         c = db.cursor()
         #creat allowances table is not existing
-        c.execute('''CREATE TABLE IF NOT EXISTS Deduction(Emp_id VARCHAR(15),deduction_type VARCHAR(100),month VARCHAR(15),year VARCHAR(15),Amount VARCHAR(100))''')
+        c.execute('''CREATE TABLE IF NOT EXISTS Deduction(Emp_id VARCHAR(15),Emp_name VARCHAR(30),deduction_type VARCHAR(100),month VARCHAR(15),year VARCHAR(15),Amount VARCHAR(100))''')
         #create employee table is not exist
         #create allowance type  table is not exist
         c.execute('''CREATE TABLE IF NOT EXISTS Deduction_types(Deduction_type VARCHAR(100),Description VARCHAR(100))''')
@@ -828,14 +874,25 @@ def compute_deduction():
     edd = []
     imgs=image()
     cm=com_name()
+    db = getConnection()
+    c = db.cursor()
     if request.method == 'POST':
         emp_name=request.form['a_empname']
         edd.append(emp_name)
+        #get employye name
+        depart = c.execute('''SELECT * FROM Employee_Data WHERE Emp_ID=('{nd}')'''.format(nd=emp_name))
+        depart_row = depart.fetchall()
+        for i in depart_row:
+            lname=i[9]
+            mname=i[10]
+            
+        rname=lname +" "+ mname
+        edd.append(rname)
         allowance_type=request.form['d_type']
         edd.append(allowance_type)
         Issue_date=request.form['a_date']
         edd.append(Issue_date)
-
+        
         Issue_year=request.form['year']
         edd.append(Issue_year)
 
@@ -843,11 +900,10 @@ def compute_deduction():
         edd.append(amt)
         arr2=[str(i) for i in edd]
         edd_data = tuple(arr2)
-        db = getConnection()
-        c = db.cursor()
+        
         try:
-
-            c.execute('''INSERT INTO Deduction(Emp_id,deduction_type,month,year,Amount)  VALUES {table_values}'''.format(table_values=edd_data))
+            
+            c.execute('''INSERT INTO Deduction(Emp_id,Emp_name,deduction_type,month,year,Amount)  VALUES {table_values}'''.format(table_values=edd_data))
             db.commit()
             return redirect(url_for('deductions'))
         except Exception as e:
@@ -862,22 +918,19 @@ def pay():
     try:
         db = getConnection()
         c = db.cursor()
-        # #name,department,date,amount,period
-        # # query = c.execute('SELECT * FROM Employee_Data')
-        # # emp_rows = query.fetchall()
+        c.execute('''CREATE TABLE IF NOT EXISTS Payment(Emp_ID VARCHAR(100),Emp_name VARCHAR(30),pmonth VARCHAR(15),pyear VARCHAR(15),tt_allowances VARCHAR(10),gross_pay VARCHAR(20),emp_contrib VARCHAR(20),emplry_contrib VARCHAR(20),nssf_contrib VARCHAR(20),paye VARCHAR(20),mdeduction VARCHAR(20),other_ded VARCHAR(20),ttded VARCHAR(20),net_pay VARCHAR(20),Issue_Date DATE)''')
+        
         depart = c.execute('SELECT * FROM Employee_Data')
         depart_row = depart.fetchall()
-        pay_list = c.execute('SELECT * FROM Payment')
-        dpay_list = pay_list.fetchall()
+        db.commit()
+        
 
     except Exception as e:
-        c = db.cursor()
-        c.execute('''CREATE TABLE IF NOT EXISTS Payment(Emp_ID VARCHAR(100),pmonth VARCHAR(15),pyear VARCHAR(15),tt_allowances VARCHAR(10),gross_pay VARCHAR(20),emp_contrib VARCHAR(20),emplry_contrib VARCHAR(20),nssf_contrib VARCHAR(20),paye VARCHAR(20),mdeduction VARCHAR(20),other_ded VARCHAR(20),ttded VARCHAR(20),net_pay VARCHAR(20),Issue_Date DATE)''')
-        db.commit()
+        raise e
         return redirect(url_for('pay'))
 
 
-    return render_template('pay.html',pay_list=dpay_list,Finance=depart_row,img=imgs,cm=cm)
+    return render_template('pay.html',Finance=depart_row,img=imgs,cm=cm)
 @app.route('/add_tpaylist',methods=['POST','GET'])
 def add_tpaylist():
     imgs=image()
@@ -886,19 +939,27 @@ def add_tpaylist():
     c = db.cursor()
     if request.method=='POST':
         name=request.form['emp_id']
-
+        #get employye name
+        depart = c.execute('''SELECT * FROM Employee_Data WHERE Emp_ID=('{nd}')'''.format(nd=name))
+        depart_row = depart.fetchall()
+        for i in depart_row:
+            lname=i[9]
+            mname=i[10]
+            
+        rname=lname +" "+ mname
+        
         emdata = c.execute('''SELECT Gross_Pay FROM Employee_Data WHERE Emp_ID=('{nd}')'''.format(nd=name))
         rdata =  emdata.fetchall()
         salary=rdata[0][0]
-
+        
         vmonth=request.form['vMonth']
-
+        
         vyear=request.form['vyear']
-
+        
         vdate=request.form['vdate']
 
         try:
-            add_data(name,salary,vmonth,vyear,vdate)
+            add_data(name,rname,salary,vmonth,vyear,vdate)
             return redirect(url_for('pay'))
         except Exception as e:
             raise e
@@ -909,17 +970,25 @@ def gen_slip():
         db = getConnection()
         c = db.cursor()
         new_data=request.form['myFile']
-
+        nmonth=request.form['sMonth']
+        nyear=request.form['year']
         emdata = c.execute('''SELECT * FROM Employee_Data WHERE Emp_ID=('{nd}')'''.format(nd=new_data))
         rdata =  emdata.fetchall()
         crows=Company.query.all()
-
-
-        gpayment = c.execute('''SELECT * FROM Payment WHERE Emp_ID=('{name}')'''.format(name=new_data))
+        
+            
+        gpayment = c.execute('''SELECT * FROM Payment WHERE Emp_ID=('{name}') OR (('{moth}') AND ('{yr}'))'''.format(name=new_data,moth=nmonth,yr=nyear))
         rf_list = gpayment.fetchall()
 
-
         return render_template('dis_slip.html',crows=crows,rdata=rdata,rf_list=rf_list)
+#generate pay-slip page
+@app.route('/create_pay')
+def create_pay():
+    db = getConnection()
+    c = db.cursor()
+    pay_list = c.execute('SELECT * FROM Payment')
+    dpay_list = pay_list.fetchall()
+    return render_template('gen_slip.html',pay_list=dpay_list)
 #NSSF submission
 @app.route('/nssf')
 def nssf():
@@ -931,7 +1000,7 @@ def nssf_sub():
     if request.method=='POST':
         syear=request.form['year']
         submonth=request.form['sMonth']
-
+        
         db = getConnection()
         c = db.cursor()
         # company_details=c.execute('SELECT * FROM  Artistry')
@@ -941,12 +1010,12 @@ def nssf_sub():
             nssf_number=i.nssf_number
         ford=c.execute("""SELECT  Employee_Data.Emp_ID,
         Employee_Data.Emp_ID,Employee_Data.Nssf_Number,
-        Employee_Data.Residence_type,Employee_Data.Surname,
+        Employee_Data.Residence_type,Payment.Emp_name,
         Payment.gross_pay,Payment.emp_contrib,Payment.emplry_contrib,
         Payment.nssf_contrib,Employee_Data.Mobile FROM Payment JOIN Employee_Data ON(Payment.Emp_ID=Employee_Data.Emp_ID)  WHERE Payment.pmonth=('{nmonth}') AND  Payment.pYear=('{yr}')"""
                        .format(nmonth=submonth,yr=syear))
         drows = ford.fetchall()
-
+        
         #sum
         tsum=c.execute("select SUM(nssf_contrib)from Payment WHERE Payment.pmonth=('{nmonth}') AND Payment.pyear=('{nyear}')".format(nmonth=submonth,nyear=syear))
         tsumval = tsum.fetchall()
@@ -954,15 +1023,15 @@ def nssf_sub():
             ttr=float(tsumval[0][0])
         except:
             ttr=0.0
-
+        
         output=BytesIO()
-
+        
         workbook = xlsxwriter.Workbook(output)
        #writing excel headers
         workbook.formats[0].set_bold()
         workbook.formats[0].set_font_size(10)
         workbook.formats[0].set_font_name('Arial')
-
+        
 
         worksheet = workbook.add_worksheet()
         worksheet.set_column('A:J',20)
@@ -970,15 +1039,15 @@ def nssf_sub():
         #cell background colors
         bcel_format=workbook.add_format({'bg_color':'#C6EFCE','font_size':'10'})
         wcel_format=workbook.add_format({'bg_color':'#C5EADA','font_size':'10'})
-
+        
         ncel_format=workbook.add_format({'bg_color':'#ff4f33','font_size':'10'})
      #create a format to use in the merged range
         cell_format.set_font_color('Sliver')
         coname=cname
         nssf=nssf_number
-
+        
         # print(tsumval[0][0])
-
+    
         nmembers=len(drows)
         year=syear
         nMonth=submonth
@@ -1036,16 +1105,15 @@ def nssf_sub():
         worksheet.write('I12','Total Contribution',wcel_format)
         worksheet.write('J12','Telephone Number',ncel_format)
         #add values to the file
-
+        
         for i, row in enumerate(drows):
             for j, value in enumerate(row):
                 worksheet.write(i+12, j, row[j])
-        workbook.close()
+        workbook.close() 
         #go back to the beginning of the stream
         output.seek(0)
-
-
-
+        
+  
     # return redirect(url_for('nssf'))
     return send_file(output, attachment_filename="nssf.xlsx", as_attachment=True)
 if __name__ == '__main__':

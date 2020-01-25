@@ -185,35 +185,13 @@
           <div class="collapsible-body">
             <ul class="collapsible collapsible-sub" data-collapsible="accordion">
               <li>
-                  <a href="{{url_for('salary')}}">
-                      <i class="material-icons">radio_button_unchecked</i>
-                      <span data-i18n="Invoice List">Manage Salary Details</span>
-                  </a>
-              </li>
-              <li>
-                  <a href="{{url_for('deductions')}}">
-                      <i class="material-icons">radio_button_unchecked</i>
-                      <span data-i18n="Invoice View">Deductions</span>
-                  </a>
-              </li>
-              <li>
-                  <a href="{{url_for('allowances')}}">
-                      <i class="material-icons">radio_button_unchecked</i>
-                      <span data-i18n="Invoice Edit">Allowances</span>
-                  </a>
-              </li>
-                <li>
-                  <a href="{{url_for('pay')}}">
-                      <i class="material-icons">radio_button_unchecked</i>
-                      <span data-i18n="Invoice Edit">Payslip</span>
-                  </a>
-              </li>
-                <li>
-                  <a href="{{url_for('nssf')}}">
-                      <i class="material-icons">radio_button_unchecked</i>
-                      <span data-i18n="Invoice Edit">NSSF Submission</span>
-                  </a>
-              </li>
+                   <li><a href="{{url_for('deductions')}}">Deductions</a></li>
+                   <li><a href="{{url_for('allowances')}}">Allowances</a></li>
+                   <li><a href="{{url_for('pay')}}">Issue Payment</a></li>
+                   <li><a href="{{url_for('create_pay')}}">PaySlip</a></li>
+                   
+                   <li><a href="{{url_for('salary')}}">Manage Salary Details</a></li>
+                   <li><a href="{{url_for('nssf')}}">NSSF Submission</a></li>
             </ul>
           </div>
         </li>
