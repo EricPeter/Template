@@ -26,10 +26,12 @@
                                 <div id="tblCustomers" style="width:800px; height:800px; border:black solid 1px;" class="text-center" >
                                   
                                    {% for row in crows %}
-                                    <h5 class='h5 text-center'>{{row.cname}}</h5>
-                                    <h5 class='h5 text-center'>{{row.address}}</h5>
+                                    <h5 style="float:right; margin-left:5px;">{{row.cname}}<br>{{row.address}}</h5>
+                                    
                                    {% endfor %}
-                                   <h5 class='h5 text-center'>Monthly Pay Slip</h5>
+                                    <br /><br />
+                                   <h5>Monthly Pay Slip</h5>
+                                   <p class='text-center'>Month Paid:{% for x in rf_list%}{{x[2]}} {{x[3]}}{% endfor%}</p>
                                    <table style="border:black solid 1px;" class="text-center table table-striped">
                                    <tr><td>
                                    {% for i in rdata%}
@@ -55,14 +57,14 @@
                                    <p>Basic Pay:  UGX {{i[28]}}</p>
                                    {% endfor %}
                                     {% for rp in rf_list %}
-                                   <p>Other Earnings: UGX {{rp[3]}}</p>
+                                   <p>Other Earnings: UGX {{rp[4]}}</p>
                                    
-                                   <p>Gross Pay: UGX {{rp[4]}}</p>
+                                   <p>Gross Pay: UGX {{rp[5]}}</p>
                                    {% endfor %}
                                    </td>
                                    <td>
                                    {% for rp in rf_list %}
-                                   <p>Taxable Pay:    UGX {{rp[4]}}</p>
+                                   <p>Taxable Pay:    UGX {{rp[5]}}</p>
                                    {% endfor %}
                                    </td>
                                    </tr>
@@ -70,17 +72,17 @@
                                    <tr>
                                    <td>
                                     {% for rp in rf_list %}
-                                   <p>P.A.Y.E:    UGX {{rp[8]}}</p>
+                                   <p>P.A.Y.E:    UGX {{rp[9]}}</p>
                                    
-                                   <p>NSSF: UGX {{rp[7]}}</p>
+                                   <p>NSSF: UGX {{rp[8]}}</p>
                                   
                                    
-                                    <p>other Deductions:UGX {{rp[10] }}</p>
+                                    <p>other Deductions:UGX {{rp[11] }}</p>
                                     {% endfor %}
                                    </td>
                                    <td>
                                    {% for rp in rf_list %}
-                                   <p>Net Pay: UGX {{rp[12]}}</p>
+                                   <p>Net Pay: UGX {{rp[13]}}</p>
                                    {% endfor %}
                                    </td>
                                    </tr>
