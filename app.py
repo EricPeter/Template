@@ -1033,7 +1033,7 @@ def nssf_sub():
             nssf_number=i.nssf_number
         ford=c.execute("""SELECT  Employee_Data.Emp_ID,
         Employee_Data.Emp_ID,Employee_Data.Nssf_Number,
-        Employee_Data.Residence_type,Employee_Data.Surname,
+        Employee_Data.Residence_type,Payment.Emp_name,
         Payment.gross_pay,Payment.emp_contrib,Payment.emplry_contrib,
         Payment.nssf_contrib,Employee_Data.Mobile FROM Payment JOIN Employee_Data ON(Payment.Emp_ID=Employee_Data.Emp_ID)  WHERE Payment.pmonth=('{nmonth}') AND  Payment.pYear=('{yr}')"""
                        .format(nmonth=submonth,yr=syear))
