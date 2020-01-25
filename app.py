@@ -961,12 +961,8 @@ def add_deduction():
 def compute_deduction():
     edd = []
     imgs=image()
-<<<<<<< HEAD
-    cm=com_name()
-=======
     db = getConnection()
     c = db.cursor()
->>>>>>> 5a36d508110532bb061006a4a08a42003a9b400d
     if request.method == 'POST':
         emp_name=request.form['a_empname']
         edd.append(emp_name)
@@ -1022,11 +1018,7 @@ def pay():
         return redirect(url_for('pay'))
         
     
-<<<<<<< HEAD
-    return render_template('pay.html',pay_list=dpay_list,Finance=depart_row,img=imgs,cm=cm)
-=======
     return render_template('pay.html',Finance=depart_row,img=imgs)
->>>>>>> 5a36d508110532bb061006a4a08a42003a9b400d
 @app.route('/add_tpaylist',methods=['POST','GET'])
 def add_tpaylist():
     imgs=image()
