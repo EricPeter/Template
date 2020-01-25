@@ -755,6 +755,41 @@ def Delete_User():
         except Exception as e:
             raise e
     return render_template('settings.html')
+    #delete deduction
+@app.route('/delete_dd',methods=['POST','GET'] )
+def delete_dd():
+    if request.method == 'POST':
+        emp_id = request.form['emp_id']
+        nmonth = request.form['nmonth']
+        nyear = request.form['nyear']
+        db = getConnection()
+        c = db.cursor()
+        try:
+            c.execute('''DELETE FROM Deduction WHERE Emp_id=('{nm}')  OR (('{moth}') AND ('{yr}'))'''.format(nm=emp_id,moth=nmonth,yr=nyear))
+            db.commit()
+            db.close()
+            return redirect(url_for('deductions'))
+        except Exception as e:
+            raise e
+    return render_template('deductions.html')
+#delete allowances 
+@app.route('/delete_allow',methods=['POST','GET'])
+def delete_allow():
+    if request.method == 'POST':
+        emp_id = request.form['emp_id']
+        nmonth = request.form['nmonth']
+        nyear = request.form['nyear']
+        db = getConnection()
+        c = db.cursor()
+        try:
+            c.execute('''DELETE FROM Allowances WHERE Emp_id=('{nm}')  OR (('{moth}') AND ('{yr}'))'''.format(nm=emp_id,moth=nmonth,yr=nyear))
+            db.commit()
+            db.close()
+            return redirect(url_for('allowances'))
+        except Exception as e:
+            raise e
+    return render_template('allowances.html')
+
 @app.route('/allowances')
 def allowances():
     imgs=image()
