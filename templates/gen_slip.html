@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Admin {% endblock title%}
+{% block content %}
+<div id="main">
+      <div class="row">
+        <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+        <div class="col s12">
+          <div class="container">
+            <div class="section">
+                    <div class="col s12 m12 l12">
+                        <div id="html-validations" class="card-panel">
+                            <div class="card-content">
+                                <div class="card-title">
+                                    <div class="row">
+                                        <div class="col s12 m6 l10">
+                                            <h4 class="card-title">Generate Pay Slip</h4>
+                                        </div>
+                                        <div class="col s12 m6 l2">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="html-view-validations">
+                                <form class="formValidate0" id="formValidate0" method="POST" action="{{url_for('gen_slip')}}" enctype="multipart/form-data">
+                                        <div class="row">
+                                        <div class="input-field col s12">
+                                            	 <label for="first_input2" class="">Employee Name</label><br>
+                                               
+                                               <select name="myFile">
+			                                    {% for row in pay_list %}
+			                                      <option value="{{row[0]}}">{{row[1]}}</option>
+			                                      {% endfor %}
+			                                  </select>
+                                            </div>
+                                          
+                                            <div class="input-field col s12">
+                                                
+                                                <label for="c_event" >Month</label><br>
+                                                <select name="sMonth">
+                                      
+			                                      <option value="January">January</option>
+			                                      <option value="February">February</option>
+			                                      <option value="March">March</option>
+			                                      <option value="April">April</option>
+			                                      <option value="May">May</option>
+			                                      <option value="June">June</option>
+			                                      <option value="July">July</option>
+			                                      <option value="August">August</option>
+			                                      <option value="September">September</option>
+			                                      <option value="October ">October</option>
+			                                      <option value="November">November</option>
+			                                      <option value="December">December</option>
+			                                      
+			                                  </select>
+                                            </div>
+                                            <div class="input-field col s12">
+                                            	 <label for="first_input2" class="">Enter Year</label><br>
+                                                <input id="first_input2" type="text" class="validate"  required="" name="year">
+                                               
+                                            </div>
+                                            <div class="input-field col s12">
+                                                <button class="btn cyan waves-effect waves-light left" type="submit" name="action">Create Slip
+                                                    <i class="material-icons right">send</i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

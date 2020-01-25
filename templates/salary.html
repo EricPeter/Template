@@ -43,18 +43,30 @@
                                             <table id="data-table-contact" class="display dataTable no-footer dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="data-table-contact_info">
                                             <thead>
                                             <tr >
-                                                <th>Employee ID</th>
+                                                
                                                 <th>Employee Name</th>
-                                                  <th>Basic Payment</th>
-                                                  
-                                                  
+                                                <th>month</th>
+                                                <th>year</th>
+                                                <th>Allowances</th>
+                                                <th>GrossPay</th>
+                                                <th>Nssf Contribution</th>
+                                                <th>PAYE</th>
+                                                <th>Other Deductions</th>
+                                                <th>Total Deductions</th>
+                                                <th>NetPay</th>
+                                                <th>Action</th>    
                                             </tr>
                                             </thead>
                                                 <tbody>
                                                 {% for df in sql_rows %}
                                                     <tr>
-                                                        <tr><td>{{df[1]}}</td><td>{{df[9]}} {{df[10]}} {{df[11]}}</td><td>{{df[28]}}</td>                                                      
-                                                          <td>
+                                                        <tr><td>{{df[1]}}</td><td>{{df[2]}}</td><td>{{df[3]}}</td><td>{{df[4]}}</td><td>{{df[5]}}</td><td>{{df[8]}}</td><td>{{df[9]}}</td><td>{{df[11]}}</td><td>{{df[12]}}</td><td>{{df[13]}}</td><td>
+                                                         <form>
+                                                                <input type="hidden" value="" name="">
+                                                                <button type="submit" class="btn-floating btn waves-effect waves-light red">
+                                                                    <i class="material-icons blue-grey-text">delete</i>
+                                                                </button>
+                                                            </form></td>
                                                     </tr>
                                                 {% endfor %}
                                                 </tbody>
