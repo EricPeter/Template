@@ -4,16 +4,16 @@
     <!-- BEGIN: Page Main-->
     <div id="main">
         <div class="row">
-            <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+            <div class="content-wrapper-before gradient-45deg-indigo-light-blue"></div>
             <div class="col s12">
                 <div class="container">
                     <!-- Add new contact popup -->
                     <div class="contact-overlay"></div>
-                    <div style="bottom: 54px; right: 19px;" class="fixed-action-btn direction-top active">
-                        <a class="btn-floating btn-large primary-text gradient-shadow contact-sidebar-trigger" href="#modal1">
-                            <i class="material-icons">person_add</i>
-                        </a>
-                    </div>
+{#                    <div style="bottom: 54px; right:14px;" class="fixed-action-btn direction-top active">#}
+{#                        <a class="btn-floating btn-large primary-text gradient-shadow contact-sidebar-trigger" href="#modal1">#}
+{#                            <i class="material-icons">person_add</i>#}
+{#                        </a>#}
+{#                    </div>#}
                     <!-- Add new contact popup Ends-->
                     <!-- Sidebar Area Starts -->
                     <div class="sidebar-left sidebar-fixed">
@@ -25,7 +25,7 @@
                                         </h5>
                                         <div class="mt-10 pt-2">
                                             <p class="m-0 subtitle font-weight-700">Total number of Employees</p>
-                                            <p class="m-0 text-muted">1457 Employees</p>
+                                            <p class="m-0 text-muted"> Employees</p>
                                         </div>
                                     </div>
                                 </div>
@@ -52,8 +52,15 @@
                                                 fiber_manual_record </i> Support</a></li>
                                         </ul>
                                     </div>
-                                    <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 620px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 561px;"></div></div></div>
-                                <a href="#" data-target="contact-sidenav" class="sidenav-trigger hide-on-large-only"><i class="material-icons">menu</i></a>
+{#                                    <div class="ps__rail-x" style="left: 0px; bottom: 0px;">#}
+{#                                        <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>#}
+{#                                    </div>#}
+{#                                    <div class="ps__rail-y" style="top: 0px; height: 620px; right: 0px;">#}
+{#                                        <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 561px;"></div>#}
+{#                                    </div>#}
+                                </div>
+                                <a href="#" data-target="contact-sidenav" class="sidenav-trigger hide-on-large-only">
+                                    <i class="material-icons">menu</i></a>
                             </div>
                         </div>
                     </div>
@@ -83,8 +90,9 @@
                                             <div class="dataTables_scrollHeadInner" style="box-sizing: content-box; width: 712.05px; padding-right: 12px;">
                                             </div>
                                         </div>
-                                        <div class="dataTables_scrollBody ps ps--active-x ps--active-y" style="position: relative; overflow: auto; max-height: 553px; width: 100%;">
-                                            <table id="data-table-contact" class="display dataTable no-footer dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="data-table-contact_info">
+                                        <div class="dataTables_scrollBody ps ps--active-x ps--active-y" style="">
+                                            <table id="data-table-contact" class="display dataTable no-footer dtr-inline collapsed"
+                                                   style="" role="grid" aria-describedby="data-table-contact_info">
                                             <thead>
                                             <tr >
                                                 <th>Emp ID</th>
@@ -169,7 +177,7 @@
                         </div>
                     </div>
 <!-- Content Area Ends -->
-          <div class="content-overlay"></div>
+{#          <div class="content-overlay"></div>#}
         </div>
       </div>
     </div>
