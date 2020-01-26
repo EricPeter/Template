@@ -7,13 +7,6 @@
 {#            <div class="contentt-wrapper-before gradient-45deg-indigo-purple"></div>#}
             <div class="col s12">
                 <div class="container">
-                    <!-- Add new contact popup -->
-                    <div class="contact-overlay"></div>
-                    <div style="bottom: 54px; right: 19px;" class="fixed-action-btn direction-top active">
-                        <a class="btn-floating btn-large primary-text gradient-shadow contact-sidebar-trigger" href="#modal1">
-                            <i class="material-icons">person_add</i>
-                        </a>
-                    </div>
                    
                     <!-- Sidebar Area Ends -->
                     <!-- Content Area Starts -->
@@ -21,26 +14,13 @@
                         <div class="app-wrapper">
                             <h5>Employee Salary Structures</h5>
                             <!-- <div class="datatable-search"> -->
-                                <i class="material-icons mr-2 search-icon">search</i>
-                                <input type="text" placeholder="Search employee" class="app-filter" id="global_filter">
+
                             </div>
                             <div id="button-trigger" class="card card card-default scrollspy border-radius-6 fixed-width">
                                 <div class="card-content p-0">
-                                    <div id="data-table-contact_wrapper" class="dataTables_wrapper no-footer">
-                                        <div class="dataTables_length" id="data-table-contact_length"><label>Show
-                                            <select name="data-table-contact_length" aria-controls="data-table-contact" class="">
-                                                <option value="15" selected="selected">15</option>
-                                            </select> entries
-                                        </label>
-                                        </div>
-                                        
-                                        <div class="dataTables_scroll">
-                                        <div class="dataTables_scrollHead" style="overflow: hidden; position: relative; border: 0px none; width: 100%;">
-                                            <div class="dataTables_scrollHeadInner" style="box-sizing: content-box; width: 712.05px; padding-right: 12px;">
-                                            </div>
-                                        </div>
-                                        <div class=" ps ps--active-x ps--active-y" style="position: relative; overflow: auto; max-height: 553px; width: 100%;">
-                                            <table id="data-table-contact" class="display dataTable no-footer dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="data-table-contact_info">
+                                    <div id="page-length-option_wrapper" class="dataTables_wrapper">
+                                            <table id="page-length-option" class="display dataTable dtr-inline collapsed" role="grid"
+                                                                   aria-describedby="page-length-option_info" style="width:100%;">
                                             <thead>
                                             <tr >
                                                 
@@ -71,38 +51,6 @@
                                                 {% endfor %}
                                                 </tbody>
                                             </table>
-                                            <div class="ps__rail-x" style="width: 695px; left: 0px; bottom: 0px;">
-                                                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 678px;">
-
-                                                </div>
-                                            </div>
-                                            <div class="ps__rail-y" style="top: 0px; height: 552px; right: 0px;">
-                                                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 358px;">
-
-                                                </div>
-                                            </div>
-                                            <div class="ps__rail-x" style="width: 695px; left: 0px; bottom: 0px;">
-                                                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 678px;">
-
-                                                </div>
-                                            </div>
-                                            <div class="ps__rail-y" style="top: 0px; height: 552px; right: 0px;">
-                                                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 358px;">
-
-                                                </div>
-                                            </div>
-                                            <div class="ps__rail-x" style="width: 695px; left: 0px; bottom: 0px;">
-                                                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 678px;">
-
-                                                </div>
-                                            </div>
-                                            <div class="ps__rail-y" style="top: 0px; height: 552px; right: 0px;">
-                                                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 358px;">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 {#                                        <div class="dataTables_info" id="data-table-contact_info" role="status" aria-live="polite">Showing 16 to 29 of 29 entries</div>#}
 {#                                        <div class="dataTables_paginate paging_simple_numbers" id="data-table-contact_paginate">#}
 {#                                            <a class="paginate_button previous" aria-controls="data-table-contact" data-dt-idx="0" tabindex="0" id="data-table-contact_previous">Previous</a>#}

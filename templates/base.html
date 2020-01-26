@@ -102,11 +102,11 @@
               </ul>
             </div>
             <ul class="navbar-list right">
-                <li><a style="font-size:40px;">{{cm}}</a></li>
+                <li><a style="font-size:20px;">{{cm}}</a></li>
               <li>
                   <a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown">
-                  <span class="avatar-status avatar-online">
-                  <img  class="circle responsive-img" src="{{url_for('static',filename='index/FB_IMG_15705199242119556.jpg')}}" alt="avatar"><i></i></span></a>
+                  <span >
+                  <i class="material-icons">keyboard_tab</i></span></a>
                   <ul class="dropdown-content" id="profile-dropdown" tabindex="0">
               <li tabindex="0"><a class="grey-text text-darken-1" href=""><i class="material-icons">person_outline</i>Profile</a></li>
 {#              <li tabindex="0"><a class="grey-text text-darken-1" href=""><i class="material-icons">chat_bubble_outline</i></a></li>#}
@@ -142,7 +142,7 @@
     </header>
 
     <!-- BEGIN: SideNav-->
-    <aside class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-light sidenav-active-square">
+    <aside class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-light sidenav-active-square"  id="slide-out">
       <div class="brand-sidebar">
         <h1 class="logo-wrapper">
                 <div class="col s2">
@@ -151,7 +151,7 @@
                 </div>
         </h1>
       </div>
-      <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow ps ps--active-y" id="slide-out" data-menu="menu-navigation" data-collapsible="menu-accordion" style="transform: translateX(0px);">
+      <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow ps ps--active-y" >
         <li class="active bold open"><a  href="{{url_for('index')}}" tabindex="0">
             <i class="material-icons">dashboard</i>
             <span class="menu-title" data-i18n="Dashboard">Dashboard</span></a>
@@ -185,27 +185,33 @@
           <div class="collapsible-body">
             <ul class="collapsible collapsible-sub" data-collapsible="accordion">
               <li>
-                  <a href="{{url_for('salary')}}">
-                      <i class="material-icons">radio_button_unchecked</i>
-                      <span data-i18n="Invoice List">Manage Salary Details</span>
-                  </a>
-              </li>
-              <li>
                   <a href="{{url_for('deductions')}}">
                       <i class="material-icons">radio_button_unchecked</i>
-                      <span data-i18n="Invoice View">Deductions</span>
+                      <span data-i18n="Invoice List">Deductions</span>
                   </a>
               </li>
               <li>
                   <a href="{{url_for('allowances')}}">
                       <i class="material-icons">radio_button_unchecked</i>
-                      <span data-i18n="Invoice Edit">Allowances</span>
+                      <span data-i18n="Invoice View">Allowances</span>
+                  </a>
+              </li>
+              <li>
+                  <a href="{{url_for('pay')}}">
+                      <i class="material-icons">radio_button_unchecked</i>
+                      <span data-i18n="Invoice Edit">Issue Payment</span>
                   </a>
               </li>
                 <li>
-                  <a href="{{url_for('pay')}}">
+                  <a href="{{url_for('create_pay')}}">
                       <i class="material-icons">radio_button_unchecked</i>
-                      <span data-i18n="Invoice Edit">Payslip</span>
+                      <span data-i18n="Invoice Edit">PaySlip</span>
+                  </a>
+              </li>
+                <li>
+                  <a href="{{url_for('salary')}}">
+                      <i class="material-icons">radio_button_unchecked</i>
+                      <span data-i18n="Invoice Edit">Manage Salary Details</span>
                   </a>
               </li>
                 <li>
