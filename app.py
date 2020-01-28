@@ -2,6 +2,7 @@ import sqlite3
 from flask import Flask, render_template, url_for, request,jsonify,redirect,g,send_file,Response,flash
 from flask_sqlalchemy import SQLAlchemy
 import base64
+from flaskwebgui import FlaskUI
 import datetime
 from datetime import datetime
 import xlsxwriter
@@ -15,6 +16,7 @@ app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///Database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 autoflush=True
+ui = FlaskUI(app)
 db  = SQLAlchemy(app)
 '''Create Company profile table'''
 class Company(db.Model):
@@ -1123,3 +1125,6 @@ if __name__ == '__main__':
     db.create_all()
     db.session.commit()
     app.run(debug=True)
+# db.create_all()
+# db.session.commit()
+# ui.run()

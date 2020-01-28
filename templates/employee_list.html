@@ -91,8 +91,7 @@
                                             </div>
                                         </div>
                                         <div class="dataTables_scrollBody ps ps--active-x ps--active-y" style="">
-                                            <table id="data-table-contact" class="display dataTable no-footer dtr-inline collapsed"
-                                                   style="" role="grid" aria-describedby="data-table-contact_info">
+                                            <table id="data-table-contact" class="display dataTable no-footer dtr-inline collapsed" style="height:10px;">
                                             <thead>
                                             <tr >
                                                 <th>Emp ID</th>
@@ -104,7 +103,7 @@
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
-                                                <tbody>
+                                                <tbody >
                                                 {% for i in users %}
                                                     <tr>
                                                         <td>{{i.Emp_ID}}</td>
