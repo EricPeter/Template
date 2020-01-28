@@ -4,7 +4,7 @@
     <!-- BEGIN: Page Main-->
     <div id="main">
         <div class="row">
-            <div class="content-wrapper-before gradient-45deg-indigo-light-blue"></div>
+{#            <div class="content-wrapper-before gradient-45deg-indigo-light-"></div>#}
             <div class="col s12">
                 <div class="container">
                     <!-- Add new contact popup -->
@@ -19,16 +19,16 @@
                     <div class="sidebar-left sidebar-fixed">
                         <div class="sidebar">
                             <div class="sidebar-content">
-                                <div class="sidebar-header">
-                                    <div class="sidebar-details">
-                                        <h5 class="m-0 sidebar-title"><i class="material-icons app-header-icon text-top">perm_identity</i> Employees
-                                        </h5>
-                                        <div class="mt-10 pt-2">
-                                            <p class="m-0 subtitle font-weight-700">Total number of Employees</p>
-                                            <p class="m-0 text-muted"> Employees</p>
-                                        </div>
-                                    </div>
-                                </div>
+{#                                <div class="sidebar-header">#}
+{#                                    <div class="sidebar-details">#}
+{#                                        <h5 class="m-0 sidebar-title"><i class="material-icons app-header-icon text-top">perm_identity</i> Employees#}
+{#                                        </h5>#}
+{#                                        <div class="mt-10 pt-2">#}
+{#                                            <p class="m-0 subtitle font-weight-700">Total number of Employees</p>#}
+{#                                            <p class="m-0 text-muted"> Employees</p>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
                                 <div id="sidebar-list" class="sidebar-menu list-group position-relative animate fadeLeft delay-1 ps ps--active-y">
                                     <div class="sidebar-list-padding app-sidebar" id="contact-sidenav">
                                         <ul class="contact-list display-grid">
@@ -66,7 +66,9 @@
                     </div>
                     <!-- Sidebar Area Ends -->
                     <!-- Content Area Starts -->
+                <h4 class="float-right">Employee List</h4>
                     <div class="content-area content-right">
+{#                    #}
                         <div class="app-wrapper">
                             <div class="datatable-search">
                                 <i class="material-icons mr-2 search-icon">search</i>
@@ -90,8 +92,10 @@
                                             <div class="dataTables_scrollHeadInner" style="box-sizing: content-box; width: 712.05px; padding-right: 12px;">
                                             </div>
                                         </div>
-                                        <div class="dataTables_scrollBody ps ps--active-x ps--active-y" style="">
-                                            <table id="data-table-contact" class="display dataTable no-footer dtr-inline collapsed" style="height:10px;">
+                                        <div class="dataTables_scrollBody " style="">
+                                             <table id="data-table-contact"
+                                                       class="display dataTable no-footer dtr-inline collapsed"
+                                                        role="grid" aria-describedby="data-table-contact_info" style="height:10px;">
                                             <thead>
                                             <tr >
                                                 <th>Emp ID</th>
@@ -100,10 +104,10 @@
                                                 <th>Designation</th>
                                                 <th>Mobile</th>
                                                 <th>View</th>
-                                                <th>Action</th>
+                                                <th>Delete</th>
                                             </tr>
                                             </thead>
-                                                <tbody >
+                                                <tbody>
                                                 {% for i in users %}
                                                     <tr>
                                                         <td>{{i.Emp_ID}}</td>

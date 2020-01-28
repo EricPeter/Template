@@ -14,40 +14,65 @@
                         <div class="app-wrapper">
                             <h5>Employee Salary Structures</h5>
                             <!-- <div class="datatable-search"> -->
-                               
+{#                                 <th></th>#}
+{#                                                <th></th>#}
+{#                                                <th></th>#}
+{#                                                <th></th>#}
+{#                                                <th></th>#}
+{#                                                <th></th>#}
+{#                                                <th></th>#}
+{#                                                <th></th>#}
+{#                                                <th></th>#}
+{#                                                <th></th>#}
+{#                                                <th>Action</th>    #}
                             </div>
-                            <div id="button-trigger" class="card card card-default scrollspy border-radius-6 fixed-width">
-                                <div class="card-content p-0">
-                                    <div id="data-table-contact_wrapper" class="dataTables_wrapper no-footer">
-                                        
-                                        
-                                        <div class="dataTables_scroll">
-                                        <div class="dataTables_scrollHead" style="overflow: hidden; position: relative; border: 0px none; width: 100%;">
-                                            <div class="dataTables_scrollHeadInner" style="box-sizing: content-box; width: 712.05px; padding-right: 12px;">
-                                            </div>
-                                        </div>
-                                        <div class=" ps ps--active-x ps--active-y" style="position: relative; overflow: auto; max-height: 553px; width: 100%;">
-                                            <table id="data-table-contact" class="display dataTable no-footer dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="data-table-contact_info">
-                                            <thead>
-                                            <tr >
-                                                
-                                                <th>Employee Name</th>
-                                                <th>month</th>
-                                                <th>year</th>
-                                                <th>Allowances</th>
-                                                <th>GrossPay</th>
-                                                <th>Nssf Contribution</th>
-                                                <th>PAYE</th>
-                                                <th>Other Deductions</th>
-                                                <th>Total Deductions</th>
-                                                <th>NetPay</th>
-                                                <th>Action</th>    
-                                            </tr>
-                                            </thead>
-                                                <tbody>
-                                                {% for df in sql_rows %}
+                    <table id="data-table-simple" class="responsive-table display dataTable" role="grid" aria-describedby="data-table-simple_info" cellspacing="0">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting_asc" tabindex="0" aria-controls="data-table-simple" rowspan="1" colspan="1" style="width: 142px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">
+                                Employee Name
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table-simple" rowspan="1" colspan="1" style="width: 235px;" aria-label="Position: activate to sort column ascending">
+                                month
+                            </th>
+{#                            <th class="sorting" tabindex="0" aria-controls="data-table-simple" rowspan="1" colspan="1" style="width: 101px;" aria-label="Office: activate to sort column ascending">#}
+{#                                year#}
+{#                            </th>#}
+{#                            <th class="sorting" tabindex="0" aria-controls="data-table-simple" rowspan="1" colspan="1" style="width: 40px;" aria-label="Age: activate to sort column ascending">#}
+{#                                Allowances#}
+{#                            </th>#}
+                            <th class="sorting" tabindex="0" aria-controls="data-table-simple" rowspan="1" colspan="1" style="width: 99px;" aria-label="Start date: activate to sort column ascending">
+                                GrossPay
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table-simple" rowspan="1" colspan="1" style="width: 82px;" aria-label="Salary: activate to sort column ascending">
+                                Nssf Contribution
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table-simple" rowspan="1" colspan="1" style="width: 82px;" aria-label="Salary: activate to sort column ascending">
+                                PAYE
+                            </th>
+{#                            <th class="sorting" tabindex="0" aria-controls="data-table-simple" rowspan="1" colspan="1" style="width: 82px;" aria-label="Salary: activate to sort column ascending">#}
+{#                                Other Deductions#}
+{#                            </th>#}
+                            <th class="sorting" tabindex="0" aria-controls="data-table-simple" rowspan="1" colspan="1" style="width: 82px;" aria-label="Salary: activate to sort column ascending">
+                                Total Deductions
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table-simple" rowspan="1" colspan="1" style="width: 82px;" aria-label="Salary: activate to sort column ascending">
+                                NetPay
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="data-table-simple" rowspan="1" colspan="1" style="width: 82px;" aria-label="Salary: activate to sort column ascending">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+{##}
+{#                    <tfoot>#}
+{#                        <tr><th rowspan="1" colspan="1">Name</th><th rowspan="1" colspan="1">Position</th><th rowspan="1" colspan="1">Office</th><th rowspan="1" colspan="1">Age</th><th rowspan="1" colspan="1">Start date</th><th rowspan="1" colspan="1">Salary</th></tr>#}
+{#                    </tfoot>#}
+
+                    <tbody>
+                     {% for df in sql_rows %}
                                                     <tr>
-                                                        <tr><td>{{df[1]}}</td><td>{{df[2]}}</td><td>{{df[3]}}</td><td>{{df[4]}}</td><td>{{df[5]}}</td><td>{{df[8]}}</td><td>{{df[9]}}</td><td>{{df[11]}}</td><td>{{df[12]}}</td><td>{{df[13]}}</td><td>
+                                                        <tr><td>{{df[1]}}</td><td>{{df[2]}}</td><td>{{df[5]}}</td><td>{{df[8]}}</td><td>{{df[9]}}</td><td>{{df[12]}}</td><td>{{df[13]}}</td><td>
                                                          <form>
                                                                 <input type="hidden" value="" name="">
                                                                 <button type="submit" class="btn-floating btn waves-effect waves-light red">
@@ -55,9 +80,48 @@
                                                                 </button>
                                                             </form></td>
                                                     </tr>
-                                                {% endfor %}
-                                                </tbody>
-                                            </table>
+                                                {% endfor %}</tbody>
+                  </table>
+{#                                        <div class="dataTables_scroll">#}
+{#                                        <div class="dataTables_scrollHead" style="overflow: hidden; position: relative; border: 0px none; width: 100%;">#}
+{#                                            <div class="dataTables_scrollHeadInner" style="box-sizing: content-box; width: 712.05px; padding-right: 12px;">#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                       <div class="dataTables_scrollBody ps ps--active-x ps--active-y"#}
+{#                                                ><table id="data-table-contact"#}
+{#                                                       class="display dataTable no-footer dtr-inline collapsed"#}
+{#                                                        role="grid"#}
+{#                                                       aria-describedby="data-table-contact_info" style="height:10px;">#}
+{#                                            <thead>#}
+{#                                            <tr >#}
+{#                                                #}
+{#                                                <th>Employee Name</th>#}
+{#                                                <th>month</th>#}
+{#                                                <th>year</th>#}
+{#                                                <th>Allowances</th>#}
+{#                                                <th>GrossPay</th>#}
+{#                                                <th>Nssf Contribution</th>#}
+{#                                                <th>PAYE</th>#}
+{#                                                <th>Other Deductions</th>#}
+{#                                                <th>Total Deductions</th>#}
+{#                                                <th>NetPay</th>#}
+{#                                                <th>Action</th>    #}
+{#                                            </tr>#}
+{#                                            </thead>#}
+{#                                                <tbody>#}
+{#                                                {% for df in sql_rows %}#}
+{#                                                    <tr>#}
+{#                                                        <tr><td>{{df[1]}}</td><td>{{df[2]}}</td><td>{{df[3]}}</td><td>{{df[4]}}</td><td>{{df[5]}}</td><td>{{df[8]}}</td><td>{{df[9]}}</td><td>{{df[11]}}</td><td>{{df[12]}}</td><td>{{df[13]}}</td><td>#}
+{#                                                         <form>#}
+{#                                                                <input type="hidden" value="" name="">#}
+{#                                                                <button type="submit" class="btn-floating btn waves-effect waves-light red">#}
+{#                                                                    <i class="material-icons blue-grey-text">delete</i>#}
+{#                                                                </button>#}
+{#                                                            </form></td>#}
+{#                                                    </tr>#}
+{#                                                {% endfor %}#}
+{#                                                </tbody>#}
+{#                                            </table>#}
 {#                                        <div class="dataTables_info" id="data-table-contact_info" role="status" aria-live="polite">Showing 16 to 29 of 29 entries</div>#}
 {#                                        <div class="dataTables_paginate paging_simple_numbers" id="data-table-contact_paginate">#}
 {#                                            <a class="paginate_button previous" aria-controls="data-table-contact" data-dt-idx="0" tabindex="0" id="data-table-contact_previous">Previous</a>#}
@@ -65,8 +129,8 @@
 {#                                                <a class="paginate_button current" aria-controls="data-table-contact" data-dt-idx="2" tabindex="0">2</a>#}
 {#                                            </span>#}
 {#                                            <a class="paginate_button next disabled" aria-controls="data-table-contact" data-dt-idx="3" tabindex="-1" id="data-table-contact_next">Next</a></div>#}
-                                    </div>
-                                </div>
+{#                                    </div>#}
+{#                                </div>#}
                             </div>
                         </div>
                     </div>

@@ -991,9 +991,11 @@ def gen_slip():
 def create_pay():
     db = getConnection()
     c = db.cursor()
+    imgs=image()
+    cm=com_name()
     pay_list = c.execute('SELECT * FROM Payment')
     dpay_list = pay_list.fetchall()
-    return render_template('gen_slip.html',pay_list=dpay_list)
+    return render_template('gen_slip.html',pay_list=dpay_list,cm=cm,img=imgs)
 #NSSF submission
 @app.route('/nssf')
 def nssf():

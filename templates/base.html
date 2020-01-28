@@ -1,64 +1,58 @@
 <!DOCTYPE html>
 <html class="loading gr__pixinvent_com" data-textdirection="ltr" lang="en"><!-- BEGIN: Head--><head>
+    <style>
+            .stepwizard-step p {
+                margin-top:20px;
+            }
+            .stepwizard-row {
+                display: table-row;
+            }
+            .stepwizard {
+                display: table;
+                width:100%;
+                position: relative;
+            }
+            .stepwizard-step button[disabled] {
+                opacity: 1 !important;
+                filter: alpha(opacity=100) !important;
+            }
+            .stepwizard-row:before {
+                top: 14px;
+                bottom: 0;
+                position: absolute;
+                content: " ";
+                width: 100%;
+                height: 1px;
+                background-color: #ccc;
+                z-order: 0;
+            }
+            .stepwizard-step {
+                display: table-cell;
+                text-align: center;
+                position: relative;
+            }
+            .btn-circle {
+                width: 30px;
+                height: 30px;
+                text-align: center;
+                padding: 6px 0;
+                font-size: 12px;
+                line-height: 1.428571429;
+                border-radius: 15px;
+                }
+            .switch label input[type=checkbox]:checked + .lever:after {
+                background-color: #1dff17;
+            }
+    </style>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-{#     <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="ThemeSelect">
     <title>Dashboard  | RMS</title>
-    <style>
-        body {
-    margin-top:40px;
-}
-.stepwizard-step p {
-    margin-top:20px;
-}
-.stepwizard-row {
-    display: table-row;
-}
-.stepwizard {
-    display: table;
-    width:100%;
-    position: relative;
-}
-.stepwizard-step button[disabled] {
-    opacity: 1 !important;
-    filter: alpha(opacity=100) !important;
-}
-.stepwizard-row:before {
-    top: 14px;
-    bottom: 0;
-    position: absolute;
-    content: " ";
-    width: 100%;
-    height: 1px;
-    background-color: #ccc;
-    z-order: 0;
-}
-.stepwizard-step {
-    display: table-cell;
-    text-align: center;
-    position: relative;
-}
-.btn-circle {
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    padding: 6px 0;
-    font-size: 12px;
-    line-height: 1.428571429;
-    border-radius: 15px;
-}
-    </style>
+
     <link href="{{url_for('static',filename='index/icon.css')}}" rel="stylesheet">
-{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/css/materialize.min.css">#}
-    <style>
-        .switch label input[type=checkbox]:checked + .lever:after {
-            background-color: #827717;
-        }
-    </style>
     <!-- BEGIN: VENDOR CSS-->
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/vendors.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/animate.css')}}">
@@ -66,7 +60,8 @@
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/chartist-plugin-tooltip.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/flag-icon.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/jquery.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/materialize.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/materialize.css')}}"
+          media="screen,projection">
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/dashboard-modern.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/intro.css')}}">
@@ -81,19 +76,18 @@
     <link rel="stylesheet" href="{{url_for('static',filename='index/select2.css')}}" type="text/css">
     <link rel="stylesheet" href="{{url_for('static',filename='index/select2-materialize.css')}}" type="text/css">
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/app-todo.css')}}">
-    <!-- END: Custom CSS-->
-  <style type="text/css">/* Chart.js */
-@keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style>
 </head>
   <!-- END: Head-->
-  <body class="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu 2-columns keyboard-focused" data-open="click" data-menu="vertical-modern-menu" data-col="2-columns" data-gr-c-s-loaded="true" style="">
+  <body class="vertical-layout vertical-menu-collapsible page-header-dark
+  vertical-modern-menu 2-columns keyboard-focused" data-open="click" data-menu="vertical-modern-menu"
+        data-col="2-columns" data-gr-c-s-loaded="true" >
    <!-- BEGIN: Header-->
     <header class="page-topbar" id="header">
       <div class="navbar navbar-fixed">
         <nav class="navbar-main navbar-color nav-collapsible sideNav-lock navbar-dark gradient-45deg-indigo-light-blue no-shadow">
           <div class="nav-wrapper">
             <div class="header-search-wrapper hide-on-med-and-down">
-                  <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                  <a href="#"  class="sidenav-trigger" data-activates="slide-out"><i class="material-icons">menu</i></a>
 {#              <input class="header-search-input z-depth-2" type="text" name="Search" placeholder="Search" data-search="template-list">#}
               <ul class="search-list collection display-none ps">
                   <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
@@ -102,7 +96,7 @@
               </ul>
             </div>
             <ul class="navbar-list right">
-                <li><a style="font-size:20px;">{{cm}}</a></li>
+                <li></li>
               <li>
                   <a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown">
                   <span >
@@ -142,12 +136,12 @@
     </header>
 
     <!-- BEGIN: SideNav-->
-    <aside class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-light sidenav-active-square"  id="slide-out">
+    <aside class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-light sidenav-active-square full"  id="slide-out">
       <div class="brand-sidebar">
         <h1 class="logo-wrapper">
                 <div class="col s2">
-                    <img class="responsive-img"  src="data:;base64,{{img}}" alt="Logo">
-                <span class="logo-text hide-on-med-and-down"></span>
+                    <img class="responsive-img" style="width:50px;height:50px;" src="data:;base64,{{img}}" alt="Logo">
+                <span class="logo-text hide-on-med-and-down"><a style="font-size:20px;">{{cm}}</a></span>
                 </div>
         </h1>
       </div>
