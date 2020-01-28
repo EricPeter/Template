@@ -298,7 +298,16 @@
           $target.find('input:eq(0)').focus();
       }
   });
-
+$(document).ready(function() {
+    $('#example').DataTable( {
+        columnDefs: [
+            {
+                targets: [ 0, 1, 2 ],
+                className: 'mdl-data-table__cell--non-numeric'
+            }
+        ]
+    } );
+} );
   allPrevBtn.click(function(){
       var curStep = $(this).closest(".setup-content"),
           curStepBtn = curStep.attr("id"),
