@@ -543,12 +543,123 @@ def Employee_list():
 '''Edit employee records'''
 @app.route('/Edit_Employee',methods=['POST','GET'])
 def Edit_Employee():
+    imgs = image()
+    cm = com_name()
     if request.method=="POST":
         id  = request.form['id']
+        surname =request.form['surname']
         gname = request.form['gname']
         depart = request.form['depart']
-    return render_template('edit_employee.html',id=id)
+        tin = request.form['tin']
+        nssf =request.form['nssf']
+        designation=request.form['designation']
+        employee_status=request.form['employee_status']
+        joining_date=request.form['joining_date']
+        end_of_contract=request.form['end_of_contract']
+        rtype=request.form['rtype']
+        othername=request.form['othername']
+        DOB=request.form['DOB']
+        mstatus=request.form['mstatus']
+        gender=request.form['gender']
+        nationality=request.form['nationality']
+        caddress=request.form['caddress']
+        mobile=request.form['mobile']
+        phone=request.form['phone']
+        email=request.form['email']
+        accname=request.form['accname']
+        accnumber=request.form['accnumber']
+        bname=request.form['bname']
+        level=request.form['level']
+        award=request.form['award']
+        institution=request.form['institution']
+        gpay=request.form['gpay']
+        nkin=request.form['nkin']
+        supervisor=request.form['supervisor']
+        bbranch=request.form['bbranch']
 
+
+    return render_template('edit_employee.html',img=imgs,cm=cm,id=id,surname=surname,gname=gname,depart=depart,tin=tin,nssf=nssf,designation=designation,employee_status=employee_status,
+                           joining_date=joining_date,end_of_contract=end_of_contract,rtype=rtype,othername=othername,DOB=DOB,mstatus=mstatus,gender=gender,
+                           nationality=nationality,caddress=caddress,mobile=mobile,phone=phone,email=email,accname=accname,accnumber=accnumber,bname=bname,
+                           level=level,award=award,institution=institution,gpay=gpay,nkin=nkin,supervisor=supervisor,bbranch=bbranch)
+
+'''Update Employee data '''
+@app.route('/Update_Employee',methods=['POST','GET'])
+def Update_Employee():
+    if request.method == "POST":
+        id = request.form['id']
+        surname = request.form['surname']
+        gname = request.form['gname']
+        depart = request.form['depart']
+        tin = request.form['tin']
+        nssf = request.form['nssf']
+        designation = request.form['designation']
+        employee_status = request.form['employee_status']
+        joining_date = request.form['joining_date']
+        end_of_contract = request.form['end_of_contract']
+        rtype = request.form['rtype']
+        othername = request.form['othername']
+        DOB = request.form['DOB']
+        mstatus = request.form['mstatus']
+        gender = request.form['gender']
+        nationality = request.form['nationality']
+        caddress = request.form['caddress']
+        mobile = request.form['mobile']
+        phone = request.form['phone']
+        email = request.form['email']
+        accname = request.form['accname']
+        accnumber = request.form['accnumber']
+        bname = request.form['bname']
+        level = request.form['level']
+        award = request.form['award']
+        institution = request.form['institution']
+        gpay = request.form['gpay']
+        nkin = request.form['nkin']
+        supervisor = request.form['supervisor']
+        bbranch = request.form['bbranch']
+        cv = request.files['cv']
+        cv_file = cv.read()
+        pic = request.files['pic']
+        pic_image = pic.read()
+        try:
+            admin = Employee_Data.query.filter_by(Emp_ID=id).first()
+            admin.Emp_ID = id
+            admin.Surname = surname
+            admin.Given_name = gname
+            admin.Next_of_Kin = nkin
+            admin.Joining_Date = joining_date
+            admin.End_of_Contract = end_of_contract
+            admin.Current_Address = caddress
+            admin.Employee_Status = employee_status
+            admin.Othername = othername
+            admin.Tin_Number = tin
+            admin.Nssf_Numebr = nssf
+            admin.Account_Name = accname
+            admin.Account_Number = accnumber
+            admin.Level_of_Education = level
+            admin.Gender = gender
+            admin.Residence_type = rtype
+            admin.Designation = designation
+            admin.Supervisor = supervisor
+            admin.Gross_Pay = gpay
+            admin.Award = award
+            admin.Nationality = nationality
+            admin.Marital_Status = mstatus
+            admin.Mobile = mobile
+            admin.Home_Phone = phone
+            admin.Department = depart
+            admin.DOB = DOB
+            admin.Email = email
+            admin.Institution = institution
+            admin.CV = cv_file
+            admin.Picture = pic_image
+            admin.Bank_Branch = bbranch
+            admin.Bank_Name = bname
+            db.session.commit()
+            return redirect(url_for('Employee_list'))
+        except Exception as e:
+            raise e
+    return render_template('edit_employee.html')
 '''Screen lock'''
 @app.route('/screen_lock')
 def screen_lock():

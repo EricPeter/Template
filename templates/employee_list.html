@@ -176,17 +176,44 @@
                                 <form method="POST" action="" >
                                     <input type="hidden" value="" name="name">
                                     <button type="submit" class="btn-floating btn waves-effect waves-light green">
-                                        <i class="material-icons blue-grey-text">remove_red_eye</i>
+                                        <i class="material-icons text-success">remove_red_eye</i>
                                     </button>
                                 </form>
                             </td>
                             <td>
                                 <form method="POST" action="{{url_for('Edit_Employee')}}" >
                                     <input type="hidden" value="{{ i.Emp_ID }}" name="id">
+                                    <input type="hidden" value="{{ i.Surname }}" name="surname">
                                     <input type="hidden" value="{{ i.Given_name }}" name="gname">
                                     <input type="hidden" value="{{ i.Department }}" name="depart">
-                                    <button type="submit" class="btn-floating btn waves-effect waves-light green">
-                                        <i class="material-icons blue-grey-text">edit</i>
+                                    <input type="hidden" value="{{ i.Tin_Number }}" name="tin">
+                                    <input type="hidden" value="{{ i.Nssf_Number }}" name="nssf">
+                                    <input type="hidden" value="{{ i.Designation}}" name="designation">
+                                    <input type="hidden" value="{{ i.Employee_Status}}" name="employee_status">
+                                    <input type="hidden" value="{{ i.Joining_Date}}" name="joining_date">
+                                    <input type="hidden" value="{{ i.End_of_Contract}}" name="end_of_contract">
+                                    <input type="hidden" value="{{ i.Residence_type}}" name="rtype">
+                                    <input type="hidden" value="{{ i.Othername}}" name="othername">
+                                    <input type="hidden" value="{{ i.DOB }}" name="DOB">
+                                    <input type="hidden" value="{{ i.Marital_Status }}" name="mstatus">
+                                    <input type="hidden" value="{{ i.Gender}}" name="gender">
+                                    <input type="hidden" value="{{ i.Nationality}}" name="nationality">
+                                    <input type="hidden" value="{{ i.Current_Address }}" name="caddress">
+                                    <input type="hidden" value="{{ i.Mobile}}" name="mobile">
+                                    <input type="hidden" value="{{ i.Home_Phone}}" name="phone">
+                                    <input type="hidden" value="{{ i.Email}}" name="email">
+                                    <input type="hidden" value="{{ i.Account_Name}}" name="accname">
+                                    <input type="hidden" value="{{ i.Account_Number}}" name="accnumber">
+                                    <input type="hidden" value="{{ i.Bank_Name}}" name="bname">
+                                    <input type="hidden" value="{{ i.Bank_Branch}}" name="bbranch">
+                                    <input type="hidden" value="{{ i.Level_of_Education}}" name="level">
+                                    <input type="hidden" value="{{ i.Award}}" name="award">
+                                    <input type="hidden" value="{{ i.Institution}}" name="institution">
+                                    <input type="hidden" value="{{ i.Gross_Pay}}" name="gpay">
+                                    <input type="hidden" value="{{ i.Next_of_Kin}}" name="nkin">
+                                    <input type="hidden" value="{{ i.Supervisor}}" name="supervisor">
+                                    <button type="submit" class="btn-floating btn waves-effect waves-light blue">
+                                        <i class="material-icons text-success">edit</i>
                                     </button>
                                 </form>
                             </td>
@@ -194,7 +221,7 @@
                                 <form>
                                     <input type="hidden" value="" name="">
                                     <button type="submit" class="btn-floating btn waves-effect waves-light red">
-                                        <i class="material-icons blue-grey-text">delete</i>
+                                        <i class="material-icons text-success">delete</i>
                                     </button>
                                 </form>
                             </td>

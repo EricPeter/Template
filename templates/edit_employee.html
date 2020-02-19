@@ -1,7 +1,204 @@
 {% extends "base.html" %}
-{% block title %}Admin {% endblock title%}
+{% block title %}Admin {% endblock title %}
 {% block content %}
-    <form>
-    <input type="text" value="{{id}}">
-    </form>
+    <div id="main">
+        <div class="row">
+{#            <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>#}
+            <div class="col s12">
+                <div class="container">
+                    <div class="section">
+                        <div class="row">
+                            <form  method="POST" action="{{url_for('Update_Employee')}}" enctype="multipart/form-data">
+                            <div class="col s12 m12 l6">
+                                <div id="html-validations" class="card-panel">
+                                    <div class="card-content">
+                                        <div class="card-title">
+                                            <div class="row">
+                                                <div class="col s12 m6 l10">
+                                                    <h4 class="card-title">Employee Data</h4>
+                                                </div>
+                                                <div class="col s12 m6 l2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="html-view-validations">
+                                                <div class="row">
+                                                    <div class="input-field col s6">
+                                                        <input type="text" value="{{id}}" name="id">
+                                                        <label for="first_input2" class="">Employee ID </label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input type="text" value="{{surname}}" name="surname">
+                                                        <label class="">Surname</label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input type="text" value="{{gname}}" name="gname">
+                                                        <label class="">Lastname</label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input type="text" value="{{othername}}" name="othername">
+                                                        <label class="">Other Names</label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input type="text" value="{{nationality}}" name="nationality">
+                                                        <label class="">Nationality</label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input type="text" value="{{mstatus}}" name="mstatus">
+                                                        <label class="">Marital Status</label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input  type="text" value="{{depart}}" name="depart">
+                                                        <label for="role">Department </label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input  type="text" value="{{gender}}" name="gender">
+                                                        <label for="role">Gender </label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input  type="text" value="{{designation}}" name="designation">
+                                                        <label for="role">Desgination</label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input  type="text" value="{{gpay}}" name="gpay">
+                                                        <label for="role">Basic Pay</label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input  type="date" value="{{joining_date}}" name="joining_date">
+                                                        <label for="role">Joining Date</label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input  type="date" value="{{end_of_contract}}" name="end_of_contract">
+                                                        <label for="role">End of Contract</label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input  type="text" value="{{employee_status}}" name="employee_status">
+                                                        <label for="role">Employee Status</label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input  type="text" value="{{nssf}}" name="nssf">
+                                                        <label for="role">Nssf Number</label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input  type="text" value="{{rtype}}" name="rtype">
+                                                        <label for="role">Residence</label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input  type="text" value="{{nkin}}" name="nkin">
+                                                        <label for="role">Next of Kin</label>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <!-- START RIGHT SIDEBAR NAV -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m12 l6">
+                                <div id="html-validations" class="card-panel">
+                                    <div class="card-content">
+                                        <div class="card-title">
+                                            <div class="row">
+                                                <div class="col s12 m6 l10">
+                                                </div>
+                                                <div class="col s12 m6 l2">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="html-view-validations">
+                                            <div class="row">
+                                                    <div class="input-field col s6">
+                                                        <input  type="text" value="{{supervisor}}" name="supervisor">
+                                                        <label for="npassword">Supervisor</label>
+                                                    </div><div class="input-field col s6">
+                                                        <input  type="text" value="{{accname}}" name="accname">
+                                                        <label for="npassword">Account Name</label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input  type="text" value="{{accnumber}}" name="accnumber">
+                                                        <label for="npassword">Account Number</label>
+                                                    </div><div class="input-field col s6">
+                                                        <input  type="text" value="{{bname}}" name="bname">
+                                                        <label for="first_input2" class="">Bank Name </label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input  type="text" value="{{bbranch}}" name="bbranch">
+                                                        <label for="npassword">Bank Branch</label>
+                                                    </div>
+                                                <div class="input-field col s6">
+                                                        <input  type="text" value="{{level}}" name="level">
+                                                        <label for="first_input2" class="">Level of Education</label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input  type="text" value="{{award}}" name="award">
+                                                        <label for="npassword">Award Received</label>
+                                                    </div>
+                                                <div class="input-field col s6">
+                                                        <input  type="text" value="{{institution}}" name="institution">
+                                                        <label for="first_input2" class="">Institution</label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input  type="text" value="{{caddress}}" name="caddress">
+                                                        <label for="npassword">Current Address</label>
+                                                    </div>
+                                                <div class="input-field col s6">
+                                                        <input  type="text" value="{{mobile}}" name="mobile">
+                                                        <label for="first_input2" class="">Mobile</label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input  type="text" value="{{phone}}" name="phone">
+                                                        <label for="npassword">Home Phone</label>
+                                                    </div>
+                                                <div class="input-field col s6">
+                                                        <input  type="text" value="{{email}}" name="email">
+                                                        <label for="first_input2" class="">Email</label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                         <div class="file-field input-field">
+                                                                <div class="btn btn-light-blue">
+                                                                    <span>Upload CV:</span>
+                                                                    <input type="file" name="cv"  placeholder="Upload CV*">
+                                                                </div>
+                                                                <div class="file-path-wrapper">
+                                                                    <input class="file-path validate" type="text">
+                                                                </div>
+                                                            </div>
+                                                    </div>
+                                                <div class="input-field col s6">
+                                                        <div class="file-field input-field">
+                                                                                     <div class="btn btn-light-blue">
+                                                                                         <span>Upload Picture:</span>
+                                                                                         <input type="file" name="pic" placeholder="Upload picture *">
+                                                                                     </div>
+                                                                                     <div class="file-path-wrapper">
+                                                                                         <input class="file-path validate" type="text">
+                                                                                     </div>
+                                                                                 </div>
+                                                    </div>
+                                                 <div class="input-field col s6">
+                                                        <input  type="text" value="{{tin}}" name="tin">
+                                                        <label for="first_input2" class="">Tin Number</label>
+                                                    </div>
+                                                <div class="input-field col s6">
+                                                        <input  type="date" value="{{DOB}}" name="DOB">
+                                                        <label for="first_input2" class="">Date of Birth</label>
+                                                    </div>
+                                                <div class="input-field col s6">
+                                                        <button class="btn cyan waves-effect waves-light left"
+                                                                type="submit" name="action">Submit
+                                                            <i class="material-icons right">send</i>
+                                                        </button>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
