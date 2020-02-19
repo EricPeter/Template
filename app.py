@@ -1242,10 +1242,10 @@ def nssf_sub():
   
     # return redirect(url_for('nssf'))
     return send_file(output, attachment_filename="nssf.xlsx", as_attachment=True)
-if __name__ == '__main__':
-    db.create_all()
-    db.session.commit()
-    app.run(debug=True)
+# if __name__ == '__main__':
+db.create_all()
+db.session.commit()
+#     app.run(debug=True)
 # db.create_all()
 # db.session.commit()
 # ui.run()
