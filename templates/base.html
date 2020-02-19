@@ -87,16 +87,14 @@
         <nav class="navbar-main navbar-color nav-collapsible sideNav-lock navbar-dark gradient-45deg-indigo-light-blue no-shadow">
           <div class="nav-wrapper">
             <div class="header-search-wrapper hide-on-med-and-down">
-                  <a href="#"  class="sidenav-trigger" data-activates="slide-out"><i class="material-icons">menu</i></a>
-{#              <input class="header-search-input z-depth-2" type="text" name="Search" placeholder="Search" data-search="template-list">#}
-              <ul class="search-list collection display-none ps">
-                  <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-
-                  </div>
-              </ul>
+                 
+               <h3 class="h3" style="padding:5px;margin-top:2px;color:white; text-align:center">{{cm}}</h3>
             </div>
+           
+            
             <ul class="navbar-list right">
                 <li></li>
+
               <li>
                   <a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown">
                   <span >
@@ -110,9 +108,11 @@
               <li tabindex="0"><a class="grey-text text-darken-1" href="{{url_for('login') }}"><i class="material-icons">keyboard_tab</i> Logout</a></li>
             </ul></li>
             </ul>
+            
           </div>
           <nav class="display-none search-sm" style="display: none;">
             <div class="nav-wrapper">
+            
               <form>
                 <div class="input-field search-input-sm">
                   <input class="search-box-sm mb-0" type="search" required="" id="search" data-search="template-list">
@@ -123,7 +123,7 @@
 
                       </div>
                       </div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;">
-
+                        
                   </div>
                   </div>
                   </ul>
@@ -140,8 +140,8 @@
       <div class="brand-sidebar">
         <h1 class="logo-wrapper">
                 <div class="col s2">
-                    <img class="responsive-img" style="width:50px;height:50px;" src="data:;base64,{{img}}" alt="Logo">
-                <span class="logo-text hide-on-med-and-down"><a style="font-size:20px;">{{cm}}</a></span>
+                    <img class="responsive-img" style="width:200px;height:100px; margin-left:16px;" src="data:;base64,{{img}}" alt="Logo">
+                
                 </div>
         </h1>
       </div>

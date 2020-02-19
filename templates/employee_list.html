@@ -154,11 +154,11 @@
                     <table id="example" class="mdl-data-table" style="width:100%;height:10px;">
                     <thead>
                     <tr>
-                        <th>Emp ID</th>
-                        <th >Lastname</th>
+                        <th>Name</th>
                         <th>Department</th>
                         <th>Designation</th>
                         <th>Mobile</th>
+                        <th>Salary</th>
                         <th>View</th>
                         <th>Delete</th>
                     </tr>
@@ -166,11 +166,11 @@
                     <tbody>
                     {% for i in users %}
                         <tr>
-                            <td>{{i.Emp_ID}}</td>
-                            <td>{{i.Given_name}}</td>
+                            <td>{{i.Surname}} {{i.Given_name}}</td>
                             <td>{{i.Department}}</td>
                             <td>{{i.Designation}}</td>
                             <td>{{i.Mobile}}</td>
+                            <td>{{i.Gross_Pay}}</td>
                             <td>
                                 <form method="POST" action="" >
                                     <input type="hidden" value="" name="name">
