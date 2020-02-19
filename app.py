@@ -16,7 +16,7 @@ app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///Database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 autoflush=True
-# ui = FlaskUI(app)
+ui = FlaskUI(app)
 db  = SQLAlchemy(app)
 '''Create Company profile table'''
 class Company(db.Model):
@@ -532,6 +532,7 @@ def add_employee():
         except Exception as e:
             raise e
     return render_template('employee.html')
+'''Edit employee Details'''
 '''Display employees in a table'''
 @app.route('/Employee_list',methods=['POST','GET'])
 def Employee_list():
@@ -539,6 +540,15 @@ def Employee_list():
     cm=com_name()
     users = Employee_Data.query.all()
     return render_template('employee_list.html',img=imgs,users=users,cm=cm)
+'''Edit employee records'''
+@app.route('/Edit_Employee',methods=['POST','GET'])
+def Edit_Employee():
+    if request.method=="POST":
+        id  = request.form['id']
+        gname = request.form['gname']
+        depart = request.form['depart']
+    return render_template('edit_employee.html',id=id)
+
 '''Screen lock'''
 @app.route('/screen_lock')
 def screen_lock():
@@ -704,25 +714,6 @@ def Delete_User():
         except Exception as e:
             raise e
     return render_template('settings.html')
-#getdata to update 
-@app.route('/getdd_pdt',methods=['POST','GET'])
-def getdd_pdt( ):
-    if request.method == 'POST':
-        emp_id = request.form['emp_id']
-        nmonth = request.form['nmonth']
-        nyear = request.form['nyear']
-        db = getConnection()
-        c = db.cursor()
-        
-        deductions = c.execute('''SELECT * FROM Deduction WHERE Emp_ID=('{name}') OR (('{moth}') AND ('{yr}'))'''.format(name=emp_id, moth=nmonth,yr=nyear))
-        db.commit()
-        db.close()
-    render_template("edit_update.html",ddect=deductions)
-        
-
-
-
-
 #delete deduction
 @app.route('/delete_dd',methods=['POST','GET'] )
 def delete_dd():
@@ -1145,7 +1136,7 @@ def nssf_sub():
 if __name__ == '__main__':
     db.create_all()
     db.session.commit()
-    app.run()
+    app.run(debug=True)
 # db.create_all()
 # db.session.commit()
 # ui.run()

@@ -160,6 +160,7 @@
                         <th>Mobile</th>
                         <th>Salary</th>
                         <th>View</th>
+                        <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                     </thead>
@@ -176,6 +177,16 @@
                                     <input type="hidden" value="" name="name">
                                     <button type="submit" class="btn-floating btn waves-effect waves-light green">
                                         <i class="material-icons blue-grey-text">remove_red_eye</i>
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form method="POST" action="{{url_for('Edit_Employee')}}" >
+                                    <input type="hidden" value="{{ i.Emp_ID }}" name="id">
+                                    <input type="hidden" value="{{ i.Given_name }}" name="gname">
+                                    <input type="hidden" value="{{ i.Department }}" name="depart">
+                                    <button type="submit" class="btn-floating btn waves-effect waves-light green">
+                                        <i class="material-icons blue-grey-text">edit</i>
                                     </button>
                                 </form>
                             </td>
