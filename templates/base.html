@@ -43,6 +43,15 @@
             .switch label input[type=checkbox]:checked + .lever:after {
                 background-color: #1dff17;
             }
+            .table-striped tbody tr:nth-child(odd) td,
+            .table-striped tbody tr:nth-child(odd) th {
+                background-color: #f0f2e2;
+            }
+            .table-striped tbody tr:nth-child(even) td,
+            .table-striped tbody tr:nth-child(even) th {
+                background-color: #585fff;
+                color:#fff;
+            }
     </style>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -274,7 +283,10 @@
     <script src="{{url_for('static',filename='index/jquery-sortable-min.js')}}"></script>
     <script src="{{url_for('static',filename='index/quill.js')}}"></script>
     <script src="{{url_for('static',filename='index/select2.js')}}"></script>
-<script src="{{url_for('static',filename='index/app-todo.js')}}"></script>
+   <script src="{{url_for('static',filename='index/app-todo.js')}}"></script>
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+   <script src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js"></script>
     <!-- END PAGE LEVEL JS-->
 <script>
                  $(document).ready(function () {
@@ -348,7 +360,21 @@ $(document).ready(function() {
     format: "yyyy/mm/dd"
   });
 });
-
+$(document).ready(function() {
+			$('.datatable').dataTable({
+				"sPaginationType": "bs_four_button"
+			});
+			$('.datatable').each(function(){
+				var datatable = $(this);
+				// SEARCH - Add the placeholder for Search and Turn this into in-line form control
+				var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+				search_input.attr('placeholder', 'Search');
+				search_input.addClass('form-control input-sm');
+				// LENGTH - Inline-Form control
+				var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+				length_sel.addClass('form-control input-sm');
+			});
+		});
 </script>
 <!--  -->
 </body>
