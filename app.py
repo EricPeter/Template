@@ -411,7 +411,6 @@ def department():
     c = db.cursor()
     query = c.execute('''SELECT  Department FROM  Departments''')
     rows = query.fetchall()
-    print(rows)
     db.commit()
     db.close()
     return render_template('department.html',rows=rows,img=imgs,cm=cm)
@@ -677,7 +676,6 @@ def Holidays():
         for fm in request.form:
             data.append(request.form[fm])
         form_values =tuple(data[:6])
-        print(form_values)
         db=getConnection()
         c=db.cursor()
         try:
@@ -1242,10 +1240,10 @@ def nssf_sub():
   
     # return redirect(url_for('nssf'))
     return send_file(output, attachment_filename="nssf.xlsx", as_attachment=True)
-# if __name__ == '__main__':
-db.create_all()
-db.session.commit()
-#     app.run(debug=True)
+if __name__ == '__main__':
+    db.create_all()
+    db.session.commit()
+
 # db.create_all()
 # db.session.commit()
 # ui.run()
