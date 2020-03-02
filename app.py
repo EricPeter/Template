@@ -146,12 +146,24 @@ def getConnection():
 '''Login Function'''
 @app.route("/login_func", methods=["GET", "POST"])
 def login_func():
+    db = getConnection()
+    c = db.cursor()
     if request.method == "POST":
         uname = request.form["username"]
         passw = request.form["password"]
+
         login = Register.query.filter_by(username=uname, password=passw).first()
-        if login is not None:
-            return redirect(url_for("index"))
+        finance_login=c.execute('''SELECT * FROM Roles WHERE Employee_name=('{name}') AND Password=('{passw}')'''.format(name= uname,passw=passw))
+        login_details=finance_login.fetchall()
+        try:
+            if login is not None:
+                return redirect(url_for("index"))
+            else:
+                if login_details is not None:
+                    if login_details[0][1] =="Artificial Intelligence Engineer":
+                        return redirect(url_for("salary")) 
+        except:
+            return redirect(url_for("/"))
     return render_template("login.html")
 '''User Login'''
 @app.route("/", methods=["GET", "POST"])
@@ -704,22 +716,6 @@ def Delete_User():
         except Exception as e:
             raise e
     return render_template('settings.html')
-#getdata to update 
-@app.route('/getdd_pdt',methods=['POST','GET'])
-def getdd_pdt( ):
-    if request.method == 'POST':
-        emp_id = request.form['emp_id']
-        nmonth = request.form['nmonth']
-        nyear = request.form['nyear']
-        db = getConnection()
-        c = db.cursor()
-        
-        deductions = c.execute('''SELECT * FROM Deduction WHERE Emp_ID=('{name}') OR (('{moth}') AND ('{yr}'))'''.format(name=emp_id, moth=nmonth,yr=nyear))
-        db.commit()
-        db.close()
-    render_template("edit_update.html",ddect=deductions)
-        
-
 
 
 
@@ -990,6 +986,8 @@ def add_tpaylist():
     return render_template('pay.html', img=imgs, cm=cm)
 @app.route('/gen_slip', methods=['POST', 'GET'])
 def gen_slip():
+    imgs = image()
+    cm = com_name()
     if request.method == 'POST':
         db = getConnection()
         c = db.cursor()
@@ -1004,7 +1002,7 @@ def gen_slip():
         gpayment = c.execute('''SELECT * FROM Payment WHERE Emp_ID=('{name}') OR (('{moth}') AND ('{yr}'))'''.format(name=new_data,moth=nmonth,yr=nyear))
         rf_list = gpayment.fetchall()
 
-        return render_template('dis_slip.html',crows=crows,rdata=rdata,rf_list=rf_list)
+        return render_template('dis_slip.html',crows=crows,rdata=rdata,rf_list=rf_list,img=imgs, cm=cm)
 #generate pay-slip page
 @app.route('/create_pay')
 def create_pay():
