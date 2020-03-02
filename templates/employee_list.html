@@ -36,130 +36,17 @@
                     </div>
                     <!-- Sidebar Area Ends -->
                     <!-- Content Area Starts -->
-                <h4 class="float-right">Employee List</h4>
-{#                    <div class="content-area content-right">#}
-{#                    #}
-{#                        <div class="app-wrapper">#}
-{#                            <div class="datatable-search">#}
-{#                                <i class="material-icons mr-2 search-icon">search</i>#}
-{#                                <input type="text" placeholder="Search employee" class="app-filter" id="global_filter">#}
-{#                            </div>#}
-{#                            <div id="button-trigger" class="card card card-default scrollspy border-radius-6 fixed-width">#}
-{#                                <div class="card-content p-0">#}
-{#                                    <div id="data-table-contact_wrapper" class="dataTables_wrapper no-footer">#}
-{#                                        <div class="dataTables_length" id="data-table-contact_length"><label>Show#}
-{#                                            <select name="data-table-contact_length" aria-controls="data-table-contact" class="">#}
-{#                                                <option value="15" selected="selected">15</option>#}
-{#                                            </select> entries#}
-{#                                        </label>#}
-{#                                        </div>#}
-{#                                        <div id="data-table-contact_filter" class="dataTables_filter"><label>Search:#}
-{#                                            <input type="search" class="" placeholder="" aria-controls="data-table-contact">#}
-{#                                        </label>#}
-{#                                        </div>#}
-{#                                        <div class="dataTables_scroll">#}
-{#                                        <div class="dataTables_scrollHead" style="overflow: hidden; position: relative; border: 0px none; width: 100%;">#}
-{#                                            <div class="dataTables_scrollHeadInner" style="box-sizing: content-box; width: 712.05px; padding-right: 12px;">#}
-{#                                            </div>#}
-{#                                        </div>#}
-{#                                        <div class="dataTables_scrollBody " style="">#}
-{#                                             <table id="data-table-contact"#}
-{#                                                       class="display dataTable no-footer dtr-inline collapsed"#}
-{#                                                        role="grid" aria-describedby="data-table-contact_info" style="height:10px;">#}
-{#                                            <thead>#}
-{#                                            <tr >#}
-{#                                                <th>Emp ID</th>#}
-{#                                                <th >Lastname</th>#}
-{#                                                <th>Department</th>#}
-{#                                                <th>Designation</th>#}
-{#                                                <th>Mobile</th>#}
-{#                                                <th>View</th>#}
-{#                                                <th>Delete</th>#}
-{#                                            </tr>#}
-{#                                            </thead>#}
-{#                                                <tbody>#}
-{#                                                {% for i in users %}#}
-{#                                                    <tr>#}
-{#                                                        <td>{{i.Emp_ID}}</td>#}
-{#                                                        <td>{{i.Given_name}}</td>#}
-{#                                                        <td>{{i.Department}}</td>#}
-{#                                                        <td>{{i.Designation}}</td>#}
-{#                                                        <td>{{i.Mobile}}</td>#}
-{#                                                        <td>#}
-{#                                                            <form method="POST" action="" >#}
-{#                                                                <input type="hidden" value="" name="name">#}
-{#                                                                 <button type="submit" class="btn-floating btn waves-effect waves-light green">#}
-{#                                                                     <i class="material-icons blue-grey-text">remove_red_eye</i>#}
-{#                                                                 </button>#}
-{#                                                            </form>#}
-{#                                                        </td>#}
-{#                                                        <td>#}
-{#                                                            <form>#}
-{#                                                                <input type="hidden" value="" name="">#}
-{#                                                                <button type="submit" class="btn-floating btn waves-effect waves-light red">#}
-{#                                                                    <i class="material-icons blue-grey-text">delete</i>#}
-{#                                                                </button>#}
-{#                                                            </form>#}
-{#                                                        </td>#}
-{#                                                    </tr>#}
-{#                                                {% endfor %}#}
-{#                                                </tbody>#}
-{#                                            </table>#}
-{#                                            <div class="ps__rail-x" style="width: 695px; left: 0px; bottom: 0px;">#}
-{#                                                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 678px;">#}
-{##}
-{#                                                </div>#}
-{#                                            </div>#}
-{#                                            <div class="ps__rail-y" style="top: 0px; height: 552px; right: 0px;">#}
-{#                                                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 358px;">#}
-{##}
-{#                                                </div>#}
-{#                                            </div>#}
-{#                                            <div class="ps__rail-x" style="width: 695px; left: 0px; bottom: 0px;">#}
-{#                                                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 678px;">#}
-{##}
-{#                                                </div>#}
-{#                                            </div>#}
-{#                                            <div class="ps__rail-y" style="top: 0px; height: 552px; right: 0px;">#}
-{#                                                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 358px;">#}
-{##}
-{#                                                </div>#}
-{#                                            </div>#}
-{#                                            <div class="ps__rail-x" style="width: 695px; left: 0px; bottom: 0px;">#}
-{#                                                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 678px;">#}
-{##}
-{#                                                </div>#}
-{#                                            </div>#}
-{#                                            <div class="ps__rail-y" style="top: 0px; height: 552px; right: 0px;">#}
-{#                                                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 358px;">#}
-{##}
-{#                                                </div>#}
-{#                                            </div>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                        <div class="dataTables_info" id="data-table-contact_info" role="status" aria-live="polite">Showing 16 to 29 of 29 entries</div>#}
-{#                                        <div class="dataTables_paginate paging_simple_numbers" id="data-table-contact_paginate">#}
-{#                                            <a class="paginate_button previous" aria-controls="data-table-contact" data-dt-idx="0" tabindex="0" id="data-table-contact_previous">Previous</a>#}
-{#                                            <span><a class="paginate_button " aria-controls="data-table-contact" data-dt-idx="1" tabindex="0">1</a>#}
-{#                                                <a class="paginate_button current" aria-controls="data-table-contact" data-dt-idx="2" tabindex="0">2</a>#}
-{#                                            </span>#}
-{#                                            <a class="paginate_button next disabled" aria-controls="data-table-contact" data-dt-idx="3" tabindex="-1" id="data-table-contact_next">Next</a></div>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-<!-- Content Area Ends -->
-{#          <div class="content-overlay"></div>#}
-                    <table id="example" class="mdl-data-table" style="width:100%;height:10px;">
+                <h4 class="float-left">Employee List</h4>
+                    <table  cellpadding="0" cellspacing="0" border="0" class="">
                     <thead>
-                    <tr>
+                    <tr style="background-color: #1e1a9c;color: white;">
                         <th>Name</th>
                         <th>Department</th>
                         <th>Designation</th>
                         <th>Mobile</th>
                         <th>Salary</th>
                         <th>View</th>
+                        <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                     </thead>
@@ -175,7 +62,44 @@
                                 <form method="POST" action="" >
                                     <input type="hidden" value="" name="name">
                                     <button type="submit" class="btn-floating btn waves-effect waves-light green">
-                                        <i class="material-icons blue-grey-text">remove_red_eye</i>
+                                        <i class="material-icons text-success">remove_red_eye</i>
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form method="POST" action="{{url_for('Edit_Employee')}}" >
+                                    <input type="hidden" value="{{ i.Emp_ID }}" name="id">
+                                    <input type="hidden" value="{{ i.Surname }}" name="surname">
+                                    <input type="hidden" value="{{ i.Given_name }}" name="gname">
+                                    <input type="hidden" value="{{ i.Department }}" name="depart">
+                                    <input type="hidden" value="{{ i.Tin_Number }}" name="tin">
+                                    <input type="hidden" value="{{ i.Nssf_Number }}" name="nssf">
+                                    <input type="hidden" value="{{ i.Designation}}" name="designation">
+                                    <input type="hidden" value="{{ i.Employee_Status}}" name="employee_status">
+                                    <input type="hidden" value="{{ i.Joining_Date}}" name="joining_date">
+                                    <input type="hidden" value="{{ i.End_of_Contract}}" name="end_of_contract">
+                                    <input type="hidden" value="{{ i.Residence_type}}" name="rtype">
+                                    <input type="hidden" value="{{ i.Othername}}" name="othername">
+                                    <input type="hidden" value="{{ i.DOB }}" name="DOB">
+                                    <input type="hidden" value="{{ i.Marital_Status }}" name="mstatus">
+                                    <input type="hidden" value="{{ i.Gender}}" name="gender">
+                                    <input type="hidden" value="{{ i.Nationality}}" name="nationality">
+                                    <input type="hidden" value="{{ i.Current_Address }}" name="caddress">
+                                    <input type="hidden" value="{{ i.Mobile}}" name="mobile">
+                                    <input type="hidden" value="{{ i.Home_Phone}}" name="phone">
+                                    <input type="hidden" value="{{ i.Email}}" name="email">
+                                    <input type="hidden" value="{{ i.Account_Name}}" name="accname">
+                                    <input type="hidden" value="{{ i.Account_Number}}" name="accnumber">
+                                    <input type="hidden" value="{{ i.Bank_Name}}" name="bname">
+                                    <input type="hidden" value="{{ i.Bank_Branch}}" name="bbranch">
+                                    <input type="hidden" value="{{ i.Level_of_Education}}" name="level">
+                                    <input type="hidden" value="{{ i.Award}}" name="award">
+                                    <input type="hidden" value="{{ i.Institution}}" name="institution">
+                                    <input type="hidden" value="{{ i.Gross_Pay}}" name="gpay">
+                                    <input type="hidden" value="{{ i.Next_of_Kin}}" name="nkin">
+                                    <input type="hidden" value="{{ i.Supervisor}}" name="supervisor">
+                                    <button type="submit" class="btn-floating btn waves-effect waves-light blue">
+                                        <i class="material-icons text-success">edit</i>
                                     </button>
                                 </form>
                             </td>
@@ -183,7 +107,7 @@
                                 <form>
                                     <input type="hidden" value="" name="">
                                     <button type="submit" class="btn-floating btn waves-effect waves-light red">
-                                        <i class="material-icons blue-grey-text">delete</i>
+                                        <i class="material-icons text-success">delete</i>
                                     </button>
                                 </form>
                             </td>

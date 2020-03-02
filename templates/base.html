@@ -40,9 +40,6 @@
                 line-height: 1.428571429;
                 border-radius: 15px;
                 }
-            .switch label input[type=checkbox]:checked + .lever:after {
-                background-color: #1dff17;
-            }
     </style>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -84,14 +81,14 @@
    <!-- BEGIN: Header-->
     <header class="page-topbar" id="header">
       <div class="navbar navbar-fixed">
-        <nav class="navbar-main navbar-color nav-collapsible sideNav-lock navbar-dark gradient-45deg-indigo-light-blue no-shadow">
+        <nav class="navbar-main navbar-color nav-collapsible sideNav-lock navbar-dark gradient-45deg-blue-grey-blue no-shadow">
           <div class="nav-wrapper">
             <div class="header-search-wrapper hide-on-med-and-down">
                  
                <h3 class="h3" style="padding:5px;margin-top:2px;color:white; text-align:center">{{cm}}</h3>
             </div>
            
-            
+
             <ul class="navbar-list right">
                 <li></li>
 
@@ -108,6 +105,7 @@
               <li tabindex="0"><a class="grey-text text-darken-1" href="{{url_for('login') }}"><i class="material-icons">keyboard_tab</i> Logout</a></li>
             </ul></li>
             </ul>
+
             
           </div>
           <nav class="display-none search-sm" style="display: none;">
@@ -171,52 +169,6 @@
             <i class="material-icons">beach_access</i>
             <span class="menu-title" data-i18n="File Manager">Holiday/Leave</span></a>
         </li>
-          <li class="bold">
-              <a class="collapsible-header waves-effect waves-cyan  " href="javascript:void(0)" tabindex="0">
-                   <i class="material-icons"> business_center</i>
-                  <span class="menu-title" data-i18n="Invoice">Finance Management</span>
-              </a>
-          <div class="collapsible-body">
-            <ul class="collapsible collapsible-sub" data-collapsible="accordion">
-              <li>
-                  <a href="{{url_for('deductions')}}">
-                      <i class="material-icons">radio_button_unchecked</i>
-                      <span data-i18n="Invoice List">Deductions</span>
-                  </a>
-              </li>
-              <li>
-                  <a href="{{url_for('allowances')}}">
-                      <i class="material-icons">radio_button_unchecked</i>
-                      <span data-i18n="Invoice View">Allowances</span>
-                  </a>
-              </li>
-              <li>
-                  <a href="{{url_for('pay')}}">
-                      <i class="material-icons">radio_button_unchecked</i>
-                      <span data-i18n="Invoice Edit">Issue Payment</span>
-                  </a>
-              </li>
-                <li>
-                  <a href="{{url_for('create_pay')}}">
-                      <i class="material-icons">radio_button_unchecked</i>
-                      <span data-i18n="Invoice Edit">PaySlip</span>
-                  </a>
-              </li>
-                <li>
-                  <a href="{{url_for('salary')}}">
-                      <i class="material-icons">radio_button_unchecked</i>
-                      <span data-i18n="Invoice Edit">Manage Salary Details</span>
-                  </a>
-              </li>
-                <li>
-                  <a href="{{url_for('nssf')}}">
-                      <i class="material-icons">radio_button_unchecked</i>
-                      <span data-i18n="Invoice Edit">NSSF Submission</span>
-                  </a>
-              </li>
-            </ul>
-          </div>
-        </li>
         <li class="bold">
             <a class="waves-effect waves-cyan " href="{{url_for('settings')}}">
             <i class="material-icons">settings</i>
@@ -274,7 +226,7 @@
     <script src="{{url_for('static',filename='index/jquery-sortable-min.js')}}"></script>
     <script src="{{url_for('static',filename='index/quill.js')}}"></script>
     <script src="{{url_for('static',filename='index/select2.js')}}"></script>
-<script src="{{url_for('static',filename='index/app-todo.js')}}"></script>
+   <script src="{{url_for('static',filename='index/app-todo.js')}}"></script>
     <!-- END PAGE LEVEL JS-->
 <script>
                  $(document).ready(function () {
@@ -348,7 +300,6 @@ $(document).ready(function() {
     format: "yyyy/mm/dd"
   });
 });
-
 </script>
 <!--  -->
 </body>
