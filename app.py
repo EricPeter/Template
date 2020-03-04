@@ -414,6 +414,17 @@ def department():
     db.commit()
     db.close()
     return render_template('department.html',rows=rows,img=imgs,cm=cm)
+@app.route('/department_admin')
+def department_admin():
+    imgs = image()
+    cm=com_name()
+    db = getConnection()
+    c = db.cursor()
+    query = c.execute('''SELECT  Department FROM  Departments''')
+    rows = query.fetchall()
+    db.commit()
+    db.close()
+    return render_template('department_admin.html',rows=rows,img=imgs,cm=cm)
 '''Route attendance '''
 @app.route('/Attendance',methods=['POST','GET'])
 def Attendance():
@@ -476,6 +487,21 @@ def Employee():
     db.commit()
     db.close()
     return render_template('employee.html',img=imgs,rows=rows,cm=cm)
+
+@app.route('/Employee_admin')
+def Employee_admin():
+    imgs=image()
+    cm=com_name()
+    #connecting and selecting departments
+    db=getConnection()
+    c=db.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS Finances(Emp_ID VARCHAR(15),Employee_Name VARCHAR(100),Gross_pay VARCHAR(100),employee_contrb VARCHAR(100),employer_contrb VARCHAR(100),nssf_contrib VARCHAR(50),Paye VARCHAR(100),Total_Dect VARCHAR(100),Net_pay VARCHAR(100))''')
+    query = c.execute('SELECT * FROM  Departments')
+    rows = query.fetchall()
+    db.commit()
+    db.close()
+    return render_template('employee_admin.html',img=imgs,rows=rows,cm=cm)
+
 '''Adding an employee to the database'''
 @app.route('/add_employee',methods=['POST','GET'])
 def add_employee():

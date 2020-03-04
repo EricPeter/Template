@@ -84,10 +84,10 @@
         <nav class="navbar-main navbar-color nav-collapsible sideNav-lock navbar-dark gradient-45deg-blue-grey-blue no-shadow">
           <div class="nav-wrapper">
             <div class="header-search-wrapper hide-on-med-and-down">
-                 
+
                <h3 class="h3" style="padding:5px;margin-top:2px;color:white; text-align:center">{{cm}}</h3>
             </div>
-           
+
 
             <ul class="navbar-list right">
                 <li></li>
@@ -106,11 +106,11 @@
             </ul></li>
             </ul>
 
-            
+
           </div>
           <nav class="display-none search-sm" style="display: none;">
             <div class="nav-wrapper">
-            
+
               <form>
                 <div class="input-field search-input-sm">
                   <input class="search-box-sm mb-0" type="search" required="" id="search" data-search="template-list">
@@ -121,7 +121,7 @@
 
                       </div>
                       </div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;">
-                        
+
                   </div>
                   </div>
                   </ul>
@@ -139,30 +139,31 @@
         <h1 class="logo-wrapper">
                 <div class="col s2">
                     <img class="responsive-img" style="width:200px;height:100px; margin-left:16px;" src="data:;base64,{{img}}" alt="Logo">
-                
+
                 </div>
         </h1>
       </div>
       <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow ps ps--active-y" >
-        <li class="active bold open"><a  href="{{url_for('index')}}" tabindex="0">
-            <i class="material-icons">dashboard</i>
-            <span class="menu-title" data-i18n="Dashboard">Dashboard</span></a>
-        </li>
-          <li class="bold"><a class="waves-effect waves-cyan " href="{{url_for('department_admin')}}">
+          <li class="bold"><a class="waves-effect waves-cyan " href="{{url_for('department')}}">
             <i class="material-icons">device_hub</i>
             <span class="menu-title" data-i18n="Chat">Department</span></a>
           </li>
-          <li class="bold"><a class="waves-effect waves-cyan " href="{{url_for('Employee_admin')}}">
+          <li class="bold"><a class="waves-effect waves-cyan " href="{{url_for('Employee')}}">
             <i class="material-icons">person_add</i>
             <span class="menu-title" data-i18n="Chat">Add Employee</span></a>
           </li>
+          <li class="bold"><a class="waves-effect waves-cyan " href="{{url_for('Employee_list')}}">
+            <i class="material-icons">people_outline</i>
+            <span class="menu-title" data-i18n="Chat">Employee List</span></a>
+          </li>
+        <li class="bold"><a class="waves-effect waves-cyan " href="{{url_for('Attendance')}}">
+            <i class="material-icons">playlist_add_check</i>
+            <span class="menu-title" data-i18n="Chat">Attendance</span></a>
+        </li>
         <li class="bold">
-            <a class="waves-effect waves-cyan " href="{{url_for('settings')}}">
-            <i class="material-icons">settings</i>
-            <span class="menu-title" data-i18n="settings">
-                User Settings
-            </span>
-        </a>
+            <a class="waves-effect waves-cyan " href="{{url_for('Leave')}}">
+            <i class="material-icons">beach_access</i>
+            <span class="menu-title" data-i18n="File Manager">Holiday/Leave</span></a>
         </li>
       </ul>
     </aside>
