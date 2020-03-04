@@ -2,6 +2,7 @@ import sqlite3
 from flask import Flask, render_template, url_for, request,jsonify,redirect,g,send_file,Response,flash
 from flask_sqlalchemy import SQLAlchemy
 import base64
+from flaskwebgui import FlaskUI
 import datetime
 from datetime import datetime
 import xlsxwriter
@@ -15,6 +16,7 @@ app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///Database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 autoflush=True
+# ui = FlaskUI(app)
 db  = SQLAlchemy(app)
 '''Create Company profile table'''
 class Company(db.Model):
@@ -144,12 +146,24 @@ def getConnection():
 '''Login Function'''
 @app.route("/login_func", methods=["GET", "POST"])
 def login_func():
+    db = getConnection()
+    c = db.cursor()
     if request.method == "POST":
         uname = request.form["username"]
         passw = request.form["password"]
+
         login = Register.query.filter_by(username=uname, password=passw).first()
-        if login is not None:
-            return redirect(url_for("index"))
+        finance_login=c.execute('''SELECT * FROM Roles WHERE Employee_name=('{name}') AND Password=('{passw}')'''.format(name= uname,passw=passw))
+        login_details=finance_login.fetchall()
+        try:
+            if login is not None:
+                return redirect(url_for("index"))
+            else:
+                if login_details is not None:
+                    if login_details[0][1] =="Artificial Intelligence Engineer":
+                        return redirect(url_for("salary")) 
+        except:
+            return redirect(url_for("/"))
     return render_template("login.html")
 '''User Login'''
 @app.route("/", methods=["GET", "POST"])
@@ -411,6 +425,7 @@ def department():
     c = db.cursor()
     query = c.execute('''SELECT  Department FROM  Departments''')
     rows = query.fetchall()
+    print(rows)
     db.commit()
     db.close()
     return render_template('department.html',rows=rows,img=imgs,cm=cm)
@@ -555,7 +570,6 @@ def add_employee():
         except Exception as e:
             raise e
     return render_template('employee.html')
-'''Edit employee Details'''
 '''Display employees in a table'''
 @app.route('/Employee_list',methods=['POST','GET'])
 def Employee_list():
@@ -563,126 +577,6 @@ def Employee_list():
     cm=com_name()
     users = Employee_Data.query.all()
     return render_template('employee_list.html',img=imgs,users=users,cm=cm)
-'''Edit employee records'''
-@app.route('/Edit_Employee',methods=['POST','GET'])
-def Edit_Employee():
-    imgs = image()
-    cm = com_name()
-    if request.method=="POST":
-        id  = request.form['id']
-        surname =request.form['surname']
-        gname = request.form['gname']
-        depart = request.form['depart']
-        tin = request.form['tin']
-        nssf =request.form['nssf']
-        designation=request.form['designation']
-        employee_status=request.form['employee_status']
-        joining_date=request.form['joining_date']
-        end_of_contract=request.form['end_of_contract']
-        rtype=request.form['rtype']
-        othername=request.form['othername']
-        DOB=request.form['DOB']
-        mstatus=request.form['mstatus']
-        gender=request.form['gender']
-        nationality=request.form['nationality']
-        caddress=request.form['caddress']
-        mobile=request.form['mobile']
-        phone=request.form['phone']
-        email=request.form['email']
-        accname=request.form['accname']
-        accnumber=request.form['accnumber']
-        bname=request.form['bname']
-        level=request.form['level']
-        award=request.form['award']
-        institution=request.form['institution']
-        gpay=request.form['gpay']
-        nkin=request.form['nkin']
-        supervisor=request.form['supervisor']
-        bbranch=request.form['bbranch']
-
-
-    return render_template('edit_employee.html',img=imgs,cm=cm,id=id,surname=surname,gname=gname,depart=depart,tin=tin,nssf=nssf,designation=designation,employee_status=employee_status,
-                           joining_date=joining_date,end_of_contract=end_of_contract,rtype=rtype,othername=othername,DOB=DOB,mstatus=mstatus,gender=gender,
-                           nationality=nationality,caddress=caddress,mobile=mobile,phone=phone,email=email,accname=accname,accnumber=accnumber,bname=bname,
-                           level=level,award=award,institution=institution,gpay=gpay,nkin=nkin,supervisor=supervisor,bbranch=bbranch)
-
-'''Update Employee data '''
-@app.route('/Update_Employee',methods=['POST','GET'])
-def Update_Employee():
-    if request.method == "POST":
-        id = request.form['id']
-        surname = request.form['surname']
-        gname = request.form['gname']
-        depart = request.form['depart']
-        tin = request.form['tin']
-        nssf = request.form['nssf']
-        designation = request.form['designation']
-        employee_status = request.form['employee_status']
-        joining_date = request.form['joining_date']
-        end_of_contract = request.form['end_of_contract']
-        rtype = request.form['rtype']
-        othername = request.form['othername']
-        DOB = request.form['DOB']
-        mstatus = request.form['mstatus']
-        gender = request.form['gender']
-        nationality = request.form['nationality']
-        caddress = request.form['caddress']
-        mobile = request.form['mobile']
-        phone = request.form['phone']
-        email = request.form['email']
-        accname = request.form['accname']
-        accnumber = request.form['accnumber']
-        bname = request.form['bname']
-        level = request.form['level']
-        award = request.form['award']
-        institution = request.form['institution']
-        gpay = request.form['gpay']
-        nkin = request.form['nkin']
-        supervisor = request.form['supervisor']
-        bbranch = request.form['bbranch']
-        cv = request.files['cv']
-        cv_file = cv.read()
-        pic = request.files['pic']
-        pic_image = pic.read()
-        try:
-            admin = Employee_Data.query.filter_by(Emp_ID=id).first()
-            admin.Emp_ID = id
-            admin.Surname = surname
-            admin.Given_name = gname
-            admin.Next_of_Kin = nkin
-            admin.Joining_Date = joining_date
-            admin.End_of_Contract = end_of_contract
-            admin.Current_Address = caddress
-            admin.Employee_Status = employee_status
-            admin.Othername = othername
-            admin.Tin_Number = tin
-            admin.Nssf_Numebr = nssf
-            admin.Account_Name = accname
-            admin.Account_Number = accnumber
-            admin.Level_of_Education = level
-            admin.Gender = gender
-            admin.Residence_type = rtype
-            admin.Designation = designation
-            admin.Supervisor = supervisor
-            admin.Gross_Pay = gpay
-            admin.Award = award
-            admin.Nationality = nationality
-            admin.Marital_Status = mstatus
-            admin.Mobile = mobile
-            admin.Home_Phone = phone
-            admin.Department = depart
-            admin.DOB = DOB
-            admin.Email = email
-            admin.Institution = institution
-            admin.CV = cv_file
-            admin.Picture = pic_image
-            admin.Bank_Branch = bbranch
-            admin.Bank_Name = bname
-            db.session.commit()
-            return redirect(url_for('Employee_list'))
-        except Exception as e:
-            raise e
-    return render_template('edit_employee.html')
 '''Screen lock'''
 @app.route('/screen_lock')
 def screen_lock():
@@ -702,6 +596,7 @@ def Holidays():
         for fm in request.form:
             data.append(request.form[fm])
         form_values =tuple(data[:6])
+        print(form_values)
         db=getConnection()
         c=db.cursor()
         try:
@@ -847,6 +742,9 @@ def Delete_User():
         except Exception as e:
             raise e
     return render_template('settings.html')
+
+
+
 #delete deduction
 @app.route('/delete_dd',methods=['POST','GET'] )
 def delete_dd():
@@ -1114,6 +1012,8 @@ def add_tpaylist():
     return render_template('pay.html', img=imgs, cm=cm)
 @app.route('/gen_slip', methods=['POST', 'GET'])
 def gen_slip():
+    imgs = image()
+    cm = com_name()
     if request.method == 'POST':
         db = getConnection()
         c = db.cursor()
@@ -1128,7 +1028,7 @@ def gen_slip():
         gpayment = c.execute('''SELECT * FROM Payment WHERE Emp_ID=('{name}') OR (('{moth}') AND ('{yr}'))'''.format(name=new_data,moth=nmonth,yr=nyear))
         rf_list = gpayment.fetchall()
 
-        return render_template('dis_slip.html',crows=crows,rdata=rdata,rf_list=rf_list)
+        return render_template('dis_slip.html',crows=crows,rdata=rdata,rf_list=rf_list,img=imgs, cm=cm)
 #generate pay-slip page
 @app.route('/create_pay')
 def create_pay():
@@ -1269,7 +1169,7 @@ def nssf_sub():
 if __name__ == '__main__':
     db.create_all()
     db.session.commit()
-
+    app.run()
 # db.create_all()
 # db.session.commit()
 # ui.run()
