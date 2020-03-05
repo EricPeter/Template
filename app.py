@@ -144,12 +144,30 @@ def getConnection():
 '''Login Function'''
 @app.route("/login_func", methods=["GET", "POST"])
 def login_func():
+    db = getConnection()
+    c = db.cursor()
     if request.method == "POST":
         uname = request.form["username"]
         passw = request.form["password"]
         login = Register.query.filter_by(username=uname, password=passw).first()
-        if login is not None:
-            return redirect(url_for("index"))
+        others=c.execute('''select * from Roles where Employee_name=('{name}') AND Password=('{passw}')'''.format(name=uname,passw=passw))
+        login_others=others.fetchall()
+        try:
+            if login is not None:
+                return redirect(url_for("index"))
+            else:
+                
+                if login_others is not None:
+                    if login_others[0][1] =="Finance":
+                        return redirect(url_for('salary'))
+                        # return redirect(url_for('department'))
+                    if login_others[0][1]=="HR":
+                        return redirect(url_for('department'))
+                   
+        except:
+            
+            render_template("login.html")
+        
     return render_template("login.html")
 '''User Login'''
 @app.route("/", methods=["GET", "POST"])
@@ -555,6 +573,7 @@ def add_employee():
         except Exception as e:
             raise e
     return render_template('employee.html')
+
 '''Edit employee Details'''
 '''Display employees in a table'''
 @app.route('/Employee_list',methods=['POST','GET'])
