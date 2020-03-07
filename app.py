@@ -1,4 +1,4 @@
-import sqlite3
+import sqlite3,hashlib
 from flask import Flask, render_template, url_for, request,jsonify,redirect,g,send_file,Response,flash
 from flask_sqlalchemy import SQLAlchemy
 import base64
@@ -149,8 +149,8 @@ def login_func():
     if request.method == "POST":
         uname = request.form["username"]
         passw = request.form["password"]
-        login = Register.query.filter_by(username=uname, password=passw).first()
-        others=c.execute('''select * from Roles where Employee_name=('{name}') AND Password=('{passw}')'''.format(name=uname,passw=passw))
+        login = Register.query.filter_by(username=uname, password=hash_pass(passw)).first()
+        others=c.execute('''select * from Roles where Employee_name=('{name}') AND Password=('{passw}')'''.format(name=uname,passw=hash_pass(passw)))
         login_others=others.fetchall()
         try:
             if login is not None:
@@ -184,7 +184,7 @@ def register_func():
         mail = request.form['email']
         passw = request.form['password']
         try:
-            register = Register(username=uname, email=mail, password=passw)
+            register = Register(username=uname, email=mail, password=hash_pass(passw))
             db.session.add(register)
             db.session.commit()
             return redirect(url_for('login'))
@@ -826,7 +826,7 @@ def Role():
             c = db.cursor()
             c.execute(
                 """INSERT INTO Roles(Employee_name,Role,Password,Department) VALUES('{name}','{role}','{password}','{department}')""".
-                format(name=name, role=role, password=password, department=department))
+                format(name=name, role=role, password=hash_pass(password), department=department))
             db.commit()
             db.close()
             return redirect(url_for('settings'))
@@ -844,7 +844,7 @@ def Change_Password():
         c = db.cursor()
         try:
             c.execute(
-                '''UPDATE Roles SET Password =('{ps}') WHERE Employee_name=('{nm}')'''.format(ps=npassword, nm=name))
+                '''UPDATE Roles SET Password =('{ps}') WHERE Employee_name=('{nm}')'''.format(ps=hash_pass(npassword), nm=name))
             db.commit()
             db.close()
             return redirect(url_for('settings'))
@@ -1285,6 +1285,11 @@ def nssf_sub():
   
     # return redirect(url_for('nssf'))
     return send_file(output, attachment_filename="nssf.xlsx", as_attachment=True)
+# Create password hashes
+def hash_pass(passw):
+	m = hashlib.md5()
+	m.update(passw.encode('utf-8'))
+	return m.hexdigest()
 if __name__ == '__main__':
     db.create_all()
     db.session.commit()
