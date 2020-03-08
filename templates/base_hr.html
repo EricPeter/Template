@@ -139,32 +139,32 @@
       <div class="brand-sidebar">
         <h1 class="logo-wrapper">
                 <div class="col s2">
-                    <img class="responsive-img" style="width:200px;height:100px; margin-left:16px;" src="data:;base64,{{img}}" alt="Logo">
+                    <img class="responsive-img" style="width:150px;height:50px; margin-left:16px;" src="data:;base64,{{img}}" alt="Logo">
 
                 </div>
         </h1>
       </div>
       <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow ps ps--active-y" >
-          <li class="bold"><a class="waves-effect waves-cyan " href="{{url_for('department')}}">
+          <li class="bold"><button style="width:250px; padding:16px; margin-left:16px;"><a class="waves-effect waves-cyan " href="{{url_for('department')}}">
             <i class="material-icons">device_hub</i>
-            <span class="menu-title" data-i18n="Chat">Department</span></a>
+            <span class="menu-title" data-i18n="Chat">Department</span></a></button>
           </li>
-          <li class="bold"><a class="waves-effect waves-cyan " href="{{url_for('Employee')}}">
+          <li class="bold"><button style="width:250px; padding:16px; margin-left:16px;"><a class="waves-effect waves-cyan " href="{{url_for('Employee')}}">
             <i class="material-icons">person_add</i>
-            <span class="menu-title" data-i18n="Chat">Add Employee</span></a>
+            <span class="menu-title" data-i18n="Chat">Add Employee</span></a></button>
           </li>
-          <li class="bold"><a class="waves-effect waves-cyan " href="{{url_for('Employee_list')}}">
+          <li class="bold"><button style="width:250px; padding:16px; margin-left:16px;"><a class="waves-effect waves-cyan " href="{{url_for('Employee_list')}}">
             <i class="material-icons">people_outline</i>
-            <span class="menu-title" data-i18n="Chat">Employee List</span></a>
+            <span class="menu-title" data-i18n="Chat">Employee List</span></a></button>
           </li>
-        <li class="bold"><a class="waves-effect waves-cyan " href="{{url_for('Attendance')}}">
+        <li class="bold"><button style="width:250px; padding:16px; margin-left:16px;"><a class="waves-effect waves-cyan " href="{{url_for('Attendance')}}">
             <i class="material-icons">playlist_add_check</i>
-            <span class="menu-title" data-i18n="Chat">Attendance</span></a>
+            <span class="menu-title" data-i18n="Chat">Attendance</span></a></button>
         </li>
-        <li class="bold">
+        <li class="bold"><button style="width:250px; padding:16px; margin-left:16px;">
             <a class="waves-effect waves-cyan " href="{{url_for('Leave')}}">
             <i class="material-icons">beach_access</i>
-            <span class="menu-title" data-i18n="File Manager">Holiday/Leave</span></a>
+            <span class="menu-title" data-i18n="File Manager">Holiday/Leave</span></a></button>
         </li>
       </ul>
     </aside>
