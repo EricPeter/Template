@@ -1133,6 +1133,8 @@ def add_tpaylist():
     return render_template('pay.html', img=imgs, cm=cm)
 @app.route('/gen_slip', methods=['POST', 'GET'])
 def gen_slip():
+    imgs = image()
+    cm = com_name()
     if request.method == 'POST':
         db = getConnection()
         c = db.cursor()
@@ -1147,7 +1149,7 @@ def gen_slip():
         gpayment = c.execute('''SELECT * FROM Payment WHERE Emp_ID=('{name}') OR (('{moth}') AND ('{yr}'))'''.format(name=new_data,moth=nmonth,yr=nyear))
         rf_list = gpayment.fetchall()
 
-        return render_template('dis_slip.html',crows=crows,rdata=rdata,rf_list=rf_list)
+        return render_template('dis_slip.html',crows=crows,rdata=rdata,rf_list=rf_list,img=imgs, cm=cm)
 #generate pay-slip page
 @app.route('/create_pay')
 def create_pay():
