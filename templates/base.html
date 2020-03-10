@@ -45,6 +45,7 @@ body{font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans
                 line-height: 1.428571429;
                 border-radius: 15px;
                 }
+
     </style>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -75,9 +76,15 @@ body{font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/app-contacts.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/app-sidebar.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/quill.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/materialize.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/perfect-scrollbar.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/plugin.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/prism.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/style.css')}}">
     <link rel="stylesheet" href="{{url_for('static',filename='index/select2.css')}}" type="text/css">
     <link rel="stylesheet" href="{{url_for('static',filename='index/select2-materialize.css')}}" type="text/css">
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/app-todo.css')}}">
+    <script defer src="{{url_for('static',filename='script.js')}}"></script>
 </head>
   <!-- END: Head-->
   <body >
@@ -219,6 +226,12 @@ body{font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans
     <script src="{{url_for('static',filename='index/quill.js')}}"></script>
     <script src="{{url_for('static',filename='index/select2.js')}}"></script>
    <script src="{{url_for('static',filename='index/app-todo.js')}}"></script>
+   <script src="{{url_for('static',filename='index/additional-methods.js')}}"></script>
+   <script src="{{url_for('static',filename='index/andular.js')}}"></script>
+   <script src="{{url_for('static',filename='index/custom-script.js')}}"></script>
+   <script src="{{url_for('static',filename='index/perfect-scrollbar.js')}}"></script>
+   <script src="{{url_for('static',filename='index/plugin.js')}}"></script>
+   <script src="{{url_for('static',filename='index/prism.js')}}"></script>
     <!-- END PAGE LEVEL JS-->
 <script>
                  $(document).ready(function () {
@@ -292,6 +305,10 @@ $(document).ready(function() {
     format: "yyyy/mm/dd"
   });
 });
+ $( document ).ready(function() {
+
+    });
+
 </script>
 <!--  -->
 </body>

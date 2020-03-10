@@ -4,6 +4,7 @@
 <div id="main">
       <div class="row">
 {#        <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>#}
+
         <div class="col s12 " >
           <div class="container">
             <div class="section">
@@ -20,10 +21,23 @@
                                         </div>
                                     </div>
                                 </div>
+                            <div id="error"></div>
                                 <div id="html-view-validations">
                                     <div class="container">
                                         <div class="stepwizard col-md-offset-3">
                                             <div class="stepwizard-row setup-panel">
+                                            <div class="alert alert-success">
+                                                {% with messages = get_flashed_messages() %}
+                                                    {% if messages %}
+                                                        <ul class=flashes>
+                                                            {% for message in messages %}
+                                                                <li>{{ message }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                {% endwith %}
+                                            </div>
+
                                                 <div class="stepwizard-step">
                                                     <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
                                                     <p>Personal Information</p>
@@ -66,13 +80,15 @@
                                                                          <div class="col-md-12">
                                                                              <div class="input-field col s6">
                                                                                  <i class="material-icons prefix">accessibility</i>
-                                                                                 <input class="validate invalid" required="" id="emp_id" name="emp_id" type="text">
-                                                                                 <label for="emp_id" class="">Emp ID*</label>
+                                                                                 <input class="validate" required="required" id="emp_id" name="emp_id" type="text">
+                                                                                 <label for="emp_id">Emp ID*</label>
+                                                                                 <span class="helper-text right-alert"  data-error="Please enter a correct employee id!" data-success="Perfect!">Helper text</span>
                                                                              </div>
                                                                              <div class="input-field col s6">
                                                                                  <i class="material-icons prefix">card_travel</i>
-                                                                                 <input class="validate invalid" required="" id="designation" type="text" name="designation">
-                                                                                 <label for="designation" class="">Designation *</label>
+                                                                                 <input class="validate" required="required" id="designation" type="text" name="designation" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
+                                                                                 <label for="designation" >Designation *</label>
+                                                                                 <span class="helper-text right-alert"  data-error="Please enter a Designation" data-success="Perfect!">Helper text</span>
                                                                              </div>
 {#                                                                             <div class="input-field col s12">#}
 {#                                                                                 #}
@@ -80,13 +96,15 @@
 {#                                                                             </div>#}
                                                                              <div class="input-field col s6">
                                                                                  <i class="material-icons prefix">date_range</i>
-                                                                                 <label for="start_date1" class=""  >Joining Date *</label><br>
-                                                                                 <input class="validate" required="" id="start_date1" type="date" name="join_date">
+                                                                                 <label for="start_date1">Joining Date *</label><br>
+                                                                                 <input class="validate" required="required" id="start_date1" type="date" name="join_date">
+                                                                                 <span class="helper-text right-alert"  data-error="Please enter a correct date" data-success="Perfect!">Helper text</span>
                                                                              </div>
                                                                              <div class="input-field col s6">
                                                                                  <i class="material-icons prefix">date_range</i>
-                                                                                 <label for="start_date" class=""  >End of Contract *</label><br>
-                                                                                 <input class="validate" required="" id="start_date" type="date" name="end_date">
+                                                                                 <label for="start_date" >End of Contract *</label><br>
+                                                                                 <input class="validate" required="required" id="start_date" type="date" name="end_date">
+                                                                                 <span class="helper-text right-alert"  data-error="Please enter a correct date" data-success="Perfect!">Helper text</span>
                                                                              </div>
                                                                              <div class="input-field col s6">
                                                                                  <i class="material-icons prefix">assignment_ind</i>
@@ -106,8 +124,9 @@
                                                                              </div>
                                                                               <div class="input-field col s12">
                                                                                   <i class="material-icons prefix">assessment</i>
-                                                                                 <input class="validate invalid" required="" id="tin" type="text" name="tin" maxlength="10" size="10">
-                                                                                  <label for="tin" class="">Tin Number *</label>
+                                                                                 <input class="validate" required="required" id="tin" type="text" name="tin" pattern="[^a-zA-Z]+"  maxlength="10" size="10">
+                                                                                  <label for="tin" >Tin Number *</label>
+                                                                                  <span class="helper-text right-alert"  data-error="Please enter a correct tin number" data-success="Perfect!">Helper text</span>
                                                                              </div>
                                                                              <button class="btn btn-light-light-green prevBtn  pull-left" type="button">
                                                                                  Previous
@@ -135,18 +154,21 @@
                                                                          <div class="col-md-12">
                                                                              <div class="input-field col s6">
                                                                                   <i class="material-icons prefix">money</i>
-                                                                                 <input class="validate invalid" required="" id="gross" name="gross_pay" type="text">
-                                                                                 <label for="gross" class="">Basic Pay*</label>
+                                                                                 <input class="validate" required="required" id="gross" name="gross_pay" pattern="\d*" type="text">
+                                                                                 <label for="gross" >Basic Pay*</label>
+                                                                                 <span class="helper-text right-alert"  data-error="Please enter correct basic pay!" data-success="Perfect!">Helper text</span>
                                                                              </div>
                                                                              <div class="input-field col s6">
                                                                                  <i class="material-icons prefix">work</i>
-                                                                                 <input class="validate invalid" required="" id="nssf" type="text" name="nssf" maxlength="13" minlength="0">
-                                                                                 <label for="nssf" class="">Nssf Number *</label>
+                                                                                 <input class="validate" required="required" id="nssf" type="text" pattern="\d*" name="nssf" maxlength="13" minlength="0">
+                                                                                 <label for="nssf">Nssf Number *</label>
+                                                                                 <span class="helper-text right-alert"  data-error="Please enter nssf number!" data-success="Perfect!">Helper text</span>
                                                                              </div>
                                                                              <div class="input-field col s6">
                                                                                  <i class="material-icons prefix">group</i>
-                                                                                 <input class="validate invalid" required="" id="next_of_kin" type="text" name="next_of_kin">
-                                                                                 <label for="next_of_kin" class="">Next of Kin *</label>
+                                                                                 <input class="validate" required="required" id="next_of_kin" type="text" name="next_of_kin" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
+                                                                                 <label for="next_of_kin">Next of Kin *</label>
+                                                                                 <span class="helper-text"  data-error="Please enter next of kin !" data-success="Perfect!">Helper text</span>
                                                                              </div>
                                                                              <div class="input-field col s6">
                                                                              <i class="material-icons prefix">device_hub</i>
@@ -159,8 +181,9 @@
                                                                              </div>
                                                                              <div class="input-field col s6">
                                                                                   <i class="material-icons prefix">person_outline</i>
-                                                                                 <input class="validate invalid" required="" id="supervisor" type="text" name="supervisor">
-                                                                                 <label for="supervisor" class="">Supervisor *</label>
+                                                                                 <input class="validate" required="required" id="supervisor" type="text" name="supervisor" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
+                                                                                 <label for="supervisor" >Supervisor *</label>
+                                                                                 <span class="helper-text right-alert"  data-error="Please enter a supervisor !" data-success="Perfect!">Helper text</span>
                                                                              </div>
                                                                              <div class="input-field col s6">
                                                                                  <div class="file-field input-field">
@@ -189,18 +212,22 @@
                                                  
                                                         <div class="input-field col s6">
                                                             <i class="material-icons prefix">person_add</i>
-                                                            <input class="validate invalid" required="" id="first_name" name="surname" type="text">
-                                                            <label for="first_name" class="">Surname *</label>
+                                                            <input id="first_name" type="text" class="validate"  required="required" aria-required="true" name="surname"
+                                                onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
+                                                            <label for="first_name">Surname *</label>
+                                                            <span class="helper-text"  data-error="Please enter a correct of surname !" data-success="Perfect!">Helper text</span>
                                                         </div>
                                                         <div class="input-field col s6">
                                                             <i class="material-icons prefix">person_add</i>
-                                                            <input class="validate invalid"  id="last_name" type="text" name="given_name">
+                                                            <input class="validate invalid"  id="last_name" type="text" name="given_name" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
                                                             <label for="last_name" class="">Last Name *</label>
+                                                            <span class="helper-text right-alert"  data-error="Please enter a lastname !" data-success="Perfect!">Helper text</span>
                                                         </div>
                                                         <div class="input-field col s6">
                                                             <i class="material-icons prefix">person_add</i>
                                                             <input  id="other" type="text" name="other_names">
                                                             <label for="other" class="">Other Names *</label>
+
                                                         </div>
                                                         <div class="input-field col s6">
                                                             <i class="material-icons prefix">plus_one</i>
@@ -222,8 +249,9 @@
                                                         </div>
                                                         <div class="input-field col s6">
                                                             <i class="material-icons prefix">person_pin_circle</i>
-                                                            <input class="validate invalid" required="" id="nationality" type="text" name="nationality">
+                                                            <input class="validate" required="required" id="nationality" type="text" name="nationality" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
                                                             <label for="nationality" class="">Nationality *</label>
+                                                            <span class="helper-text right-alert"  data-error="Please enter the nationality !" data-success="Perfect!">Helper text</span>
                                                         </div>
 {#                                                        <div class="input-field col s12">#}
 {#                                                            <i class="material-icons prefix">date_range</i>#}
@@ -233,7 +261,8 @@
                                                         <div class="input-field col s12">
                                                             <i class="material-icons prefix">date_range</i>
                                                             <label for="start_date" class=""  >Date of Birth *</label><br>
-                                                            <input class="validate" required="" id="start_date" type="date" name="date_of_birth">
+                                                            <input class="validate" required="required" id="start_date" type="date" name="date_of_birth">
+                                                            <span class="helper-text right-alert"  data-error="Please enter the date of birth !" data-success="Perfect!">Helper text</span>
                                                         </div>
 
 {#                                                        <button class="btn btn-light-deep-purple prevBtn  pull-left" type="button">#}
@@ -251,23 +280,28 @@
                                                         
                                                         <div class="input-field col s12">
                                                             <i class="material-icons prefix">business_center</i>
-                                                            <input class="validate invalid" required="" id="account_name" name="account_name" type="text">
+                                                            <input class="validate" required="required" id="account_name"  name="account_name" type="text" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
                                                             <label for="account_name" class="">Account Name *</label>
+                                                            <span class="helper-text right-alert"  data-error="Please enter the account name !" data-success="Perfect!">Helper text</span>
                                                         </div>
                                                         <div class="input-field col s12">
                                                             <i class="material-icons prefix">redeem</i>
-                                                            <input class="validate invalid" required="" id="account_number" type="text" name="account_number">
+                                                            <input class="validate invalid" required="" id="account_number"  pattern="\d*" type="text" name="account_number" maxlength="16"  size="16" minlength="16">
                                                             <label for="account_number" class="">Account Number *</label>
+                                                            <span class="helper-text right-alert"  data-error="Please enter a correct account number!" data-success="Perfect!">Helper text</span>
+
                                                         </div>
                                                         <div class="input-field col s12">
                                                             <i class="material-icons prefix">credit_card</i>
-                                                            <input class="validate invalid" required="" id="bank_name" type="text" name="bank_name">
+                                                            <input class="validate invalid" required="" id="bank_name" type="text" name="bank_name" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
                                                             <label for="bank_name" class="">Bank Name *</label>
+                                                            <span class="helper-text right-alert"  data-error="Please enter a correct bank name!" data-success="Perfect!">Helper text</span>
                                                         </div>
                                                         <div class="input-field col s12">
                                                             <i class="material-icons prefix">credit_card</i>
-                                                            <input class="validate invalid" required="" id="bank_branch" type="text" name="bank_branch">
+                                                            <input class="validate invalid" required="required" id="bank_branch" type="text" name="bank_branch" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
                                                             <label for="bank_branch" class="">Bank Branch *</label>
+                                                             <span class="helper-text right-alert"  data-error="Please enter a correct bank branch" data-success="Perfect!">Helper text</span>
                                                         </div>
                                                         <button class="btn btn-light-light-green prevBtn  pull-left" type="button">
                                                             Previous
@@ -284,18 +318,21 @@
                                                      
                                                         <div class="input-field col s12">
                                                             <i class="material-icons prefix">school</i>
-                                                            <input class="validate invalid" required="" id="level" name="level" type="text">
-                                                            <label for="level" class="">Level of Education  *</label>
+                                                            <input class="validate invalid" required="required" id="level" name="level" type="text" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
+                                                            <label for="level" >Level of Education  *</label>
+                                                             <span class="helper-text right-alert"  data-error="Please enter the level of education!" data-success="Perfect!">Helper text</span>
                                                         </div>
                                                         <div class="input-field col s12">
                                                             <i class="material-icons prefix">school</i>
-                                                            <input class="validate invalid" required="" id="award" name="award" type="text">
+                                                            <input class="validate invalid" required="required" id="award" name="award" type="text" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
                                                             <label for="award" class="">Award Received  *</label>
+                                                             <span class="helper-text right-alert"  data-error="Please enter the reward received!" data-success="Perfect!">Helper text</span>
                                                         </div>
                                                         <div class="input-field col s12">
                                                             <i class="material-icons prefix">account_balance</i>
-                                                            <input class="validate invalid" required="" id="instition" type="text" name="instition">
+                                                            <input class="validate invalid" required="required" id="instition" type="text" name="instition" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
                                                             <label for="instition" class="">Institution*</label>
+                                                             <span class="helper-text right-alert"  data-error="Please enter the institution!" data-success="Perfect!">Helper text</span>
                                                         </div>
                                                         <div class="input-field col s12">
                                                             <div class="file-field input-field">
@@ -323,25 +360,29 @@
                                                        
                                                         <div class="input-field col s12">
                                                             <i class="material-icons prefix">accessibility</i>
-                                                            <input class="validate invalid" required="" id="current_address" name="current_address" type="text">
+                                                            <input class="validate invalid" required="required" id="current_address" name="current_address" type="text" >
                                                             <label for="current_address" class="">Current Address *</label>
+                                                            <span class="helper-text right-alert"  data-error="Please enter the current address !" data-success="Perfect!">Helper text</span>
                                                         </div>
                                                         <div class="input-field col s12">
                                                             <i class="material-icons prefix">contact_phone</i>
-                                                              <label for="mobile" class="">Mobile *</label>
-                                                            <input class="validate invalid" required="" id="mobile" type="number" name="mobile" >
+                                                              <label for="mobile">Mobile *</label>
+                                                            <input class="validate invalid" required="required" id="mobile" type="number" name="mobile" pattern="\d*" maxlength="10"  size="10" >
+                                                            <span class="helper-text right-alert"  data-error="Please enter a correct mobile number!" data-success="Perfect!">Helper text</span>
                                                             
                                                         </div>
                                                         <div class="input-field col s12">
                                                             <i class="material-icons prefix">phone</i>
-                                                              <label for="phone" class="">Home Phone *</label>
-                                                            <input class="validate invalid " required="" id="phone" type="number" name="phone" >
+                                                              <label for="phone">Home Phone *</label>
+                                                            <input class="validate invalid " required="required" id="phone" type="number" name="phone" pattern="[^a-zA-Z]+" maxlength="10"  size="10" >
+                                                            <span class="helper-text right-alert"  data-error="Please enter a correct home number!" data-success="Perfect!">Helper text</span>
                                                             
                                                         </div>
                                                         <div class="input-field col s12">
                                                             <i class="material-icons prefix">contact_mail</i>
-                                                            <input class="validate invalid" required="" id="email" type="email" name="email">
-                                                            <label for="email" class="">Email *</label>
+                                                            <input class="validate invalid" required="required" id="email" type="email" name="email">
+                                                            <label for="email" >Email *</label>
+                                                             <span class="helper-text right-alert" data-error="Please enter an email address" data-success="Perfect!" >Helper text</span>
                                                         </div>
                                                         <button class="btn btn-light-light-green  prevBtn btn-light-deep-purple pull-left" type="button">
                                                             Previous

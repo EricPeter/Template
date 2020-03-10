@@ -44,14 +44,16 @@
                                                         <label class="">Department</label>
                                                     </div>
                                                     <div class="input-field col s6">
-                                                        <input class="validate" required="" id="role" type="text"
-                                                               name="role">
-                                                        <label for="role">Role</label>
+                                                        <select name="role">
+                                                            <option>HR</option>
+                                                            <option>Finance</option>
+                                                        </select>
                                                     </div>
                                                     <div class="input-field col s6">
-                                                        <input class="validate" required="" id="password"
-                                                               type="password" name="password">
+                                                        <input class="validate" required="required" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+                                                               type="password" name="password" maxlength="8" minlength="5" data-error="Please enter a password with atleast number and Upper case letter" >
                                                         <label for="password">Password</label>
+                                                        <span class="helper-text right-alert"  data-error="Password should have atleast 5 characters and not more 8 , with numbers and Upper case" data-success="Perfect!">Helper text</span>
                                                     </div>
                                                     <div class="input-field col s12">
                                                         <button class="btn cyan waves-effect waves-light right"
@@ -93,9 +95,10 @@
                                                         <label for="first_input2" class="">Employee Name </label>
                                                     </div>
                                                     <div class="input-field col s6">
-                                                        <input class="validate" required="" id="npassword"
-                                                               type="password" name="npassword">
+                                                        <input class="validate" required="required" id="npassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+                                                               type="password" name="npassword" maxlength="8" minlength="5">
                                                         <label for="npassword">New Password</label>
+                                                        <span class="helper-text right-alert"  data-error="Please enter a password with atleast number and Upper case letter" data-success="Perfect!">Helper text</span>
                                                     </div>
                                                     <div class="input-field col s12">
                                                         <button class="btn cyan waves-effect waves-light right"

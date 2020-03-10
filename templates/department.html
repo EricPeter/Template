@@ -24,8 +24,9 @@
                                 <form class="formValidate0" id="formValidate0" method="POST" action="{{url_for('add_department')}}">
                                         <div class="row">
                                             <div class="input-field col s6">
-                                                <textarea class="materialize-textarea" placeholder="Separate departments with commas..." id="uname0" name="dname" required=""></textarea>
+                                                <textarea class="materialize-textarea"  placeholder="Separate departments with commas..." id="uname0" name="dname" required="required" pattern="[A-Za-z]" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"></textarea>
                                                 <label for="uname0">Department Name *</label>
+                                                <span class="helper-text " data-error="Please enter correct department" data-success="success continue">Helper text</span>
                                             </div>
                                             <div class="input-field col s6">
                                                 <button class="btn cyan waves-effect waves-light left" type="submit" name="action">Submit
