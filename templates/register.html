@@ -13,6 +13,37 @@
     <!-- BEGIN: VENDOR CSS-->
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/vendors.css')}}">
     <!-- END: VENDOR CSS-->
+
+    <link href="{{url_for('static',filename='index/icon.css')}}" rel="stylesheet">
+    <!-- BEGIN: VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/vendors.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/animate.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/chartist.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/chartist-plugin-tooltip.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/flag-icon.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/jquery.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/materialize.css')}}"
+          media="screen,projection">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/dashboard-modern.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/intro.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/dropify.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/data-tables.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/responsive.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/select.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/custom.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/app-contacts.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/app-sidebar.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/quill.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/materialize.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/perfect-scrollbar.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/plugin.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/prism.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='index/select2.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{url_for('static',filename='index/select2-materialize.css')}}" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/app-todo.css')}}">
+    <script defer src="{{url_for('static',filename='script.js')}}"></script>
     <!-- BEGIN: Page Level CSS-->
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/materialize.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index/style.css')}}">
@@ -40,22 +71,27 @@
                         <div class="row margin">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix pt-2">person_outline</i>
-                                <input id="username" type="text" name="username">
+                                <input id="username" type="text" name="username"  required="required"
+                                       onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
+                                minlength="4">
                                 <label for="username" class="center-align">Username</label>
+                                <span class="helper-text right-alert" data-error="Please enter a correct username" data-success="success continue">Helper text</span>
                             </div>
                         </div>
                         <div class="row margin">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix pt-2">mail_outline</i>
-                                <input id="email" type="email" name="email">
+                                <input id="email" type="email" required="required" name="email">
                                 <label for="email">Email</label>
+                                <span class="helper-text right-alert" data-error="Please enter an email address" data-success="Perfect!" >Helper text</span>
                             </div>
                         </div>
                         <div class="row margin">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix pt-2">lock_outline</i>
-                                <input id="password" type="password" name="password">
+                                <input id="password" type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}" maxlength="10" minlength="10">
                                 <label for="password">Password</label>
+                                <span class="helper-text right-alert"  data-error="Password should have atleast 5 characters and not more 10 , with numbers and Upper case" data-success="Perfect!">Helper text</span>
                             </div>
                         </div>
                         {#      <div class="row margin">#}
@@ -98,6 +134,42 @@
     <!-- END THEME  JS-->
     <!-- BEGIN PAGE LEVEL JS-->
     <!-- END PAGE LEVEL JS-->
+ <!-- END: Footer-->
+    <!-- BEGIN VENDOR JS-->
+    <script src="{{url_for('static',filename='index/vendors.js')}}"></script>
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN PAGE VENDOR JS-->
+    <script src="{{url_for('static',filename='index/chart.js')}}"></script>
+    <script src="{{url_for('static',filename='index/chartist.js')}}"></script>
+    <script src="{{url_for('static',filename='index/chartist-plugin-tooltip.js')}}"></script>
+    <script src="{{url_for('static',filename='index/chartist-plugin-fill-donut.js')}}"></script>
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN THEME  JS-->
+    <script src="{{url_for('static',filename='index/plugins.js')}}"></script>
+    <script src="{{url_for('static',filename='index/app-contacts.js')}}"></script>
+    <script src="{{url_for('static',filename='index/search.js')}}"></script>
+    <script src="{{url_for('static',filename='index/custom-script.js')}}"></script>
+    <script src="{{url_for('static',filename='index/customizer.js')}}"></script>
+    <script src="{{url_for('static',filename='index/dropify.js')}}"></script>
+    <script src="{{url_for('static',filename='index/form-file-uploads.js')}}"></script>
+    <script src="{{url_for('static',filename='index/data-tables.js')}}"></script>
+    <script src="{{url_for('static',filename='index/dataTables.js')}}"></script>
+    <script src="{{url_for('static',filename='index/dataTables_002.js')}}"></script>
+    <!-- END THEME  JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script src="{{url_for('static',filename='index/dashboard-modern.js')}}"></script>
+    <script src="{{url_for('static',filename='index/intro.js')}}"></script>
+    <script src="{{url_for('static',filename='index/jquery.js')}}"></script>
+    <script src="{{url_for('static',filename='index/jquery-sortable-min.js')}}"></script>
+    <script src="{{url_for('static',filename='index/quill.js')}}"></script>
+    <script src="{{url_for('static',filename='index/select2.js')}}"></script>
+   <script src="{{url_for('static',filename='index/app-todo.js')}}"></script>
+   <script src="{{url_for('static',filename='index/additional-methods.js')}}"></script>
+   <script src="{{url_for('static',filename='index/andular.js')}}"></script>
+   <script src="{{url_for('static',filename='index/custom-script.js')}}"></script>
+   <script src="{{url_for('static',filename='index/perfect-scrollbar.js')}}"></script>
+   <script src="{{url_for('static',filename='index/plugin.js')}}"></script>
+   <script src="{{url_for('static',filename='index/prism.js')}}"></script>
 
 </body>
 </html>
