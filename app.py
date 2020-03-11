@@ -560,20 +560,93 @@ def add_employee():
         phone=request.form['phone']
         email=request.form['email']
         try:
-            data = Employee_Data(Emp_ID=emp_id,Joining_Date=join_date,End_of_Contract=end_date,Designation=designation,Employee_Status=emp_status,
-                                 Residence_type=status,Tin_Number=tin,Gross_Pay=gross_pay,Nssf_Number=nssf,Next_of_Kin=next_of_kin,Department=department,
-                                 Supervisor=supervisor,Picture=pic_image,Surname=surname,Given_name=given_name,Othername=other_names,Marital_Status=marital_status,
-                                 Nationality=nationality,DOB=date_of_birth,Gender=gender,Account_Name=account_name,Account_Number=account_number,
-                                 Bank_Name=bank_name,Bank_Branch=bank_branch,Level_of_Education=level,Award=award,Institution=instition,Cv=cv_file,
-                                 Current_Address=current_address,Mobile=mobile,Home_Phone=phone,Email=email)
-            db.session.add(data)
+            exists = Employee_Data.query.all()
+            if not exists:
+                data = Employee_Data(Emp_ID=emp_id, Joining_Date=join_date, End_of_Contract=end_date,
+                                     Designation=designation, Employee_Status=emp_status,
+                                     Residence_type=status, Tin_Number=tin, Gross_Pay=gross_pay, Nssf_Number=nssf,
+                                     Next_of_Kin=next_of_kin, Department=department,
+                                     Supervisor=supervisor, Picture=pic_image, Surname=surname, Given_name=given_name,
+                                     Othername=other_names, Marital_Status=marital_status,
+                                     Nationality=nationality, DOB=date_of_birth, Gender=gender,
+                                     Account_Name=account_name, Account_Number=account_number,
+                                     Bank_Name=bank_name, Bank_Branch=bank_branch, Level_of_Education=level,
+                                     Award=award, Institution=instition, Cv=cv_file,
+                                     Current_Address=current_address, Mobile=mobile, Home_Phone=phone, Email=email)
+                db.session.add(data)
 
-            db.session.commit()
+                db.session.commit()
+            else:
+                message = "Employee exists"
+                flash(message)
             return redirect(url_for('Employee'))
         except Exception as e:
             raise e
     return render_template('employee.html')
 
+'''Adding an employee to the database'''
+@app.route('/add_employee_admin',methods=['POST','GET'])
+def add_employee_admin():
+    if request.method=='POST':
+        emp_id=request.form['emp_id']
+        designation=request.form['designation']
+        join_date=request.form['join_date']
+        end_date=request.form['end_date']
+        emp_status=request.form['emp_status']
+        status=request.form['status']
+        tin=request.form['tin']
+        gross_pay=request.form['gross_pay']
+        nssf=request.form['nssf']
+        next_of_kin=request.form['next_of_kin']
+        department=request.form['department']
+        supervisor=request.form['supervisor']
+        pic=request.files['pic']
+        pic_image=pic.read()
+        surname=request.form['surname']
+        given_name=request.form['given_name']
+        other_names=request.form['other_names']
+        name=surname+" "+given_name
+        marital_status=request.form['marital_status']
+        nationality=request.form['nationality']
+        date_of_birth=request.form['date_of_birth']
+        gender=request.form['gender']
+        account_name=request.form['account_name']
+        account_number=request.form['account_number']
+        bank_name=request.form['bank_name']
+        bank_branch=request.form['bank_branch']
+        level=request.form['level']
+        award=request.form['award']
+        instition=request.form['instition']
+        cv=request.files['cv']
+        cv_file=cv.read()
+        current_address=request.form['current_address']
+        mobile=request.form['mobile']
+        phone=request.form['phone']
+        email=request.form['email']
+        try:
+            exists = Employee_Data.query.all()
+            if not exists:
+                data = Employee_Data(Emp_ID=emp_id, Joining_Date=join_date, End_of_Contract=end_date,
+                                     Designation=designation, Employee_Status=emp_status,
+                                     Residence_type=status, Tin_Number=tin, Gross_Pay=gross_pay, Nssf_Number=nssf,
+                                     Next_of_Kin=next_of_kin, Department=department,
+                                     Supervisor=supervisor, Picture=pic_image, Surname=surname, Given_name=given_name,
+                                     Othername=other_names, Marital_Status=marital_status,
+                                     Nationality=nationality, DOB=date_of_birth, Gender=gender,
+                                     Account_Name=account_name, Account_Number=account_number,
+                                     Bank_Name=bank_name, Bank_Branch=bank_branch, Level_of_Education=level,
+                                     Award=award, Institution=instition, Cv=cv_file,
+                                     Current_Address=current_address, Mobile=mobile, Home_Phone=phone, Email=email)
+                db.session.add(data)
+
+                db.session.commit()
+            else:
+                message = "Employee exists"
+                flash(message)
+            return redirect(url_for('Employee_admin'))
+        except Exception as e:
+            raise e
+    return render_template('employee_admin.html')
 '''Edit employee Details'''
 '''Display employees in a table'''
 @app.route('/Employee_list',methods=['POST','GET'])

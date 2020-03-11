@@ -14,7 +14,7 @@
                                 <div class="card-title">
                                     <div class="row">
                                         <div class="col s12 m6 l10">
-                                            <h4 class="card-title">Add Allowance</h4>
+                                            <h4 class="card-title">Add Allowances</h4>
                                         </div>
                                         <div class="col s12 m6 l2">
 
@@ -26,13 +26,16 @@
                                         <div class="row">
                                             <div class="input-field col s6">
                                             	<label for="first_input2" class="">Allowance Name</label>
-                                                <input id="first_input2" type="text" class="validate"  required="" name="a_type">
+                                                <input id="first_input2" type="text" class="validate"  required="required" name="a_type"
+                                                       onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
+                                                 <span class="helper-text right-alert" data-error="Please enter a correct allowance name" data-success="success continue">Helper text</span>
                                                 
                                             </div>
                                             
                                             <div class="input-field col s6">
                                             	<label for="c_event" >Description</label>
                                                 <input class="validate" required="" id="c_event" type="text" name="descr">
+                                                 <span class="helper-text right-alert" data-error="Please fill in the description" data-success="success continue">Helper text</span>
                                                 
                                             </div>
                                          
@@ -84,7 +87,8 @@
                                             </div>
                                             <div class="input-field col s6">
                                             	<label for="end_date" class="">Amount</label><br>
-                                                <input class="validate" required="" id="end_date" type="text"  name="a_ammount">
+                                                <input class="validate" required="required" id="end_date" type="text"  name="a_ammount" pattern="\d*">
+                                                <span class="helper-text right-alert"  data-error="Please enter correct price." data-success="Perfect!">Helper text</span>
                                                 
                                             </div>
                                             <div class="input-field col s6">
@@ -131,23 +135,23 @@
                                             <h4 class="card-title">Allowances</h4>
                                         </div>
                                         <div class="col s12 m6 l2">
-
                                         </div>
                                     </div>
                                 </div>
                                 <div id="html-view-validations">
                                         <div class="row">
-              <table id="example" class="table table-striped table-bordered" style="width:100%">
+              <table id="example" class="table table-striped table-bordered" style="width:100%" cellpadding="0" cellspacing="0" border="0">
 						                      <thead>
                                               <tr style="background-color: #1e1a9c;color: white;">
-						                      <th>Employee ID</th>
-                                              <th>Employee Name</th>
-						                      <th>Allowance Type</th>
-						                      <th>Month</th>
-                                              <th>Year</th>
-						                      <th>Amount</th>
-                                              <th>Action</th>
+                                                  <th>Employee ID</th>
+                                                  <th>Employee Name</th>
+                                                  <th>Allowance Type</th>
+                                                  <th>Month</th>
+                                                  <th>Year</th>
+                                                  <th>Amount</th>
+                                                  <th>Action</th>
                                               </tr>
+
 						                      </thead>
 						                      <tbody>
 						                      {% for row in data1 %}
@@ -157,7 +161,7 @@
                                                                 <input type="hidden" value="{{row[3]}}" name="nmonth">
                                                                 <input type="hidden" value="{{row[4]}}" name="nyear">
                                                                 <button type="submit" class="btn-floating btn waves-effect waves-light red">
-                                                                    <i class="material-icons blue-grey-text">delete</i>
+                                                                    <i class="material-icons text-success">delete</i>
                                                                 </button>
                                                             </form></td>
                                               </tr>
