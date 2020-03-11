@@ -40,6 +40,7 @@
                     <table  cellpadding="0" cellspacing="0" border="0" class="">
                     <thead>
                     <tr style="background-color: #1e1a9c;color: white;">
+                        <th>Emplpyee ID</th>
                         <th>Name</th>
                         <th>Department</th>
                         <th>Designation</th>
@@ -52,7 +53,7 @@
                     </thead>
                     <tbody>
                     {% for i in users %}
-                        <tr>
+                        <tr><td>{{i.Emp_ID}}</td>
                             <td>{{i.Surname}} {{i.Given_name}}</td>
                             <td>{{i.Department}}</td>
                             <td>{{i.Designation}}</td>

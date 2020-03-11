@@ -883,6 +883,30 @@ def delete_dd():
         except Exception as e:
             raise e
     return render_template('deductions.html')
+#employee list finance
+@app.route('/emp_list')
+def emp_list():
+    imgs=image()
+    cm=com_name()
+    users = Employee_Data.query.all()
+    return render_template('emp_list.html',img=imgs,users=users,cm=cm)
+@app.route('/delete_ss',methods=['POST','GET'])
+def delete_ss():
+    if request.method =='POST':
+        emp_id = request.form['emp_id']
+        nmonth = request.form['nmonth']
+        nyear = request.form['nyear']
+        db = getConnection()
+        c = db.cursor()
+        try:
+            c.execute('''DELETE FROM Payment WHERE Emp_ID=('{nm}')  OR (('{moth}') AND ('{yr}'))'''.format(nm=emp_id,moth=nmonth,yr=nyear))
+            db.commit()
+            db.close()
+            return redirect(url_for('salary'))
+        except Exception as e:
+            raise e
+    return render_template('salary.html')
+
 #delete allowances 
 @app.route('/delete_allow',methods=['POST','GET'])
 def delete_allow():

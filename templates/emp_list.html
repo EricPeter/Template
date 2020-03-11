@@ -1,0 +1,70 @@
+{% extends "base_finance.html" %}
+{% block title %}Finance{% endblock title%}
+{% block content %}
+    <!-- BEGIN: Page Main-->
+    <div id="main">
+        <div class="row">
+{#            <div class="content-wrapper-before gradient-45deg-indigo-light-"></div>#}
+            <div class="col s12">
+                <div class="container">
+                    <!-- Add new contact popup -->
+                    <div class="contact-overlay"></div>
+{#                    <div style="bottom: 54px; right:14px;" class="fixed-action-btn direction-top active">#}
+{#                        <a class="btn-floating btn-large primary-text gradient-shadow contact-sidebar-trigger" href="#modal1">#}
+{#                            <i class="material-icons">person_add</i>#}
+{#                        </a>#}
+{#                    </div>#}
+                    <!-- Add new contact popup Ends-->
+                    <!-- Sidebar Area Starts -->
+                    <div class="sidebar-left sidebar-fixed">
+                        <div class="sidebar">
+                            <div class="sidebar-content">
+{#                                <div class="sidebar-header">#}
+{#                                    <div class="sidebar-details">#}
+{#                                        <h5 class="m-0 sidebar-title"><i class="material-icons app-header-icon text-top">perm_identity</i> Employees#}
+{#                                        </h5>#}
+{#                                        <div class="mt-10 pt-2">#}
+{#                                            <p class="m-0 subtitle font-weight-700">Total number of Employees</p>#}
+{#                                            <p class="m-0 text-muted"> Employees</p>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+                                <a href="#" data-target="contact-sidenav" class="sidenav-trigger hide-on-large-only">
+                                    <i class="material-icons">menu</i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Sidebar Area Ends -->
+                    <!-- Content Area Starts -->
+                <h4 class="float-left">Employee List</h4>
+                    <table  cellpadding="0" cellspacing="0" border="0" class="">
+                    <thead>
+                    <tr style="background-color: #1e1a9c;color: white;">
+                        <th>Employee ID</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Designation</th>
+                        <th>Mobile</th>
+                        <th>Salary</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in users %}
+                        <tr>
+                            <td>{{i.Emp_ID}}</td>
+                            <td>{{i.Surname}} {{i.Given_name}}</td>
+                            <td>{{i.Department}}</td>
+                            <td>{{i.Designation}}</td>
+                            <td>{{i.Mobile}}</td>
+                            <td>{{i.Gross_Pay}}</td>                      
+                            
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- END: Page Main-->
+{% endblock %}

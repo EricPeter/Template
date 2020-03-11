@@ -23,16 +23,16 @@
                                     </div>
                                 </div>
                                 <hr />
-                                <div id="tblCustomers" style="width:800px; height:800px; border:black solid 1px;" class="text-center" >
+                                <div id="tblCustomers" style="width:500px; height:1000px; border:black solid 1px;margin-left:220px;" class="text-center" >
                                   
                                    {% for row in crows %}
-                                    <h5 style="float:right; margin-left:5px;">{{row.cname}}<br>{{row.address}}</h5>
+                                    <h5 style="float:left; margin-left:5px;">{{row.cname}}<br>{{row.address}}</h5>
                                     
                                    {% endfor %}
                                     <br /><br />
-                                   <h5>Monthly Pay Slip</h5>
-                                   <p class='text-center'>Month Paid:{% for x in rf_list%}{{x[2]}} {{x[3]}}{% endfor%}</p>
-                                   <table style="border:black solid 1px;" class="text-center table table-striped">
+                                   <h5 >Monthly Pay Slip</h5>
+                                   <p class='align-center'>Month Paid:{% for x in rf_list%}{{x[2]}} {{x[3]}}{% endfor%}</p>
+                                   <table style="border:black solid 1px;" class="text-center striped ">
                                    <tr><td>
                                    {% for i in rdata%}
                                    <p>Employee ID: {{i[1]}}</p>
@@ -40,17 +40,13 @@
                                    
                                    <p>Department: {{i[31]}}</p>
                                    <p>Designation: {{i[4]}}</p>
-                                   
-                                   {% endfor %}
-                                   </td>
-                                   <td>
-                                   {% for i in rdata%}
                                    <p>NSSF No:     {{i[3]}}</p>
                                    <p>Bank Account: {{i[21]}}</p>
                                    <p>Bank info: {{i[20]}}</p>
                                    {% endfor %}
-                                   </td></tr>
-                                   <th>Gross Pay</th><th>Taxation</th>
+                                   </td>
+                                   </tr>
+                                   <th>Gross Pay</th>
                                    <tr>
                                    <td>
                                    {% for i in rdata%}
@@ -62,13 +58,8 @@
                                    <p>Gross Pay: UGX {{rp[5]}}</p>
                                    {% endfor %}
                                    </td>
-                                   <td>
-                                   {% for rp in rf_list %}
-                                   <p>Taxable Pay:    UGX {{rp[5]}}</p>
-                                   {% endfor %}
-                                   </td>
                                    </tr>
-                                   <th>Deduction(s)</th><th>SUMMARY</th>
+                                   <th>Deduction(s)</th>
                                    <tr>
                                    <td>
                                     {% for rp in rf_list %}
@@ -80,6 +71,10 @@
                                     <p>other Deductions:UGX {{rp[11] }}</p>
                                     {% endfor %}
                                    </td>
+                                   </tr>
+                                   <th>SUMMARY
+                                   </th>
+                                   <tr>
                                    <td>
                                    {% for rp in rf_list %}
                                    <p>Net Pay: UGX {{rp[13]}}</p>
@@ -101,7 +96,7 @@
                                                 var docDefinition = {
                                                     content: [{
                                                         image: data,
-                                                        width: 500
+                                                        width: 200
                                                     }]
                                                 };
                                                 pdfMake.createPdf(docDefinition).download("Table.pdf");
