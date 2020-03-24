@@ -71,27 +71,25 @@
                         <div class="row margin">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix pt-2">person_outline</i>
-                                <input id="username" type="text" name="username"  required="required"
-                                       onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
-                                minlength="4">
+                                <input id="username" type="text" name="username"  required="required" class="validate">
                                 <label for="username" class="center-align">Username</label>
-                                <span class="helper-text right-alert" data-error="Please enter a correct username" data-success="success continue">Helper text</span>
+                                <span class="helper-text right-alert" data-error="Please enter a correct username" data-success="success continue"></span>
                             </div>
                         </div>
                         <div class="row margin">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix pt-2">mail_outline</i>
-                                <input id="email" type="email" required="required" name="email">
+                                <input id="email" type="email" required="required" name="email" minlength="4" maxlength="8">
                                 <label for="email">Email</label>
-                                <span class="helper-text right-alert" data-error="Please enter an email address" data-success="Perfect!" >Helper text</span>
+                                <span class="helper-text right-alert" data-error="Please enter an email address" data-success="Perfect!" ></span>
                             </div>
                         </div>
                         <div class="row margin">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix pt-2">lock_outline</i>
-                                <input id="password" type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}" maxlength="10" minlength="10">
+                                <input id="password" type="password" name="password" maxlength="8" minlength="4">
                                 <label for="password">Password</label>
-                                <span class="helper-text right-alert"  data-error="Password should have atleast 5 characters and not more 10 , with numbers and Upper case" data-success="Perfect!">Helper text</span>
+                                <span class="helper-text right-alert"  data-error="Password should have atleast 5 characters and not more , with numbers and Upper case" data-success="Perfect!"></span>
                             </div>
                         </div>
                         {#      <div class="row margin">#}

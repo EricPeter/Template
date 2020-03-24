@@ -27,40 +27,39 @@
                                         <div class="row">
                                             <div class="input-field col s12">
                                                 <i class="material-icons prefix active">person_add</i>
-                                                <input id="first_input2" type="text" class="validate"  required="required" aria-required="true" name="c_name"
-                                                onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
+                                                <input id="first_input2" type="text" class="validate"  required="required" aria-required="true" name="c_name" pattern="^[A-Za-z -]+$">
                                                 <label for="first_input2">Company Name</label>
-                                                 <span class="helper-text right-alert" data-error="wrong company name" data-success="success continue">Helper text</span>
+                                                 <span class="helper-text right-alert" data-error="wrong company name" data-success="success continue"></span>
                                             </div>
                                             <div class="input-field col s12">
                                                 <i class="material-icons prefix active">email</i>
                                                 <input class="validate" required="required"  aria-required="true" id="c_email" type="email" name="c_email">
                                                 <label for="c_email" >E-Mail *</label>
-                                                <span class="helper-text right-alert" data-error="Please enter an email address" data-success="Perfect!" >Helper text</span>
+                                                <span class="helper-text right-alert" data-error="Please enter an email address" data-success="Perfect!" ></span>
                                             </div>
                                             <div class="input-field col s12">
                                                 <i class="material-icons prefix">place</i>
                                                 <input class="validate" required="required"  aria-required="true" id="c_address" type="text" name="c_address">
                                                 <label for="c_address">Address *</label>
-                                                <span class="helper-text right-alert"  data-error="Please enter addess." data-success="Perfect!">Helper text</span>
+                                                <span class="helper-text right-alert"  data-error="Please enter addess." data-success="Perfect!"></span>
                                             </div>
                                             <div class="input-field col s12">
                                                 <i class="material-icons prefix">work</i>
                                                 <input class="validate" required="required" aria-required="true" id="c_nssf" type="text"  maxlength="9" size="9" pattern="\d*.{9,}" name="c_nssf" >
                                                 <label for="c_nssf">Company NSSF Number *</label>
-                                                <span class="helper-text right-alert"  data-error="Please enter nssf number." data-success="Perfect!">Helper text</span>
+                                                <span class="helper-text right-alert"  data-error="Please enter nssf number." data-success="Perfect!"></span>
                                             </div>
                                             <div class="input-field col s12">
                                                 <i class="material-icons prefix">phone</i>
-                                                <input type="text"  class="validate invalid " aria-required="true" required="required" pattern="\d*" maxlength="10"  size="10" id="c_tel"  name="c_tel" >
+                                                <input type="tel"  class="validate invalid " aria-required="true" required="required" pattern="^\d{10}$"  id="c_tel"  name="c_tel" >
                                                 <label for="c_tel"  >Telephone *</label>
-                                                <span class="helper-text right-alert"  data-error="Please enter a correct phone number." data-success="Perfect!">Helper text</span>
+                                                <span class="helper-text right-alert"  data-error="Please enter a 10 digit  phone number." data-success="Perfect!"></span>
                                             </div>
                                             <div class="input-field col s12">
                                                 <i class="material-icons prefix">assessment</i>
                                                 <input class="validate" required="required" aria-required="true" id="c_tin" type="text" maxlength="10" size="10" pattern="[^a-zA-Z]+"  name="c_tin">
                                                 <label for="c_tin" >Company Tin *</label>
-                                                <span class="helper-text right-alert"  data-error="Please enter company tin number" data-success="Perfect!">Helper text</span>
+                                                <span class="helper-text right-alert"  data-error="Please enter company tin number" data-success="Perfect!"></span>
                                             </div>
                                             <div class="input-field col s12">
                                                 <div class="file-field input-field">

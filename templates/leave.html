@@ -26,8 +26,8 @@
                                             <div class="input-field col s6">
                                                 <label for="first_input2" class="">Public Holiday</label><br>
                                                 <input id="first_input2" type="text" class="validate"  required="required" name="public_holiday"
-                                                       onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
-                                                <span class="helper-text " data-error="wrong input" data-success="success continue">Helper text</span>
+                                                       pattern="^[A-Za-z -]+$">
+                                                <span class="helper-text " data-error="wrong input" data-success="success continue"></span>
                                             </div>
 {#                                            <div class="input-field col s6">#}
 {#                                                <input class="validate" required="" id="c_date" type="date" name="date1">#}
@@ -37,13 +37,13 @@
 {#                                                 <i class="material-icons prefix">date_range</i>#}
                                                  <label for="start_date">Date</label><br>
                                                  <input class="validate" required="required" id="start_date" type="date" name="date1">
-                                                  <span class="helper-text " data-error="wrong input" data-success="success continue">Helper text</span>
+                                                  <span class="helper-text " data-error="wrong input" data-success="success continue"></span>
                                              </div>
                                             <div class="input-field col s6">
                                                 <input class="validate" required="required" id="c_event" type="text" name="personal_event"
-                                                       onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
+                                                       pattern="^[A-Za-z -]+$">
                                                 <label for="c_event" >Personal Event</label><br>
-                                                <span class="helper-text " data-error="wrong input" data-success="success continue">Helper text</span>
+                                                <span class="helper-text " data-error="wrong input" data-success="success continue"></span>
                                             </div>
                                             <div class="input-field col s6">
                                                 <label for="c_date0" class="">Date</label><br>
@@ -52,8 +52,8 @@
                                             <div class="input-field col s6">
                                                 <label for="cevent" >Company Events</label><br>
                                                 <input class="validate" required="required" id="cevent" type="text" name="company_events"
-                                                       onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
-                                                <span class="helper-text " data-error="wrong input" data-success="success continue">Helper text</span>
+                                                       pattern="^[A-Za-z -]+$">
+                                                <span class="helper-text " data-error="wrong input" data-success="success continue"></span>
                                             </div>
                                             <div class="input-field col s6">
                                                 <label for="c_date1"  >Date</label><br>
@@ -98,8 +98,8 @@
                                             <div class="input-field col s6">
                                                 <label for="rep" >Replacement</label>
                                                 <input class="validate" required="required" id="rep" type="text" name="rep"
-                                                       onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
-                                                <span class="helper-text " data-error="wrong input" data-success="success continue">Helper text</span>
+                                                       pattern="^[A-Za-z -]+$">
+                                                <span class="helper-text " data-error="wrong input" data-success="success continue"></span>
                                             </div>
                                             <div class="input-field col s6">
                                                  <label for="start_date" class=""  >Start Date</label><br>
@@ -146,9 +146,9 @@
                                             </div>
                                             <div class="input-field col s6">
                                                 <input class="validate" required="required" id="replacement" type="text" name="replacement"
-                                                       onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
+                                                       pattern="^[A-Za-z -]+$">
                                                 <label for="replacement" >Replacement</label>
-                                                <span class="helper-text " data-error="wrong input" data-success="success continue">Helper text</span>
+                                                <span class="helper-text " data-error="wrong input" data-success="success continue"></span>
                                             </div>
                                             <div class="input-field col s6">
                                                 <label for="start_date1" class=""  >Start Date</label><br>

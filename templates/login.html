@@ -70,18 +70,17 @@
                         <div class="row margin">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix pt-2">person_outline</i>
-                                <input id="username" type="text" name="username" required="required" 
-                                    minlength="4">
+                                <input id="username" type="text" name="username" required="required">
                                 <label for="username" class="center-align">Username</label>
-                                <span class="helper-text right-alert" data-error="Please enter a correct username" data-success="success continue">Helper text</span>
+                                <span class="helper-text right-alert" data-error="Please enter a correct username" data-success="success continue"></span>
                             </div>
                         </div>
                         <div class="row margin">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix pt-2">lock_outline</i>
-                                <input id="password" type="password" name="password" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}" maxlength="10" minlength="10">
+                                <input id="password" type="password" name="password" required="required" maxlength="8" minlength="4">
                                 <label for="password">Password</label>
-                                <span class="helper-text right-alert"  data-error="Password should have atleast 5 characters and not more 10 , with numbers and Upper case" data-success="Perfect!">Helper text</span>
+                                <span class="helper-text right-alert"  data-error="Password should have atleast 5 characters and not more 10 , with numbers and Upper case" data-success="Perfect!"></span>
                             </div>
                         </div>
                         <div class="row">
