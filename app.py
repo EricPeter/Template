@@ -461,6 +461,18 @@ def Attendance():
         img_df.append(images)
     user_zipped = zip(users,img_df)
     return  render_template('attendance.html',img=imgs,user_zipped=user_zipped,cm=cm)
+@app.route('/Attendance_hr',methods=['POST','GET'])
+def Attendance_hr():
+    imgs=image()
+    cm=com_name()
+    img_df = []
+    users = Employee_Data.query.all()
+    # # base64.b64encode(file.image).decode('ascii')
+    for i in users:
+        images=base64.b64encode(i.Picture).decode('ascii')
+        img_df.append(images)
+    user_zipped = zip(users,img_df)
+    return  render_template('attendance_hr.html',img=imgs,user_zipped=user_zipped,cm=cm)
 '''Take attendance'''
 @app.route('/Take_Attendance',methods=['POST','GET'])
 def Take_Attendance():
@@ -482,6 +494,26 @@ def Take_Attendance():
         except Exception as e:
             raise  e
     return render_template('attendance.html')
+@app.route('/Take_Attendance_hr',methods=['POST','GET'])
+def Take_Attendance_hr():
+    data=[]
+    if request.method=='POST':
+        today=datetime.today().strftime('%Y-%m-%d-%H:%M:%S')
+        for v in request.form:
+            data.append(request.form[v])
+        data.append(today)
+        table_insert = tuple(data)
+        db = getConnection()
+        c=db.cursor()
+        try:
+            c.execute("""CREATE TABLE IF NOT EXISTS Attendance(Given_name VARCHAR(100) ,Attendance VARCHAR(100),Day_Date DATE)""")
+            c.execute("""INSERT INTO Attendance(Given_name,Attendance,Day_Date) VALUES {tbv}""".format(tbv=table_insert))
+            db.commit()
+            db.close()
+            return  redirect(url_for('Attendance_hr'))
+        except Exception as e:
+            raise  e
+    return render_template('attendance_hr.html')
 '''Delete department'''
 @app.route('/Delete_Department',methods=['POST','GET'])
 def Delete_Department():
@@ -510,7 +542,6 @@ def Employee():
     db.commit()
     db.close()
     return render_template('employee.html',img=imgs,rows=rows,cm=cm)
-
 @app.route('/Employee_admin')
 def Employee_admin():
     imgs=image()
@@ -524,7 +555,6 @@ def Employee_admin():
     db.commit()
     db.close()
     return render_template('employee_admin.html',img=imgs,rows=rows,cm=cm)
-
 '''Adding an employee to the database'''
 @app.route('/add_employee',methods=['POST','GET'])
 def add_employee():
@@ -565,7 +595,7 @@ def add_employee():
         phone=request.form['phone']
         email=request.form['email']
         try:
-            exists = Employee_Data.query.all()
+            exists = Employee_Data.query.filter_by(Emp_ID=emp_id).first()
             if not exists:
                 data = Employee_Data(Emp_ID=emp_id, Joining_Date=join_date, End_of_Contract=end_date,
                                      Designation=designation, Employee_Status=emp_status,
@@ -579,7 +609,6 @@ def add_employee():
                                      Award=award, Institution=instition, Cv=cv_file,
                                      Current_Address=current_address, Mobile=mobile, Home_Phone=phone, Email=email)
                 db.session.add(data)
-
                 db.session.commit()
             else:
                 message = "Employee exists"
@@ -588,7 +617,6 @@ def add_employee():
         except Exception as e:
             raise e
     return render_template('employee.html')
-
 '''Adding an employee to the database'''
 @app.route('/add_employee_admin',methods=['POST','GET'])
 def add_employee_admin():
@@ -629,7 +657,7 @@ def add_employee_admin():
         phone=request.form['phone']
         email=request.form['email']
         try:
-            exists = Employee_Data.query.all()
+            exists = Employee_Data.query.filter_by(Emp_ID=emp_id).first()
             if not exists:
                 data = Employee_Data(Emp_ID=emp_id, Joining_Date=join_date, End_of_Contract=end_date,
                                      Designation=designation, Employee_Status=emp_status,
@@ -680,10 +708,6 @@ def delete_list():
         emp_details = c.execute('''DELETE FROM Employee_Data WHERE Emp_ID=('{nd}')'''.format(nd=emp_id))
         db.commit()
         return redirect(url_for('Employee_list'))
-
-
-
-
 '''Edit employee records'''
 @app.route('/Edit_Employee',methods=['POST','GET'])
 def Edit_Employee():
@@ -726,7 +750,6 @@ def Edit_Employee():
                            joining_date=joining_date,end_of_contract=end_of_contract,rtype=rtype,othername=othername,DOB=DOB,mstatus=mstatus,gender=gender,
                            nationality=nationality,caddress=caddress,mobile=mobile,phone=phone,email=email,accname=accname,accnumber=accnumber,bname=bname,
                            level=level,award=award,institution=institution,gpay=gpay,nkin=nkin,supervisor=supervisor,bbranch=bbranch)
-
 '''Update Employee data '''
 @app.route('/Update_Employee',methods=['POST','GET'])
 def Update_Employee():
@@ -809,6 +832,13 @@ def Update_Employee():
 def screen_lock():
     return  render_template('screen_lock.html')
 '''Holidays , sick leave and vacation module'''
+@app.route('/Leave_hr',methods=['POST','GET'])
+def Leave_hr():
+    imgs = image()
+    cm=com_name()
+    users = Employee_Data.query.all()
+    return render_template('leave_hr.html',img=imgs,sql_rows=users,cm=cm)
+'''Holidays , sick leave and vacation module'''
 @app.route('/Leave',methods=['POST','GET'])
 def Leave():
     imgs = image()
@@ -835,6 +865,26 @@ def Holidays():
         except Exception as e:
             raise e
     return render_template('leave.html')
+'''Set Holidays'''
+@app.route('/Holidays_hr',methods=['POST','GET'])
+def Holidays_hr():
+    data = []
+    if request.method=='POST':
+        for fm in request.form:
+            data.append(request.form[fm])
+        form_values =tuple(data[:6])
+        db=getConnection()
+        c=db.cursor()
+        try:
+            c.execute('''CREATE TABLE IF NOT EXISTS Holidays(Public_Holiday VARCHAR(4000) ,Public_Date DATE ,Personal_Event VARCHAR(100),Personal_Date DATE ,
+            Company_Event VARCHAR(100),Company_Event_Date DATE )''')
+            c.execute('Insert INTO Holidays(Public_Holiday,Public_Date,Personal_Event,Personal_Date,Company_Event,Company_Event_Date) VALUES {tbv}'.format(tbv=form_values))
+            db.commit()
+            db.close()
+            return  redirect(url_for('Leave_hr'))
+        except Exception as e:
+            raise e
+    return render_template('leave_hr.html')
 '''Apply for sick leave '''
 @app.route('/Sick_Leave',methods=['POST','GET'])
 def Sick_Leave():
@@ -855,6 +905,26 @@ def Sick_Leave():
         except Exception as e:
             raise e
     return render_template('leave.html',img=imgs)
+'''Apply for sick leave '''
+@app.route('/Sick_Leave_hr',methods=['POST','GET'])
+def Sick_Leave_hr():
+    imgs=image()
+    if request.method=='POST':
+        name=request.form['name']
+        start_date=request.form['start_date']
+        end_date=request.form['end_date']
+        replacement=request.form['rep']
+        db=getConnection()
+        c=db.cursor()
+        try:
+            c.execute('''CREATE TABLE IF NOT EXISTS Sick_Leave(Employee_Name VARCHAR(100),Replacement VARCHAR(100),Start_Date DATE ,End_Date DATE)''')
+            c.execute("Insert INTO Sick_Leave(Employee_Name,Replacement,Start_Date,End_Date) VALUES('{name}','{rep}','{start_date}','{end_date}')".format(name=name,rep=replacement,start_date=start_date,end_date=end_date))
+            db.commit()
+            db.close()
+            return  redirect(url_for('Leave_hr'))
+        except Exception as e:
+            raise e
+    return render_template('leave_hr.html',img=imgs)
 @app.route('/salary')
 def salary():
     db = getConnection()
@@ -893,6 +963,29 @@ def Vacation():
         except Exception as e:
             raise e
     return render_template('leave.html', img=imgs)
+'''Apply for a vacation'''
+@app.route('/Vacation_hr',methods=['POST','GET'])
+def Vacation_hr():
+    imgs=image()
+    if request.method=='POST':
+        name=request.form['name']
+        start_date=request.form['start_date1']
+        end_date=request.form['end_date1']
+        replacement = request.form['replacement']
+        db = getConnection()
+        c = db.cursor()
+        try:
+            c.execute(
+                '''CREATE TABLE IF NOT EXISTS Vacation(Employee_Name VARCHAR(4000),Replacement VARCHAR(100),Start_Date DATE ,End_Date DATE)''')
+            c.execute(
+                "Insert INTO Vacation(Employee_Name,Replacement,Start_Date,End_Date) VALUES('{name}','{rep}','{start_date}','{end_date}')".format(
+                    name=name, rep=replacement, start_date=start_date, end_date=end_date))
+            db.commit()
+            db.close()
+            return redirect(url_for('Leave_hr'))
+        except Exception as e:
+            raise e
+    return render_template('leave_hr.html', img=imgs)
 '''User settings'''
 @app.route('/settings', methods=['POST', 'GET'])
 def settings():

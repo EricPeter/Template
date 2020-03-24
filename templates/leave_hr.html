@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_hr.html" %}
 {% block title %}Admin {% endblock title%}
 {% block content %}
 <div id="main">
@@ -21,7 +21,7 @@
                                     </div>
                                 </div>
                                 <div id="html-view-validations">
-                                    <form class="formValidate0" id="formValidate0" method="POST" action="{{url_for('Holidays')}}" enctype="multipart/form-data">
+                                    <form class="formValidate0" id="formValidate0" method="POST" action="{{url_for('Holidays_hr')}}" enctype="multipart/form-data">
                                         <div class="row">
                                             <div class="input-field col s6">
                                                 <label for="first_input2" class="">Public Holiday</label><br>
@@ -86,7 +86,7 @@
                                 </div>
                                 <div id="html-view-validations">
                                         <div class="row">
-                                            <form class="formValidate0" id="formValidate0" method="POST" action="{{url_for('Sick_Leave')}}" enctype="multipart/form-data">
+                                            <form class="formValidate0" id="formValidate0" method="POST" action="{{url_for('Sick_Leave_hr')}}" enctype="multipart/form-data">
                                             <div class="input-field col s6">
                                             <label for="first_input2" class="">Employee Name </label><br>
                                                 <select name="name">
@@ -135,7 +135,7 @@
                                 </div>
                                 <div id="html-view-validations">
                                         <div class="row">
-                                            <form class="formValidate0" id="formValidate0" method="POST" action="{{url_for('Vacation')}}" enctype="multipart/form-data">
+                                            <form class="formValidate0" id="formValidate0" method="POST" action="{{url_for('Vacation_hr')}}" enctype="multipart/form-data">
                                             <div class="input-field col s6" >
                                                 <select name="name">
                                                     {% for i in sql_rows %}

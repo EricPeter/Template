@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_hr.html" %}
 {% block title %}Admin {% endblock title%}
 {% block content %}
     <!-- BEGIN: Page Main-->
@@ -32,7 +32,7 @@
                                                         </td>
                                                         <td>{{i.Surname}} {{i.Given_name}}</td>
                                                         <td>{{i.Department}}</td>
-                                                            <form method="POST" action="{{url_for('Take_Attendance')}}" >
+                                                            <form method="POST" action="{{url_for('Take_Attendance_hr')}}" >
                                                                 <input type="hidden" value="{{i.Given_name}}" name="name">
                                                                 <td>
                                                                 <label>
