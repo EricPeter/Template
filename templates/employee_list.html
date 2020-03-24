@@ -60,8 +60,8 @@
                             <td>{{i.Mobile}}</td>
                             <td>{{i.Gross_Pay}}</td>
                             <td>
-                                <form method="POST" action="" >
-                                    <input type="hidden" value="" name="name">
+                                <form method="POST" action="{{url_for('view_emp')}}" >
+                                    <input type="hidden" value="{{i.Emp_ID}}" name="name">
                                     <button type="submit" class="btn-floating btn waves-effect waves-light green">
                                         <i class="material-icons text-success">remove_red_eye</i>
                                     </button>
@@ -105,8 +105,8 @@
                                 </form>
                             </td>
                             <td>
-                                <form>
-                                    <input type="hidden" value="" name="">
+                                <form action="{{url_for('delete_list')}}" method='POST'>
+                                    <input type="hidden" value="{{i.Emp_ID}}" name="name">
                                     <button type="submit" class="btn-floating btn waves-effect waves-light red">
                                         <i class="material-icons text-success">delete</i>
                                     </button>

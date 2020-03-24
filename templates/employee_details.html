@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block title %}Admin {% endblock title%}
+{% block content %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<div id="main">
+      <div class="row">
+        <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+        <div class="col s12">
+          <div class="container">
+            <div class="section">
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <div id="html-validations" class="card-panel">
+                            <div class="card-content">
+                                <div class="card-title">
+                                    <div class="row">
+                                        <div class="col s12 m6 l10">
+                                            <h4 class="card-title">Employee Details</h4>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                </div>
+                                <hr />
+                                <div id="tblCustomers" style="width:1000px; height:1000px; border:black solid 1px;" class="text-center" >
+                            
+                                   <table style="border:black solid 1px;" class="text-center striped ">
+                                   <th>Personal Information</th> <th>Employment Details</th>
+                                   <tr><td>
+                                   {% for i in data%}
+                                   <p>Employee ID: {{i[1]}}</p>
+                                   <p>Employee Name: {{i[9]}} {{i[10]}} {{11}}</p>
+                                   
+                                   <p>Martial Status: {{i[13]}}</p>
+                                   <p>Gender: {{i[14]}}</p>
+                                   <p>Nationality:     {{i[15]}}</p>
+                                   <p>Date of Birth: {{i[12]}}</p>
+                                   <p>Desgination:{{i[4]}}</p>
+                                   <p>Joining Date:{{i[7]}}</p>
+                                   <p>End of Contract:{{i[8]}}</p>
+                                
+                                   </td>
+                                   <td>
+                                
+                                   
+                                   <p>Employee Status:{{i[5]}}</p>
+                                   <p>Residence:{{i[6]}}</p>
+                                   <p>TIN Number:{{i[2]}}</p>
+                                   <p>Gross Pay:{{i[28]}}</p>
+                                   <p>NSSF Number:{{i[3]}}</p>
+                                   <p>Next of Kin:{{i[29]}}</p>
+                                   <p>Department:{{i[31]}}</p>
+                                   <p>Supervisor:{{i[30]}}</p>   
+                                   </td>
+                                   </tr>
+                                
+                                   <th>Bank Information</th><th>Education Information</th>
+                                   <tr>
+                                   <td>
+                                    
+                                   <p>Account Name:{{i[20]}}</p>
+                                   
+                                   <p>Account Number: {{i[21]}}</p>
+                                   <p>Bank Name:{{i[22]}}</p>
+                                   <p>Bank Branch:{{i[23]}}</p>
+                                   
+                                   </td>
+                                   <td>
+                                  
+                                   <p>Level of Education:{{i[24]}}</p>
+                                   
+                                   <p>Award Recieved:{{i[25]}}</p>
+                                   <p>Institution:{{i[26]}}</p>
+                                   
+                                   
+                                   </td>
+                                   </tr>
+                                    
+                                    <th>Contact Information</th>
+                                   <tr>
+                                   <td>
+                                   
+                                   <p>Current Address:{{i[16]}}</p>
+                                   
+                                   <p>Mobile:{{i[17]}}</p>
+                                   
+                                   <p>Home Phone:{{i[18]}}</p>
+                                   <p>Email:{{i[19]}}</p>
+                                   
+                                    {% endfor %}
+                                   </td>
+                                   </tr>
+                                   
+                                   </table>
+
+
+                                </div> <hr />
+                                <div>
+                               
+                                
+                                </div>
+                                <!-- START RIGHT SIDEBAR NAV -->
+                            </div>
+                        </div>
+                    </div>
+                 
+                    
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

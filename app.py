@@ -323,6 +323,11 @@ def index():
     imgs=image()
     cm = com_name()
     return render_template('index.html',img=imgs,cm=cm)
+@app.route('/home')
+def home():
+    imgs=image()
+    cm = com_name()
+    return render_template('home.html',img=imgs,cm=cm)
 '''Creating a company profile'''
 @app.route("/Profile", methods=["GET", "POST"])
 def Profile():
@@ -655,6 +660,30 @@ def Employee_list():
     cm=com_name()
     users = Employee_Data.query.all()
     return render_template('employee_list.html',img=imgs,users=users,cm=cm)
+'''view employee details'''
+@app.route('/view_emp',methods=['POST','GET'])
+def view_emp():
+    imgs = image()
+    cm = com_name()
+    db=getConnection()
+    c=db.cursor()
+    if request.method =="POST":
+        emp_id=request.form['name']
+        emp_details = c.execute('''SELECT * FROM Employee_Data WHERE Emp_ID=('{nd}')'''.format(nd=emp_id))
+        return render_template('employee_details.html',data=emp_details,cm=cm,img=imgs)
+@app.route('/delete_list',methods=['POST','GET'])
+def delete_list():
+    db=getConnection()
+    c=db.cursor()
+    if request.method =="POST":
+        emp_id=request.form['name']
+        emp_details = c.execute('''DELETE FROM Employee_Data WHERE Emp_ID=('{nd}')'''.format(nd=emp_id))
+        db.commit()
+        return redirect(url_for('Employee_list'))
+
+
+
+
 '''Edit employee records'''
 @app.route('/Edit_Employee',methods=['POST','GET'])
 def Edit_Employee():
