@@ -72,13 +72,13 @@
                     <tbody>
                      {% for df in sql_rows %}
                                                     <tr>
-                                                        <tr><td>{{df[1]}}</td><td>{{df[2]}}</td><td>{{df[5]}}</td><td>{{df[8]}}</td><td>{{df[9]}}</td><td>{{df[12]}}</td><td>{{df[13]}}</td><td>
+                                                        <tr><td>{{df[1]}}</td><td>{{df[2]}}</td><td>{{df[5] | numberFormat}}</td><td>{{df[8] | numberFormat}}</td><td>{{df[9] | numberFormat}}</td><td>{{df[12] | numberFormat}}</td><td>{{df[13] | numberFormat}}</td><td>
                                                          <form method="POST" action="{{url_for('delete_ss')}}">
                                                                 <input type="hidden" value="{{df[0]}}" name="emp_id">
                                                                 <input type="hidden" value="{{df[2]}}" name="nmonth">
                                                                 <input type="hidden" value="{{df[3]}}" name="nyear">
                                                                 <button type="submit" class="btn-floating btn waves-effect waves-light red">
-                                                                    <i class="material-icons blue-grey-text">delete</i>
+                                                                    <i class="material-icons text-success">delete</i>
                                                                 </button>
                                                             </form></td>
                                                     </tr>

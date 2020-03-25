@@ -6,6 +6,7 @@ import datetime
 from datetime import datetime
 import xlsxwriter
 import io
+import csv
 from io import BytesIO
 
 
@@ -680,6 +681,9 @@ def add_employee_admin():
             raise e
     return render_template('employee_admin.html')
 '''Edit employee Details'''
+@app.template_filter()
+def numberFormat(value):
+    return format(float(value), ',f')
 '''Display employees in a table'''
 @app.route('/Employee_list',methods=['POST','GET'])
 def Employee_list():
@@ -1100,7 +1104,6 @@ def delete_ss():
         except Exception as e:
             raise e
     return render_template('salary.html')
-
 #delete allowances 
 @app.route('/delete_allow',methods=['POST','GET'])
 def delete_allow():
@@ -1505,7 +1508,17 @@ def nssf_sub():
   
     # return redirect(url_for('nssf'))
     return send_file(output, attachment_filename="nssf.xlsx", as_attachment=True)
-
+@app.route('/Export')
+def Export():
+    try:
+        db = getConnection()
+        c = db.cursor()
+        erows = c.execute('SELECT * FROM Attendance')
+        result = erows.fetchall()
+        print(result)
+    except Exception as e:
+        print(e)
+    return  redirect(url_for('Attendance'))
 # Create password hashes
 def hash_pass(passw):
 	m = hashlib.md5()
