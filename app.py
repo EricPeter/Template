@@ -9,7 +9,6 @@ import io
 from io import BytesIO
 
 
-
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///Database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -432,7 +431,7 @@ def department():
     cm=com_name()
     db = getConnection()
     c = db.cursor()
-    query = c.execute('''SELECT  Department FROM  Departments''')
+    query = c.execute('''SELECT  * FROM  Departments''')
     rows = query.fetchall()
     db.commit()
     db.close()
@@ -443,7 +442,7 @@ def department_admin():
     cm=com_name()
     db = getConnection()
     c = db.cursor()
-    query = c.execute('''SELECT  Department FROM  Departments''')
+    query = c.execute('''SELECT  * FROM  Departments''')
     rows = query.fetchall()
     db.commit()
     db.close()
@@ -1506,6 +1505,7 @@ def nssf_sub():
   
     # return redirect(url_for('nssf'))
     return send_file(output, attachment_filename="nssf.xlsx", as_attachment=True)
+
 # Create password hashes
 def hash_pass(passw):
 	m = hashlib.md5()
